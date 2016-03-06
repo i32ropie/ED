@@ -1,5 +1,10 @@
 #Práctica 1.
 
+###Requisitos
+```bash
+sudo apt-get install build-essential doxygen
+```
+
 ###Compilación
 
 Para compilar:
