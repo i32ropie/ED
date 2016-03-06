@@ -7,7 +7,7 @@ OUTPUT_LANGUAGE        = Spanish
 # Muestra la parte privada
 EXTRACT_PRIVATE        = YES
 
-# Muestra los ficheros "c"
+# Muestra los ficheros
 SOURCE_BROWSER         = YES
 
 # No se genera la documentación en latex
