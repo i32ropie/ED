@@ -233,8 +233,8 @@ namespace ed{
             * @return true si el grado de m1 es mayor que el de m2 y false si ocurre al contrario.
             * @sa getGrado()
             */
-            friend bool operator <(const Monomio &m1, const Monomio &m2){
-                return m1.getGrado() > m2.getGrado();
+            bool operator <(const Monomio &m){
+                return this->getGrado() > m.getGrado();
             }
             /** @name Extra */
             /**
