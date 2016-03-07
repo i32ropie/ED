@@ -151,9 +151,8 @@ namespace ed{
                                 *it = *it + aux;
                                 found = true;
                             }
-                            else{
+                            if(!found){
                                 lista_auxiliar.push_back(aux);
-                                found = true;
                             }
                         }
                     }
@@ -253,6 +252,9 @@ namespace ed{
                         *it = *it + m;
                         encontrado = true;
                     }
+                    if( abs(it->getCoeficiente()) > 0.0000000000001){
+                        aux.erase(it);
+                    }
                 }
                 if(!encontrado){
                     aux.push_back(m);
@@ -296,7 +298,7 @@ namespace ed{
             * @sa setLista()
             */
             friend std::istream &operator >>(std::istream &input, Polinomio &p){
-                int grado=-1, nTerminos=0;
+                int grado=0, nTerminos=0;
                 Monomio aux;
                 std::list<Monomio> lista_auxiliar;
                 bool found;
@@ -310,6 +312,7 @@ namespace ed{
                 for( int i = 0 ; i < nTerminos ; ++i){
                     std::cout << std::endl << "Leyendo el monomio " << i + 1 << std::endl << std::endl;
                     input >> aux;
+                    if(aux.getGrado()==0) continue;
                     if(aux.getGrado()<=grado){
                         found = false;
                         for( auto it = lista_auxiliar.begin() ; it != lista_auxiliar.end() && !found ; ++it ){
@@ -327,7 +330,6 @@ namespace ed{
                         lista_auxiliar.push_back(aux);
                     }
                 }
-                lista_auxiliar.sort();
                 p.setGrado(grado);
                 p.setNumeroTerminos(lista_auxiliar.size());
                 p.setLista(lista_auxiliar);
@@ -346,7 +348,7 @@ namespace ed{
             friend std::ostream &operator <<(std::ostream &output, const Polinomio &p){
                 std::list<Monomio> aux = p.getLista();
                 if(p.estaVacio()){
-                    output << std::endl << "Lista vacía";
+                    output << "Lista vacía";
                     return output;
                 }
                 aux.sort();

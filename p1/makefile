@@ -7,10 +7,10 @@ BIN2 = main2
 
 all: main1 main2
 
-main1: main1.o
+main1: main1.o monomio.hpp
 	g++ -o main1 $(OBJECT1)
 
-main2: main2.o
+main2: main2.o monomio.hpp polinomio.hpp
 	g++ -o main2 $(OBJECT2)
 
 main1.o: main1.cpp
