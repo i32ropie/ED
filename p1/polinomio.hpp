@@ -311,7 +311,7 @@ namespace ed{
                 }while(nTerminos<=0);
                 for( int i = 0 ; i < nTerminos ; ++i){
                     std::cout << std::endl << "Leyendo el monomio " << i + 1 << std::endl << std::endl;
-                    input >> aux;
+                    std::cin >> aux;
                     if(aux.getGrado()==0) continue;
                     if(aux.getGrado()<=grado){
                         found = false;
@@ -352,7 +352,6 @@ namespace ed{
                     return output;
                 }
                 aux.sort();
-                // p.setLista(aux);
                 for( auto it = aux.cbegin() ; it != aux.cend() ; ++it ){
                     if( it != aux.begin() && it->getCoeficiente() != 0)
                         output << " + ";
