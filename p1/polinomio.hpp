@@ -39,7 +39,7 @@ namespace ed{
             * @sa setLista()
             */
             Polinomio(const std::list<Monomio> &l = *(new std::list<Monomio>)){
-                int grado=-1;
+                int grado=0;
                 for( auto it = l.cbegin() ; it != l.cend() ; ++it ){
                     if( it->getGrado() > grado)
                         grado = it->getGrado();
@@ -106,11 +106,11 @@ namespace ed{
             * @sa getNumeroTerminos()
             */
             void setNumeroTerminos(const int &nTerminos){
-                if(nTerminos>0)
+                if(nTerminos>=0)
                     _nTerminos = nTerminos;
                 else
                     std::cout << std::endl << "Error. El número de términos del polinomio debe ser mayor que 0." << std::endl;
-                assert(_nTerminos > 0);
+                assert(_nTerminos >= 0);
                 assert(this->getNumeroTerminos() == nTerminos);
             }
             /**
