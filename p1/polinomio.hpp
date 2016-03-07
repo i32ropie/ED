@@ -178,7 +178,7 @@ namespace ed{
                     return;
                 }
                 _l.sort();
-                for( auto it = _l.begin() ; it != _l.end() ; ++it ){
+                for( auto it = _l.cbegin() ; it != _l.cend() ; ++it ){
                     if( it != _l.begin() && it->getCoeficiente() != 0)
                         std::cout << " + ";
                     std::cout << *it;
@@ -231,7 +231,7 @@ namespace ed{
             Polinomio &operator +(const Polinomio &p){
                 std::list<Monomio> aux1 = p.getLista();
                 Polinomio aux2(this->getLista());
-                for( auto it = aux1.begin() ; it != aux1.end() ; ++it ){
+                for( auto it = aux1.cbegin() ; it != aux1.cend() ; ++it ){
                     aux2 = aux2 + *it;
                 }
                 return *(new Polinomio(aux2.getLista()));
@@ -317,10 +317,9 @@ namespace ed{
                                 *it = *it + aux;
                                 found = true;
                             }
-                            else{
-                                lista_auxiliar.push_back(aux);
-                                found = true;
-                            }
+                        }
+                        if(!found){
+                            lista_auxiliar.push_back(aux);
                         }
                     }
                     else{
@@ -344,15 +343,15 @@ namespace ed{
             * @sa getLista()
             * @sa setLista()
             */
-            friend std::ostream &operator <<(std::ostream &output, Polinomio &p){
+            friend std::ostream &operator <<(std::ostream &output, const Polinomio &p){
                 std::list<Monomio> aux = p.getLista();
                 if(p.estaVacio()){
                     output << std::endl << "Lista vacía";
                     return output;
                 }
                 aux.sort();
-                p.setLista(aux);
-                for( auto it = aux.begin() ; it != aux.end() ; ++it ){
+                // p.setLista(aux);
+                for( auto it = aux.cbegin() ; it != aux.cend() ; ++it ){
                     if( it != aux.begin() && it->getCoeficiente() != 0)
                         output << " + ";
                     output << *it;
