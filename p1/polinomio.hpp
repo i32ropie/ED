@@ -313,7 +313,6 @@ namespace ed{
                     std::cout << std::endl << "Leyendo el monomio " << i + 1 << std::endl << std::endl;
                     std::cin >> aux;
                     if(aux.getCoeficiente() == 0) continue;
-                    // std::cout << "[]";
                     if(aux.getGrado()<=grado){
                         found = false;
                         for( auto it = lista_auxiliar.begin() ; it != lista_auxiliar.end() && !found ; ++it ){
