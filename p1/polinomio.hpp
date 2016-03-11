@@ -252,7 +252,7 @@ namespace ed{
                         *it = *it + m;
                         encontrado = true;
                     }
-                    if( abs(it->getCoeficiente()) > 0.0000000000001){
+                    if(it->getCoeficiente() == 0){
                         aux.erase(it);
                     }
                 }
@@ -298,21 +298,22 @@ namespace ed{
             * @sa setLista()
             */
             friend std::istream &operator >>(std::istream &input, Polinomio &p){
-                int grado=0, nTerminos=0;
+                int grado=0, nTerminos;
                 Monomio aux;
                 std::list<Monomio> lista_auxiliar;
                 bool found;
                 do{
                     std::cout << std::endl << "Introduce el número de términos del polinomio: ";
                     input >> nTerminos;
-                    if(nTerminos<=0){
+                    if(nTerminos<0){
                         std::cout << std::endl << "Error, el número de términos no puede ser menor que 0" << std::endl;
                     }
-                }while(nTerminos<=0);
+                }while(nTerminos<0);
                 for( int i = 0 ; i < nTerminos ; ++i){
                     std::cout << std::endl << "Leyendo el monomio " << i + 1 << std::endl << std::endl;
                     std::cin >> aux;
-                    if(aux.getGrado()==0) continue;
+                    if(aux.getCoeficiente() == 0) continue;
+                    // std::cout << "[]";
                     if(aux.getGrado()<=grado){
                         found = false;
                         for( auto it = lista_auxiliar.begin() ; it != lista_auxiliar.end() && !found ; ++it ){
