@@ -106,6 +106,63 @@ namespace ed{
                 this->setApellidos(d.getApellidos());
                 this->setGrupoSanguineo(d.getGrupoSanguineo());
                 this->setFactorRH(d.getFactorRH());
+                assert(*this == d);
+            }
+
+            bool operator ==(const Donante &d){
+                return this->getNombre() == d.getNombre() && this->getApellidos() == d.getApellidos();
+                // return this->getNombre().compare(d.getNombre()) == 0 && this->getApellidos().compare(d.getApellidos()) == 0;
+            }
+
+            bool operator <=(const Donante &d){
+                return this->getNombre() <= d.getNombre() && this->getApellidos() <= d.getApellidos();
+            }
+
+            friend std::istream &operator >>(std::istream &input, Donante &d){
+                std::string nombre, apellidos, gSanguineo[] = {"0", "A", "B", "AB"}, factorRH[] = {"+", "-"};
+                unsigned int opcion1, opcion2;
+                do{
+                    std::cout << "Introduce el nombre: ";
+                    std::getline(std::cin, nombre);
+                    if(nombre.empty())
+                        std::cout << "Error. Debes introducir un nombre." << std::endl;
+                }while(nombre.empty());
+                do{
+                    std::cout << "Introduce los apellidos: ";
+                    std::getline(std::cin, apellidos);
+                    if(apellidos.empty())
+                        std::cout << "Error. Debes introducir unos apellidos." << std::endl;
+                }while(apellidos.empty());
+                do{
+                    std::cout << "Estos son los grupos sanguíneos posibles:" << std::endl;
+                    std::cout << "\t1. 0" << std::endl;
+                    std::cout << "\t2. A" << std::endl;
+                    std::cout << "\t3. B" << std::endl;
+                    std::cout << "\t4. AB" << std::endl;
+                    std::cout << "Introduce el número del grupo sanguíneo: ";
+                    std::cin >> opcion1;
+                    if(opcion1 < 1 || opcion1 > 4)
+                        std::cout << "Error. Debes introducir un grupo sanguíneo válido." << std::endl;
+                }while(opcion1 < 1 || opcion1 > 4);
+                do{
+                    std::cout << "Estos son los factores RH posibles:" << std::endl;
+                    std::cout << "\t1. Positivo" << std::endl;
+                    std::cout << "\t2. Negativo" << std::endl;
+                    std::cout << "Introduce el número del factor RH: ";
+                    std::cin >> opcion2;
+                    if(opcion2 < 1 || opcion2 > 2)
+                        std::cout << "Error. Debes introducir un factor RH válido." << std::endl;
+                }while(opcion2 < 1 || opcion2 > 2);
+                d.setNombre(nombre);
+                d.setApellidos(apellidos);
+                d.setGrupoSanguineo(gSanguineo[opcion1-1]);
+                d.setFactorRH(factorRH[opcion2-1]);
+                return input;
+            }
+
+            friend std::ostream &operator <<(std::ostream &output, const Donante &d){
+                output << d.getApellidos() << ", " << d.getNombre() << " ( " << d.getGrupoSanguineo() << d.getFactorRH() << " )" << std::endl;
+                return output;
             }
     };
 }
