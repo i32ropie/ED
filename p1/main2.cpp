@@ -13,7 +13,7 @@
 #define cls() system("clear");
 
 /** Pograma principal que muestra el uso de la clase Polinomio */
-int main(int argc, char const *argv[]) {
+int main() {
     ed::Polinomio p1;
     ed::Polinomio p2(p1);
     ed::Polinomio p3(*new(std::list<ed::Monomio>));

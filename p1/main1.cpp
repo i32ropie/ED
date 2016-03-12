@@ -14,7 +14,7 @@
 #define cls() system("clear");
 
 /** Pograma principal que muestra el uso de la clase Monomio */
-int main(int argc, char const *argv[]) {
+int main() {
     ed::Monomio m1;
     ed::Monomio m2(m1);
     ed::Monomio m3(1,2);
