@@ -106,31 +106,31 @@ namespace ed{
             * @sa getGrado()
             */
             void escribir(){
-                switch (int(getCoeficiente())) {
-                    case 0:
-                        break;
-                    case 1:
-                        switch (getGrado()) {
-                            case 0:
-                                std::cout << getCoeficiente();
-                                break;
-                            case 1:
-                                std::cout << "x";
-                                break;
-                            default:
-                                std::cout << "x" << getGrado();
-                        }
-                    default:
-                        switch (getGrado()) {
-                            case 0:
-                                std::cout << getCoeficiente();
-                                break;
-                            case 1:
-                                std::cout << getCoeficiente() << "x";
-                                break;
-                            default:
-                                std::cout << getCoeficiente() << "x^" << getGrado();
-                        }
+                if(this->getCoeficiente() != 0){
+                    if(this->getCoeficiente() == 1){
+                        if(this->getGrado() == 0)
+                            std::cout << this->getCoeficiente();
+                        else if(this->getGrado() == 1)
+                            std::cout << "x";
+                        else
+                            std::cout << "x^" << this->getGrado();
+                    }
+                    else if(this->getCoeficiente() == -1){
+                        if(this->getGrado() == 0)
+                            std::cout << this->getCoeficiente();
+                        else if(this->getGrado() == 1)
+                            std::cout << "-x";
+                        else
+                            std::cout << "-x^" << this->getGrado();
+                    }
+                    else{
+                        if(this->getGrado() == 0)
+                            std::cout << this->getCoeficiente();
+                        else if(this->getGrado() == 1)
+                            std::cout << this->getCoeficiente() << "x";
+                        else
+                            std::cout << this->getCoeficiente() << "x^" << this->getGrado();
+                    }
                 }
             }
             /** @name Sobrecarga de operadores */
@@ -200,6 +200,14 @@ namespace ed{
                             output << "x";
                         else
                             output << "x^" << m.getGrado();
+                    }
+                    else if(m.getCoeficiente() == -1){
+                        if(m.getGrado() == 0)
+                            output << m.getCoeficiente();
+                        else if(m.getGrado() == 1)
+                            output << "-x";
+                        else
+                            output << "-x^" << m.getGrado();
                     }
                     else{
                         if(m.getGrado() == 0)
