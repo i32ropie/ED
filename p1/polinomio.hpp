@@ -320,6 +320,9 @@ namespace ed{
                                 *it = *it + aux;
                                 found = true;
                             }
+                            if(it->getCoeficiente() == 0){
+                                lista_auxiliar.erase(it);
+                            }
                         }
                         if(!found){
                             lista_auxiliar.push_back(aux);
