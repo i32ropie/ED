@@ -16,16 +16,21 @@
 int main() {
     ed::Polinomio p1;
     ed::Polinomio p2(p1);
-    ed::Polinomio p3(*new(std::list<ed::Monomio>));
+    ed::Polinomio p3;
     double x;
     int opcion_1, opcion_2;
     bool salir = false;
     cls();
-    std::cout << "-- f(x) --" << std::endl;
+    std::cout << "\e[1;4m\tBienvenido al programa.\e[0m" << std::endl << std::endl;
+    std::cout << "\e[1mA continuación introducirá tres polinomios y " << std::endl;
+    std::cout << "después será llevado al menú principal del programa.\e[0m" << std::endl;
+    std::cout << std::endl << "\e[92;1mPresione Enter para continuar.\e[0m" << std::endl;
+    getchar();
+    std::cout << "-- \e[1m Primer polinomio \e[92mf(x)\e[0m --" << std::endl;
     std::cin >> p1;
-    std::cout << std::endl << "-- g(x) --" << std::endl;
+    std::cout << "-- \e[1m Segundo polinomio \e[92mg(x)\e[0m --" << std::endl;
     std::cin >> p2;
-    std::cout << std::endl << "-- t(x) --" << std::endl;
+    std::cout << "-- \e[1m Tercer polinomio \e[92mt(x)\e[0m --" << std::endl;
     std::cin >> p3;
     std::cout << std::endl << "Los polinomios han sido guardados con éxito, presiona Enter para ir al menú." << std::endl;
     getchar();
@@ -38,7 +43,7 @@ int main() {
         std::cout << "1. Valor de un polinomio para un dato concreto de X." << std::endl;
         std::cout << "2. Suma de dos polinomios y almacenar el resultado en el tercero." << std::endl;
         std::cout << "3. Multiplicación de dos polinomios y almacenar el resultado en el tercero." << std::endl;
-        std::cout << "4. Lectura y escritura de un monomio haciendo uso de los los operadores “<<” y ”>>”" << std::endl;
+        std::cout << "4. Lectura y escritura de un polinomio haciendo uso de los los operadores “<<” y ”>>”" << std::endl;
         std::cout << "5. Fin del programa." << std::endl << std::endl;
         std::cout << "\tIntroduce tu opción: ";
         std::cin >> opcion_1;

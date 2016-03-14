@@ -135,10 +135,10 @@ namespace ed{
                 std::list<Monomio> lista_auxiliar;
                 bool found;
                 do{
-                    std::cout << std::endl << "Introduce el número de términos del polinomio: ";
+                    std::cout << std::endl << "Introduce el \e[4mnúmero\e[0m de términos del polinomio: ";
                     std::cin >> nTerminos;
                     if(nTerminos<=0){
-                        std::cout << std::endl << "Error, el número de términos no puede ser menor que 0" << std::endl;
+                        std::cout << std::endl << "Error, el \e[4mnúmero\e[0m de términos no puede ser menor que 0" << std::endl;
                     }
                 }while(nTerminos<=0);
                 for( int i = 0 ; i < nTerminos ; ++i){
@@ -306,12 +306,12 @@ namespace ed{
                 std::list<Monomio> lista_auxiliar;
                 bool found;
                 do{
-                    std::cout << std::endl << "Introduce el número de términos del polinomio: ";
+                    std::cout << std::endl << "Introduce el \e[4mnúmero\e[0m de términos del polinomio: ";
                     input >> nTerminos;
-                    if(nTerminos<=0){
-                        std::cout << std::endl << "Error, el número de términos no puede ser menor que 0" << std::endl;
+                    if(nTerminos<0){
+                        std::cout << std::endl << "Error, el \e[4mnúmero\e[0m de términos no puede ser menor que 0" << std::endl;
                     }
-                }while(nTerminos<=0);
+                }while(nTerminos<0);
                 for( int i = 0 ; i < nTerminos ; ++i){
                     std::cout << std::endl << "Leyendo el monomio " << i + 1 << std::endl << std::endl;
                     std::cin >> aux;

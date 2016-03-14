@@ -174,9 +174,9 @@ namespace ed{
             friend std::istream &operator >>(std::istream &input, Monomio &m){
                 int aux_grado;
                 double aux_coeficiente;
-                std::cout << "Introduce el coeficiente: ";
+                std::cout << "Introduce el \e[4mcoeficiente\e[0m: ";
                 input >> aux_coeficiente;
-                std::cout << "Introduce el grado: ";
+                std::cout << "Introduce el \e[4mgrado\e[0m: ";
                 input >> aux_grado;
                 m.setGrado(aux_grado);
                 m.setCoeficiente(aux_coeficiente);
