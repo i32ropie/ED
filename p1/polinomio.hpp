@@ -130,7 +130,7 @@ namespace ed{
             * @sa setLista()
             */
             void leerPolinomio(){
-                int grado=-1, nTerminos=0;
+                int grado=0, nTerminos;
                 Monomio aux;
                 std::list<Monomio> lista_auxiliar;
                 bool found;
@@ -144,6 +144,7 @@ namespace ed{
                 for( int i = 0 ; i < nTerminos ; ++i){
                     std::cout << std::endl << "Leyendo el monomio " << i + 1 << std::endl << std::endl;
                     std::cin >> aux;
+                    if(aux.getCoeficiente() == 0) continue;
                     if(aux.getGrado()<=grado){
                         found = false;
                         for( auto it = lista_auxiliar.begin() ; it != lista_auxiliar.end() && !found ; ++it ){
@@ -151,9 +152,12 @@ namespace ed{
                                 *it = *it + aux;
                                 found = true;
                             }
-                            if(!found){
-                                lista_auxiliar.push_back(aux);
+                            if(it->getCoeficiente() == 0){
+                                lista_auxiliar.erase(it);
                             }
+                        }
+                        if(!found){
+                            lista_auxiliar.push_back(aux);
                         }
                     }
                     else{
@@ -161,7 +165,6 @@ namespace ed{
                         lista_auxiliar.push_back(aux);
                     }
                 }
-                lista_auxiliar.sort();
                 this->setGrado(grado);
                 this->setNumeroTerminos(lista_auxiliar.size());
                 this->setLista(lista_auxiliar);
@@ -305,10 +308,10 @@ namespace ed{
                 do{
                     std::cout << std::endl << "Introduce el número de términos del polinomio: ";
                     input >> nTerminos;
-                    if(nTerminos<0){
+                    if(nTerminos<=0){
                         std::cout << std::endl << "Error, el número de términos no puede ser menor que 0" << std::endl;
                     }
-                }while(nTerminos<0);
+                }while(nTerminos<=0);
                 for( int i = 0 ; i < nTerminos ; ++i){
                     std::cout << std::endl << "Leyendo el monomio " << i + 1 << std::endl << std::endl;
                     std::cin >> aux;
