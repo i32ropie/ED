@@ -6,6 +6,7 @@ BIN2 = main2
 
 
 all: main1 main2
+	rm -f $(OBJECT1) $(OBJECT2)
 
 main1: main1.o monomio.hpp
 	g++ -o main1 $(OBJECT1)

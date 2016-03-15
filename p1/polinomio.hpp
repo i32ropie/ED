@@ -33,10 +33,8 @@ namespace ed{
             * @brief Constructor con valores por defecto.
             * @note El valor por defecto es una lista de monomios vacía.
             * @param l Lista de monomios.
-            * @sa getGrado()
             * @sa setGrado()
             * @sa setNumeroTerminos()
-            * @sa setLista()
             */
             Polinomio(){
                 setGrado(0);
@@ -306,21 +304,6 @@ namespace ed{
                     }
                 }
                 return aux;
-                // std::list<Monomio> aux1 = this->getLista();
-                // std::list<Monomio> aux2 = p.getLista();
-                // std::list<Monomio> aux3;
-                // Polinomio aux4;
-                // Polinomio aux5;
-                // for( auto it1 = aux1.begin() ; it1 != aux1.end() ; ++it1 ){
-                //     aux4.setLista(aux3);
-                //     for( auto it2 = aux2.begin() ; it2 != aux2.end() ; ++it2 ){
-                //         aux3.push_back((*it1)*(*it2));
-                //     }
-                //     aux4.setLista(aux3);;
-                //     aux3.clear();
-                //     aux5 = aux5 + aux4;
-                // }
-                // return *(new Polinomio(aux5));
             }
             /**
             * @brief Sobrecarga del operador >>
@@ -391,23 +374,11 @@ namespace ed{
                 }
                 p._l.sort();
                 for( int i = 0 ; i < p.getNumeroTerminos() ; ++i ){
-                    if( i != 0 && p.getMonomio(i).getCoeficiente() != 0)
+                    if( i != 0 )
                         output << " + ";
                     output << p.getMonomio(i);
                 }
                 return output;
-                // std::list<Monomio> aux = p.getLista();
-                // if(p.estaVacio()){
-                //     output << "Lista vacía";
-                //     return output;
-                // }
-                // aux.sort();
-                // for( auto it = aux.cbegin() ; it != aux.cend() ; ++it ){
-                //     if( it != aux.begin() && it->getCoeficiente() != 0)
-                //         output << " + ";
-                //     output << *it;
-                // }
-                // return output;
             }
             /** @name Extra */
             /**
