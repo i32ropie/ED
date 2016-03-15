@@ -187,7 +187,7 @@ namespace ed{
             * @note Con la sobrecarga de este operador podemos mostrar un monomio por el flujo de salida.
             * @param output Flujo de salida.
             * @param m Monomio.
-            * @return Flujo de salida con el polinomio ya impreso.
+            * @return Flujo de salida con el monomio ya impreso.
             * @sa getGrado()
             * @sa getCoeficiente()
             */
