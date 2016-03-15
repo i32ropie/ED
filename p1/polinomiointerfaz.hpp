@@ -33,9 +33,9 @@ namespace ed{
             */
             virtual int getNumeroTerminos() const = 0;
             /**
-            * @brief Obtiene la lista de monomios.
+            * @brief Obtiene el monomio i-ésimo
             */
-            virtual std::list<Monomio> getLista() const = 0;
+            virtual Monomio getMonomio(const int &i) const = 0;
             /** @name Modificadores. */
             /**
             * @brief Establece el grado del polinomio.
@@ -46,9 +46,9 @@ namespace ed{
             */
             virtual void setNumeroTerminos(const int &nTerminos) = 0;
             /**
-            * @brief Establece la lista de monomios del polinomio.
+            * @brief Agrega un monomio al polinomio.
             */
-            virtual void setLista(const std::list<Monomio> &l) = 0;
+            virtual void setMonomio(const Monomio &m) = 0;
     };
 
 }

@@ -38,15 +38,9 @@ namespace ed{
             * @sa setNumeroTerminos()
             * @sa setLista()
             */
-            Polinomio(const std::list<Monomio> &l = *(new std::list<Monomio>)){
-                int grado=0;
-                for( auto it = l.cbegin() ; it != l.cend() ; ++it ){
-                    if( it->getGrado() > grado)
-                        grado = it->getGrado();
-                }
-                setGrado(grado);
-                setNumeroTerminos(l.size());
-                setLista(l);
+            Polinomio(){
+                setGrado(0);
+                setNumeroTerminos(0);
             }
             /**
             * @brief Constructor de copia.
@@ -67,6 +61,23 @@ namespace ed{
             */
             int getNumeroTerminos() const{
                 return _nTerminos;
+            }
+            /**
+            * @brief Devuelve el monomio i-ésimo.
+            * @return Monomio i-ésimo.
+            */
+            Monomio getMonomio(const int &i) const{
+                assert(i<=nTerminos);
+                bool encontrado=false;
+                int aux = 0;
+                Monomio aux2;
+                for( auto it = _l.begin(); it != _l.end() && !encontrado ; ++it, ++aux){
+                    if(aux==i){
+                        aux2 = *it;
+                        encontrado = true;
+                    }
+                }
+                return aux2;
             }
             /**
             * @brief Devuelve la lista de monomios del polinomio.
@@ -112,6 +123,14 @@ namespace ed{
                     std::cout << std::endl << "Error. El número de términos del polinomio debe ser mayor que 0." << std::endl;
                 assert(_nTerminos >= 0);
                 assert(this->getNumeroTerminos() == nTerminos);
+            }
+            /**
+            * @brief Inserta un monomio en el polinomio.
+            * @note Se hace uso de la sobrecarga del operador + recibiendo un polinomio.
+            * @param m Monomio a insertar.
+            */
+            void setMonomio(const Monomio &m){
+                *this = *this + m;
             }
             /**
             * @brief Establece la lista de monomios del polinomio.
@@ -175,15 +194,15 @@ namespace ed{
             * @sa getCoeficiente()
             */
             void mostrarPolinomio(){
-                if(estaVacio()){
-                    std::cout << std::endl << "Lista vacía";
+                if(this->estaVacio()){
+                    std::cout << std::endl << "Polinomio vacío.";
                     return;
                 }
                 _l.sort();
-                for( auto it = _l.cbegin() ; it != _l.cend() ; ++it ){
-                    if( it != _l.begin() && it->getCoeficiente() != 0)
+                for( int i = 0 ; i < this->getNumeroTerminos() ; ++i ){
+                    if( i != 0 && this->getMonomio(i).getCoeficiente() != 0)
                         std::cout << " + ";
-                    std::cout << *it;
+                    std::cout << this->getMonomio(i);
                 }
             }
             /** @name Sobrecarga de operadores */
@@ -230,13 +249,12 @@ namespace ed{
             * @return Polinomio con la suma del que llama a la suma y del llamado.
             * @sa getLista()
             */
-            Polinomio &operator +(const Polinomio &p){
-                std::list<Monomio> aux1 = p.getLista();
-                Polinomio aux2(this->getLista());
-                for( auto it = aux1.cbegin() ; it != aux1.cend() ; ++it ){
-                    aux2 = aux2 + *it;
+            Polinomio operator +(const Polinomio &p){
+                Polinomio aux = *this;
+                for( int i = 0; i < p.getNumeroTerminos() ; ++i){
+                    aux = aux + p.getMonomio(i);
                 }
-                return *(new Polinomio(aux2.getLista()));
+                return *(new Polinomio(aux));
             }
             /**
             * @brief Sobrecarga del operador +
@@ -247,7 +265,9 @@ namespace ed{
             * @sa getGrado()
             */
             Polinomio &operator +(const Monomio &m){
+                Polinomio aux2;
                 std::list<Monomio> aux = this->getLista();
+                int grado = this->getGrado();
                 bool encontrado;
                 encontrado = false;
                 for( auto it = aux.begin() ; it != aux.end() && !encontrado ; ++it ){
@@ -258,11 +278,17 @@ namespace ed{
                     if(it->getCoeficiente() == 0){
                         aux.erase(it);
                     }
+                    if(it->getGrado() > grado){
+                        grado = it->getGrado();
+                    }
                 }
                 if(!encontrado){
                     aux.push_back(m);
                 }
-                return *(new Polinomio(aux));
+                aux2.setGrado(grado);
+                aux2.setNumeroTerminos(aux.size());
+                aux2.setLista(aux);
+                return *(new Polinomio(aux2));
             }
             /**
             * @brief Sobrecarga del operador *
@@ -272,22 +298,29 @@ namespace ed{
             * @sa getLista()
             * @sa setLista()
             */
-            Polinomio &operator *(const Polinomio &p){
-                std::list<Monomio> aux1 = this->getLista();
-                std::list<Monomio> aux2 = p.getLista();
-                std::list<Monomio> aux3;
-                Polinomio aux4;
-                Polinomio aux5;
-                for( auto it1 = aux1.begin() ; it1 != aux1.end() ; ++it1 ){
-                    aux4.setLista(aux3);
-                    for( auto it2 = aux2.begin() ; it2 != aux2.end() ; ++it2 ){
-                        aux3.push_back((*it1)*(*it2));
+            Polinomio operator *(const Polinomio &p){
+                Polinomio aux;
+                for( int i = 0 ; i < this->getNumeroTerminos() ; ++i ){
+                    for( int j = 0 ; j < p.getNumeroTerminos() ; ++j ){
+                        aux.setMonomio(this->getMonomio(i)*p.getMonomio(j));
                     }
-                    aux4.setLista(aux3);;
-                    aux3.clear();
-                    aux5 = aux5 + aux4;
                 }
-                return *(new Polinomio(aux5));
+                return aux;
+                // std::list<Monomio> aux1 = this->getLista();
+                // std::list<Monomio> aux2 = p.getLista();
+                // std::list<Monomio> aux3;
+                // Polinomio aux4;
+                // Polinomio aux5;
+                // for( auto it1 = aux1.begin() ; it1 != aux1.end() ; ++it1 ){
+                //     aux4.setLista(aux3);
+                //     for( auto it2 = aux2.begin() ; it2 != aux2.end() ; ++it2 ){
+                //         aux3.push_back((*it1)*(*it2));
+                //     }
+                //     aux4.setLista(aux3);;
+                //     aux3.clear();
+                //     aux5 = aux5 + aux4;
+                // }
+                // return *(new Polinomio(aux5));
             }
             /**
             * @brief Sobrecarga del operador >>
@@ -351,19 +384,30 @@ namespace ed{
             * @sa getLista()
             * @sa setLista()
             */
-            friend std::ostream &operator <<(std::ostream &output, const Polinomio &p){
-                std::list<Monomio> aux = p.getLista();
+            friend std::ostream &operator <<(std::ostream &output, Polinomio &p){
                 if(p.estaVacio()){
-                    output << "Lista vacía";
+                    output << "Polinomio vacío.";
                     return output;
                 }
-                aux.sort();
-                for( auto it = aux.cbegin() ; it != aux.cend() ; ++it ){
-                    if( it != aux.begin() && it->getCoeficiente() != 0)
+                p._l.sort();
+                for( int i = 0 ; i < p.getNumeroTerminos() ; ++i ){
+                    if( i != 0 && p.getMonomio(i).getCoeficiente() != 0)
                         output << " + ";
-                    output << *it;
+                    output << p.getMonomio(i);
                 }
                 return output;
+                // std::list<Monomio> aux = p.getLista();
+                // if(p.estaVacio()){
+                //     output << "Lista vacía";
+                //     return output;
+                // }
+                // aux.sort();
+                // for( auto it = aux.cbegin() ; it != aux.cend() ; ++it ){
+                //     if( it != aux.begin() && it->getCoeficiente() != 0)
+                //         output << " + ";
+                //     output << *it;
+                // }
+                // return output;
             }
             /** @name Extra */
             /**
