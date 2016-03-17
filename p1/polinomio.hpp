@@ -389,8 +389,10 @@ namespace ed{
             */
             double evaluar(const double &x){
                 double res = 0.0;
-                for( auto it = _l.begin() ; it != _l.end() ; ++it )
-                    res += it->evaluar(x);
+                // for( auto it = _l.begin() ; it != _l.end() ; ++it )
+                //     res += it->evaluar(x);
+                for( int i = 0 ; i < this->getNumeroTerminos() ; ++i )
+                    res += this->getMonomio(i).evaluar(x);
                 return res;
             }
     };
