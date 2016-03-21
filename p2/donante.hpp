@@ -94,11 +94,11 @@ namespace ed{
             }
 
             void mostrarDonante(){
-                // std::cout << "Información del donante:" << std::endl;
-                // std::cout << "\tNombre: " << this->getNombre() << std::endl;
-                // std::cout << "\tApellidos: " << this->getApellidos() << std::endl;
-                // std::cout << "\tGrupo sanguíneo: " << this->getGrupoSanguineo() << this->getFactorRH() << std::endl;
-                std::cout << this->getApellidos() << ", " << this->getNombre() << " ( " << this->getGrupoSanguineo() << this->getFactorRH() << " )" << std::endl;
+                std::cout << "Información del donante:" << std::endl;
+                std::cout << "\tNombre: " << this->getNombre() << std::endl;
+                std::cout << "\tApellidos: " << this->getApellidos() << std::endl;
+                std::cout << "\tGrupo sanguíneo: " << this->getGrupoSanguineo() << this->getFactorRH() << std::endl;
+                // std::cout << this->getApellidos() << ", " << this->getNombre() << " ( " << this->getGrupoSanguineo() << this->getFactorRH() << " )" << std::endl;
             }
 
             Donante &operator =(const Donante &d){
@@ -107,15 +107,20 @@ namespace ed{
                 this->setGrupoSanguineo(d.getGrupoSanguineo());
                 this->setFactorRH(d.getFactorRH());
                 assert(*this == d);
+                return *this;
             }
 
             bool operator ==(const Donante &d){
-                return this->getNombre() == d.getNombre() && this->getApellidos() == d.getApellidos();
-                // return this->getNombre().compare(d.getNombre()) == 0 && this->getApellidos().compare(d.getApellidos()) == 0;
+                return this->getApellidos() == d.getApellidos() && this->getNombre() == d.getNombre();
             }
 
             bool operator <=(const Donante &d){
-                return this->getNombre() <= d.getNombre() && this->getApellidos() <= d.getApellidos();
+                if(this->getApellidos() < d.getApellidos())
+                    return true;
+                if(this->getApellidos() > d.getApellidos())
+                    return false;
+                return this->getNombre() <= d.getNombre();
+                // return this->getApellidos() <= d.getApellidos() && this->getNombre() <= d.getNombre();
             }
 
             friend std::istream &operator >>(std::istream &input, Donante &d){
