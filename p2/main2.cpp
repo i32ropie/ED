@@ -11,7 +11,7 @@ int main() {
     unsigned int opcion_1;
     bool salir = false;
     do{
-        cabecera();
+        // cabecera();
         opcion_1 = opciones();
         switch (opcion_1) {
             case 1:

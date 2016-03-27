@@ -23,8 +23,13 @@ namespace ed{
             Donantes(const T &d){
                 _cabeza = new Nodo<T>(d);
                 _cursor = new Nodo<T>(d);
+                unsigned int contador = 0;
+                for( Nodo<T> *aux = _cabeza ; aux ; aux = aux->siguiente)
+                    contador++;
+                _total = contador;
             }
-            Donantes(): _cabeza(0), _cursor(0){}
+            Donantes(): _cabeza(0), _cursor(0), _total(0){}
+            inline unsigned int getTotal() const {return _total;}
             void insertarDonante(const T &d){
                 Nodo<T> *nuevo = new Nodo<T>(d);                                // Creamos un nuevo nodo con el dato a insertar
                 if(this->estaVacia()){                                          // Si la lista de donantes está vacía mi cursor y
@@ -145,9 +150,11 @@ namespace ed{
             void mostrarDonantes(){
                 if(this->estaVacia()){
                     std::cout << std::endl << "No hay ningún donante para mostrar." << std::endl;
+                    return;
                 }
+                std::cout << "Estos son tus donantes:\n";
                 for( unsigned int i = 1 ; i <= _total ; ++i ){
-                    std::cout << "\t" << i << ". "<< getDonante(i);
+                    std::cout << "\t\e[33;1m" << i << "\e[0m - \e[1m"<< getDonante(i) << "\e[0m";
                 }
             }
             T getDonante(const unsigned int &i) const{
