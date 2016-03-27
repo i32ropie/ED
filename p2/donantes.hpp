@@ -149,12 +149,12 @@ namespace ed{
             }
             void mostrarDonantes(){
                 if(this->estaVacia()){
-                    std::cout << std::endl << "No hay ningún donante para mostrar." << std::endl;
+                    std::cout << "No hay ningún donante para mostrar." << std::endl;
                     return;
                 }
                 std::cout << "Estos son tus donantes:\n";
                 for( unsigned int i = 1 ; i <= _total ; ++i ){
-                    std::cout << "\t\e[33;1m" << i << "\e[0m - \e[1m"<< getDonante(i) << "\e[0m";
+                    std::cout << "\t\e[33;1m[" << i << "]\e[0m - \e[1m"<< getDonante(i) << "\e[0m";
                 }
             }
             T getDonante(const unsigned int &i) const{

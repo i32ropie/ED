@@ -27,7 +27,7 @@ void volver(){
 }
 
 void error(const std::string er){
-    std::cout << "\e[31;1m[ERROR]\e[0m - " << er << ". Volviendo al menú...";
+    std::cout << std::endl << "\e[31;1m[ERROR]\e[0m - " << er;
     fflush(stdout);
     sleep(3);
 }
@@ -51,9 +51,9 @@ int opciones(){
         std::cout << "\t\e[33;1m[8]\e[0m - Fin del programa." << std::endl;
         std::cout << "Introduce tu opción: \e[33;1m";
         std::cin >> opcion;
-        std::cout << "\e[0m" << std::endl;
+        std::cout << "\e[0m";
         if(opcion<1 || opcion>8){
-            error("Opción no válida");
+            error("Opción no válida. Volviendo al menú principal...");
         }
     }while(opcion<1 || opcion>8);
     return opcion;
@@ -92,19 +92,139 @@ void cargarDonantes(ed::Donantes<ed::Donante> &lista_donantes){
         d.setFactorRH(linea);
         lista_donantes.insertarDonante(d);
     }
+    fichero.close();
     std::cout << std::endl << "Donantes actualizados con éxito." << std::endl;
     volver();
 }
 void guardarDonantes(ed::Donantes<ed::Donante> &lista_donantes){
     cabecera();
-
+    if(lista_donantes.estaVacia()){
+        std::cout << "No hay ningún donante para guardar." << std::endl;
+        volver();
+        return;
+    }
+    bool escribir = true;
+    unsigned int opcion;
+    ed::Donante d;
+    std::string nombre_fichero;
+    std::cout << "Introduce el nombre del fichero: \e[1;4m";
+    std::cin >> nombre_fichero;
+    std::cout << "\e[0m";
+    if(existe(nombre_fichero)){
+        do{
+            cabecera();
+            std::cout << "Ya existe un fichero con ese nombre." << std::endl;
+            std::cout << "\t\e[33;1m[1]\e[0m - Sobreescribir el fichero." << std::endl;
+            std::cout << "\t\e[33;1m[2]\e[0m - Volver al menú." << std::endl;
+            std::cout << "Introduce tu opción: \e[33;1m";
+            std::cin >> opcion;
+            std::cout << "\e[0m";
+            if(opcion < 1 || opcion > 2){
+                error("Opción no válida.");
+            }
+        }while(opcion < 1 || opcion > 2);
+        switch (opcion) {
+            case 1:
+                escribir = true;
+                break;
+            case 2:
+                escribir = false;
+                // std::cout << std::endl << "Volviendo al menú principal...";
+                // sleep(3);
+                break;
+        }
+    }
+    if(escribir){
+        std::ofstream fichero(nombre_fichero.c_str());
+        for( unsigned int i = 1 ; i <= lista_donantes.getTotal() ; ++i ){
+            d = lista_donantes.getDonante(i);
+            fichero << d.getNombre();
+            fichero << ',';
+            fichero << d.getApellidos();
+            fichero << ',';
+            fichero << d.getGrupoSanguineo();
+            fichero << ',';
+            fichero << d.getFactorRH();
+            fichero << std::endl;
+        }
+        fichero.close();
+        std::cout << "Donantes guardados en \e[1;4m" << nombre_fichero << "\e[0m." << std::endl;
+    }
+    volver();
 }
-void insertarDonante(ed::Donantes<ed::Donante> &lista_donantes){}
-void modificarDonante(ed::Donantes<ed::Donante> &lista_donantes){}
-void borrarDonante(ed::Donantes<ed::Donante> &lista_donantes){}
+void insertarDonante(ed::Donantes<ed::Donante> &lista_donantes){
+    bool encontrado;
+    ed::Donante d;
+    do{
+        cabecera();
+        getchar();
+        std::cin >> d;
+        encontrado = lista_donantes.buscarDonante(d);
+        if(encontrado)
+            error("Ya exisitía un donante con esos datos. Donante no insertado");
+    }while(encontrado);
+    lista_donantes.insertarDonante(d);
+    std::cout << std::endl << "Donante insertado con éxito.";
+    volver();
+}
+void modificarDonante(ed::Donantes<ed::Donante> &lista_donantes){
+    unsigned int opcion;
+    if(!lista_donantes.estaVacia()){
+        do{
+            cabecera();
+            lista_donantes.mostrarDonantes();
+            std::cout << "Introduce el donante a modificar: ";
+            std::cin >> opcion;
+            if(opcion < 1 || opcion > lista_donantes.getTotal())
+            error("Debes introducir un número entre 1 y " + std::to_string(lista_donantes.getTotal()));
+        }while(opcion < 1 || opcion > lista_donantes.getTotal());
+        cabecera();
+        lista_donantes.modificarDonante(opcion);
+    }
+    else{
+        cabecera();
+        std::cout << "No hay ningún donante para modificar." << std::endl;
+    }
+    volver();
+}
+void borrarDonante(ed::Donantes<ed::Donante> &lista_donantes){
+    unsigned int opcion;
+    bool borrado;
+    if(!lista_donantes.estaVacia()){
+        do{
+            cabecera();
+            lista_donantes.mostrarDonantes();
+            std::cout << "Introduce el donante a eliminar: ";
+            std::cin >> opcion;
+            if(opcion < 1 || opcion > lista_donantes.getTotal())
+            error("Debes introducir un número entre 1 y " + std::to_string(lista_donantes.getTotal()));
+        }while(opcion < 1 || opcion > lista_donantes.getTotal());
+        borrado = lista_donantes.borrarDonante(lista_donantes.getDonante(opcion));
+        if(borrado)
+            std::cout << std::endl << "Donante borrado con éxito.";
+        else
+            error("Linea 201. Mirar importante, aquí no debería entrar nunca el programa.");
+    }
+    else{
+        cabecera();
+        std::cout << "No hay ningún donante para borrar." << std::endl;
+    }
+    volver();
+}
 void mostrarDonantes(ed::Donantes<ed::Donante> &lista_donantes){
     cabecera();
     lista_donantes.mostrarDonantes();
     volver();
 }
-void despedida(){}
+void despedida(){
+    cabecera();
+    std::cout << "Gracias por usar el programa, ¡hasta la próxima!\e[1m" << std::endl;
+    std::cout << "              _ _           " << std::endl << "\
+     /\\      | (_)          " << std::endl << "\
+    /  \\   __| |_  ___  ___ " << std::endl << "\
+   / /\\ \\ / _` | |/ _ \\/ __|" << std::endl << "\
+  / ____ \\ (_| | | (_) \\__ \\" << std::endl << "\
+ /_/    \\_\\__,_|_|\\___/|___/" << std::endl << "\
+                            " << std::endl << "\
+                            \e[0m" << std::endl;
+}
