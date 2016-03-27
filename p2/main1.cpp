@@ -5,7 +5,7 @@
 #include <cassert>
 #include <string>
 #include "donante.hpp"
-#include "main1.hpp"
+// #include "main1.hpp"
 #define cls() system("clear");
 
 /** Pograma principal que muestra el uso de la clase Donante */
@@ -54,6 +54,7 @@ int main() {
                         std::cout << std::endl << "Error. Debes introducir un número entre 1 y 3." << std::endl;
                 }while(opcion_2 < 1 || opcion_2 > 3);
                 std::cout << std::endl;
+                getchar();
                 switch (opcion_2) {
                     case 1:
                         std::cin >> d1;
@@ -72,7 +73,6 @@ int main() {
                 std::cout << std::endl << "Presiona Enter para volver al menú.";
                 getchar();
                 getchar();
-                // cls();
                 break;
             case 2:
                 cls();
@@ -120,20 +120,22 @@ int main() {
                 getchar();
                 switch (opcion_2) {
                     case 1:
-                        modificarDonante(d1);
+                        // modificarDonante(d1);
+                        d1.modificarDonante();
                         break;
                     case 2:
-                        modificarDonante(d2);
+                        // modificarDonante(d2);
+                        d2.modificarDonante();
                         break;
                     case 3:
-                        modificarDonante(d3);
+                        // modificarDonante(d3);
+                        d3.modificarDonante();
                         break;
                 }
                 std::cout << std::endl << "El donante ha sido modificado correctamente.";
                 std::cout << std::endl << std::endl << "Presiona Enter para volver al menú.";
                 getchar();
-                getchar();
-                getchar();
+                break;
             default:
                 cls();
                 std::cout << "Opción no reconocida, presiona Enter para volver al menú.";
