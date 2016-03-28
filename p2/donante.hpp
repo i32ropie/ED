@@ -235,10 +235,10 @@ namespace ed{
                     case 3:
                         do{
                             std::cout << "Estos son los grupos sanguíneos posibles:" << std::endl;
-                            std::cout << "\t1. 0" << std::endl;
-                            std::cout << "\t2. A" << std::endl;
-                            std::cout << "\t3. B" << std::endl;
-                            std::cout << "\t4. AB" << std::endl;
+                            std::cout << "\t[33;1m[1]\e[0m - 0" << std::endl;
+                            std::cout << "\t[33;1m[2]\e[0m - A" << std::endl;
+                            std::cout << "\t[33;1m[3]\e[0m - B" << std::endl;
+                            std::cout << "\t[33;1m[4]\e[0m - AB" << std::endl;
                             std::cout << "Introduce el número del nuevo grupo sanguíneo: ";
                             std::cin >> opcion_2;
                             if(opcion_2 < 1 || opcion_2 > 4)
@@ -249,8 +249,8 @@ namespace ed{
                     case 4:
                         do{
                             std::cout << "Estos son los factores RH posibles:" << std::endl;
-                            std::cout << "\t1. Positivo" << std::endl;
-                            std::cout << "\t2. Negativo" << std::endl;
+                            std::cout << "\t[33;1m[1]\e[0m - Positivo" << std::endl;
+                            std::cout << "\t[33;1m[2]\e[0m - Negativo" << std::endl;
                             std::cout << "Introduce el número del factor RH: ";
                             std::cin >> opcion_2;
                             if(opcion_2 < 1 || opcion_2 > 2)

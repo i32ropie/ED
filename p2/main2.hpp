@@ -161,7 +161,7 @@ void insertarDonante(ed::Donantes<ed::Donante> &lista_donantes){
         std::cin >> d;
         encontrado = lista_donantes.buscarDonante(d);
         if(encontrado)
-            error("Ya exisitía un donante con esos datos. Donante no insertado");
+            error("Ya exisitía un donante con esos datos. Donante no insertado.");
     }while(encontrado);
     lista_donantes.insertarDonante(d);
     std::cout << std::endl << "Donante insertado con éxito.";

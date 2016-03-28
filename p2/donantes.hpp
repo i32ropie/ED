@@ -3,6 +3,7 @@
 
 #include <cassert>
 #include <cstdio>
+#include <iostream>
 #include "donantesinterfaz.hpp"
 
 namespace ed{
@@ -62,25 +63,35 @@ namespace ed{
                 }
                 _total++;
             }
-            bool borrarDonante(const T &d) {
-                if(this->estaVacia()){                                          // Comprobamos si no hay donantes
-                    return false;                                               // y devolvemos false ya que no eliminamos nada.
+            // EXTRA
+            bool borrarDonante(const T &d){
+                if(this->estaVacia()){                                          // Si está vacía, devolvemos false.
+                    return false;
                 }
-                if(_cabeza->dato == d){                                         // Si el dato a borrar está en la cabeza
-                    if(_cabeza->siguiente){                                     // comprobamos si hay sólo 1 donante o más.
-                        _cabeza = _cabeza->siguiente;                           // En el caso de que haya más, actualizamos la cabeza al siguiente.
-                    }
-                    else{                                                       // En el caso de que solo haya un donante y sea ese mismo el que
-                        _cabeza = 0;                                            // borramos, hacemos que _cabeza apunte a 0.
-                    }                                                           // En ambos casos, hemos eliminado el donante, por lo que
+                int indice;
+                if((indice = this->getIndice(d)) == -1){                        // Si al comprobar el índice del donante dentro de la lista obtenemos
+                    return false;                                               // -1 quiere decir que no está en la lista, por lo que devolvemos false.
+                }
+                if(this->borrarElemento(indice)){                               // Intentamos el elemento llamando a la función borrarElemento.
                     _total--;
-                    return true;                                                // devolvemos true.
+                    return true;
                 }
-                Nodo<T> *aux = _cabeza;                                         // En caso de que no sea la cabeza, necesitaremos recorrer los
-                Nodo<T> *anterior = 0;                                          // donantes para buscarlo.
+                else{
+                    return false;
+                }
+            }
+            // EXTRA
+            bool borrarElemento(const unsigned int &indice){
+                Donante d = this->getDonante(indice);
+                if(d == _cabeza->dato){                                         // Si queremos borrar la cabeza, la actualizamos.
+                    _cabeza = _cabeza->siguiente;
+                    return true;
+                }
+                Nodo<T> *aux = _cabeza;
+                Nodo<T> *anterior = 0;
                 bool encontrado = false;
-                while( aux && !encontrado){
-                    if(aux->dato == d){
+                while(aux && !encontrado){                                      // Si no, recorremos los donantes hasta encontrarlo
+                    if(d == aux->dato){
                         encontrado = true;
                     }
                     else{
@@ -89,26 +100,70 @@ namespace ed{
                     }
                 }
                 if(encontrado){
-                    anterior->siguiente = aux->siguiente;                       // Si lo hemos encontrado lo borramos eliminando la unión.
-                    _total--;
-                    return true;                                                // y devolvemos true.
+                    anterior->siguiente = aux->siguiente;
+                    return true;
                 }
-                return false;                                                   // Si no, devolvemos false.
-            }
-            bool buscarDonante(T &d) const {
-                Nodo<T> *aux = _cabeza;
-                while( aux ){                                                   // Recorremos nuestra lista de donantes.
-                    if(aux->dato == d){                                         // Si lo encontramos
-                        d = aux->dato;                                          // actualizamos el parámetro pasado por referencia
-                        return true;                                            // y devolvemos true.
-                    }
-                    else if(aux->dato <= d){                                    // Si no lo encontramos, miramos si nos hemos pasado
-                        return false;                                           // y devolvemos false. (Esto es para que sea más eficiente)
-                    }
-                    aux = aux->siguiente;
+                else{
+                    return false;
                 }
-                return false;
             }
+            // bool borrarDonante(const T &d) {
+            //     if(this->estaVacia()){                                          // Comprobamos si no hay donantes
+            //         return false;                                               // y devolvemos false ya que no eliminamos nada.
+            //     }
+            //     if(_cabeza->dato == d){                                         // Si el dato a borrar está en la cabeza
+            //         if(_cabeza->siguiente){                                     // comprobamos si hay sólo 1 donante o más.
+            //             _cabeza = _cabeza->siguiente;                           // En el caso de que haya más, actualizamos la cabeza al siguiente.
+            //         }
+            //         else{                                                       // En el caso de que solo haya un donante y sea ese mismo el que
+            //             _cabeza = 0;                                            // borramos, hacemos que _cabeza apunte a 0.
+            //         }                                                           // En ambos casos, hemos eliminado el donante, por lo que
+            //         _total--;
+            //         return true;                                                // devolvemos true.
+            //     }
+            //     Nodo<T> *aux = _cabeza;                                         // En caso de que no sea la cabeza, necesitaremos recorrer los
+            //     Nodo<T> *anterior = 0;                                          // donantes para buscarlo.
+            //     bool encontrado = false;
+            //     while( aux && !encontrado){
+            //         if(aux->dato == d){
+            //             encontrado = true;
+            //         }
+            //         else{
+            //             anterior = aux;
+            //             aux = aux->siguiente;
+            //         }
+            //     }
+            //     if(encontrado){
+            //         anterior->siguiente = aux->siguiente;                       // Si lo hemos encontrado lo borramos eliminando la unión.
+            //         _total--;
+            //         return true;                                                // y devolvemos true.
+            //     }
+            //     return false;                                                   // Si no, devolvemos false.
+            // }
+            // EXTRA
+            bool buscarDonante(T &d){
+                int indice;
+                if((indice = this->getIndice(d)) == -1){
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            }
+            // bool buscarDonante(T &d) const {
+            //     Nodo<T> *aux = _cabeza;
+            //     while( aux ){                                                   // Recorremos nuestra lista de donantes.
+            //         if(aux->dato == d){                                         // Si lo encontramos
+            //             d = aux->dato;                                          // actualizamos el parámetro pasado por referencia
+            //             return true;                                            // y devolvemos true.
+            //         }
+            //         else if(aux->dato <= d){                                    // Si no lo encontramos, miramos si nos hemos pasado
+            //             return false;                                           // y devolvemos false. (Esto es para que sea más eficiente)
+            //         }
+            //         aux = aux->siguiente;
+            //     }
+            //     return false;
+            // }
             bool estaVacia() const {
                 return _cabeza == NULL;
             }
@@ -164,6 +219,21 @@ namespace ed{
                 for( unsigned int x = 1 ; x < i ; ++x )
                     aux = aux->siguiente;
                 return aux->dato;
+            }
+            // EXTRA
+            int getIndice(const Donante &d){
+                if(this->estaVacia()){
+                    return -1;
+                }
+                int indice = -1;
+                bool encontrado = false;
+                // Nodo<T> *aux = _cabeza;
+                for( unsigned int x = 1 ; x <= this->getTotal() && !encontrado ; ++x ){
+                    if(this->getDonante(x) == d){
+                        indice = x;
+                    }
+                }
+                return indice;
             }
             void modificarDonante(const unsigned int &i){
                 assert(i>=1 && i<=_total);
