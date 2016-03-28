@@ -90,12 +90,15 @@ void cargarDonantes(ed::Donantes<ed::Donante> &lista_donantes){
         d.setGrupoSanguineo(linea);
         fichero.getline(linea, 256);
         d.setFactorRH(linea);
-        lista_donantes.insertarDonante(d);
+        if(lista_donantes.getIndice(d) == -1){                                  // Evitar donantes repetidos.
+            lista_donantes.insertarDonante(d);
+        }
     }
     fichero.close();
     std::cout << std::endl << "Donantes actualizados con éxito." << std::endl;
     volver();
 }
+
 void guardarDonantes(ed::Donantes<ed::Donante> &lista_donantes){
     cabecera();
     if(lista_donantes.estaVacia()){
