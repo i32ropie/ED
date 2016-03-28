@@ -13,9 +13,8 @@
 #include <cassert>
 #include <cstdlib>
 #include "donanteinterfaz.hpp"
-#define cls() system("clear");
 
-/*
+/**
 * @brief Espacio de nombres para la asignatura Estructuras de Datos.
 */
 
@@ -27,7 +26,7 @@ namespace ed{
             std::string _gSanguineo;                                            // Grupo sanguíneo del donante.
             std::string _factorRH;                                              // Factor RH del donante.
         public:
-            /** @name Constructores */
+            /** @name Constructores. */
             /*
             * @brief Constructor con valores por defecto.
             * @param nombre Nombre del donante (string).
