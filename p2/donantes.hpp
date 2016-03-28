@@ -1,8 +1,9 @@
 /**
 * @file donante.hpp
-* @brief <Práctica 2> Tercera parte: Representación del TAD donante.
+* @brief <Práctica 2> Tercera parte: Representación del TAD donantes.
 * @author Eduardo Roldán Pijuán
 * @date Marzo de 2016
+* Pese a que el nombre de la clase es Donantes y hace referencias a Donante en el nombre de las funciones, la clase funciona como una lista para cualquier tipo de dato, ya que usa una plantilla con tipo genérico T.
 */
 
 #ifndef __DONANTES_HPP__
@@ -36,21 +37,9 @@ namespace ed{
         public:
             /** @name Constructores. */
             /**
-            * @brief Constructor con valores por defecto.
+            * @brief Constructor parametrizado.
             */
             Donantes(): _cabeza(0), _total(0){}
-            /**
-            * @brief Constructor de copia.
-            * @note Recorre los nodos de la lista para ver cuántos items hay.
-            * @param d Nodo.
-            */
-            Donantes(const T &d){
-                _cabeza = new Nodo<T>(d);
-                unsigned int contador = 0;
-                for( Nodo<T> *aux = _cabeza ; aux ; aux = aux->siguiente)
-                    contador++;
-                _total = contador;
-            }
             /** @name Observadores. */
             /**
             * @brief Obtiene el total de elementos de la lista.
@@ -64,6 +53,7 @@ namespace ed{
             * @return Donante i-ésimo.
             * @pre i >= 1 && i <= _total
             * @pre No puede estar vacía.
+            * @sa estaVacia()
             */
             T getDonante(const unsigned int &i) const{
                 assert(i>=1 && i<=_total);
@@ -78,6 +68,9 @@ namespace ed{
             * @note Función muy útil para obtener el índice a partir de un donante.
             * @param d Elemento.
             * @return Índice de un dato T o -1 en caso de que no esté o no haya elementos.
+            * @sa estaVacia()
+            * @sa getTotal()
+            * @sa getDonante()
             */
             int getIndice(const T &d){
                 if(this->estaVacia()){
@@ -92,6 +85,12 @@ namespace ed{
                 }
                 return indice;
             }
+            /**
+            * @brief Inserta un donante.
+            * @note Inserta un donante de manera ordenada.
+            * @param d Elemento.
+            * @sa estaVacia()
+            */
             void insertarDonante(const T &d){
                 Nodo<T> *nuevo = new Nodo<T>(d);                                // Creamos un nuevo nodo con el dato a insertar
                 if(this->estaVacia()){                                          // Si la lista de donantes está vacía mi cursor y
@@ -121,7 +120,14 @@ namespace ed{
                 }
                 _total++;
             }
-            // EXTRA
+            /**
+            * @brief Borra un donante pasado por parámetro.
+            * @param d Elemento.
+            * @return true si lo borra, false si no lo borra.
+            * @sa estaVacia()
+            * @sa getIndice()
+            * @sa borrarElemento()
+            */
             bool borrarDonante(const T &d){
                 if(this->estaVacia()){                                          // Si está vacía, devolvemos false.
                     return false;
@@ -138,7 +144,12 @@ namespace ed{
                     return false;
                 }
             }
-            // EXTRA
+            /**
+            * @brief Borra un donante pasándole el índice.
+            * @param indice Índice.
+            * @return true si lo borra, false si no lo borra.
+            * @sa getDonante()
+            */
             bool borrarElemento(const unsigned int &indice){
                 T d = this->getDonante(indice);
                 if(d == _cabeza->dato){                                         // Si queremos borrar la cabeza, la actualizamos.
