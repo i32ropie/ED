@@ -93,11 +93,17 @@ namespace ed{
                 this->setFactorRH(factorRH[opcion2-1]);
             }
 
-            void mostrarDonante(){
-                std::cout << "Información del donante:" << std::endl;
-                std::cout << "\t\e[31;4mNombre\e[0m: " << this->getNombre() << std::endl;
-                std::cout << "\t\e[31;4mApellidos\e[0m: " << this->getApellidos() << std::endl;
-                std::cout << "\t\e[31;4mGrupo sanguíneo\e[0m: " << this->getGrupoSanguineo() << this->getFactorRH() << std::endl;
+            void mostrarDonante() const {
+                if(this->getNombre() == ""){
+                    std::cout << "Donante vacío." << std::endl;
+                }
+                else{
+                    std::cout << "Información del donante:" << std::endl;
+                    std::cout << "\t\e[31;4mNombre\e[0m: " << this->getNombre() << std::endl;
+                    std::cout << "\t\e[31;4mApellidos\e[0m: " << this->getApellidos() << std::endl;
+                    std::cout << "\t\e[31;4mGrupo sanguíneo\e[0m: " << this->getGrupoSanguineo() << std::endl;
+                    std::cout << "\t\e[31;4mFactor RH\e[0m: " << this->getFactorRH() << std::endl;
+                }
                 // std::cout << this->getApellidos() << ", " << this->getNombre() << " ( " << this->getGrupoSanguineo() << this->getFactorRH() << " )" << std::endl;
             }
 
@@ -166,6 +172,10 @@ namespace ed{
             }
 
             friend std::ostream &operator <<(std::ostream &output, const Donante &d){
+                if(d.getNombre() == ""){
+                    output << "Donante vacío." << std::endl;
+                    return output;
+                }
                 output << d.getApellidos() << ", " << d.getNombre() << " ( " << d.getGrupoSanguineo() << d.getFactorRH() << " )" << std::endl;
                 return output;
             }

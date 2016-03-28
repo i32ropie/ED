@@ -26,7 +26,7 @@ void volver(){
     getchar();
 }
 
-void error(const std::string er){
+void error(const std::string &er){
     std::cout << std::endl << "\e[31;1m[ERROR]\e[0m - " << er;
     fflush(stdout);
     sleep(3);
@@ -36,7 +36,7 @@ bool existe(const std::string &fichero){
     return (access( fichero.c_str(), F_OK) != -1);
 }
 
-int opciones(){
+unsigned int opciones(){
     unsigned int opcion;
     do{
         cabecera();
