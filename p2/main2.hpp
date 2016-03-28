@@ -20,7 +20,6 @@ void cabecera(){
 }
 
 void volver(){
-    // cls();
     std::cout << std::endl << "Presiona ENTER para volver al menú.";
     getchar();
     getchar();
@@ -132,8 +131,6 @@ void guardarDonantes(ed::Donantes<ed::Donante> &lista_donantes){
                 break;
             case 2:
                 escribir = false;
-                // std::cout << std::endl << "Volviendo al menú principal...";
-                // sleep(3);
                 break;
         }
     }
@@ -222,8 +219,8 @@ void mostrarDonantes(ed::Donantes<ed::Donante> &lista_donantes){
 void despedida(){
     cabecera();
     std::cout << "Gracias por usar el programa, ¡hasta la próxima!\e[1m" << std::endl;
-    std::cout << "              _ _           " << std::endl << "\
-     /\\      | (_)          " << std::endl << "\
+    std::cout << "              _ _   __      " << std::endl << "\
+     /\\      | (_) /_/      " << std::endl << "\
     /  \\   __| |_  ___  ___ " << std::endl << "\
    / /\\ \\ / _` | |/ _ \\/ __|" << std::endl << "\
   / ____ \\ (_| | | (_) \\__ \\" << std::endl << "\
