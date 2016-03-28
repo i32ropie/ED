@@ -1,3 +1,10 @@
+/**
+* @file donante.hpp
+* @brief <Práctica 2> Primera parte: Representación del TAD donante.
+* @author Eduardo Roldán Pijuán
+* @date Marzo de 2016
+*/
+
 #ifndef __DONANTE_HPP__
 #define __DONANTE_HPP__
 
@@ -8,50 +15,99 @@
 #include "donanteinterfaz.hpp"
 #define cls() system("clear");
 
+/*
+* @brief Espacio de nombres para la asignatura Estructuras de Datos.
+*/
+
 namespace ed{
     class Donante:public DonanteInterfaz{
         private:
-            std::string _nombre;
-            std::string _apellidos;
-            std::string _gSanguineo;
-            std::string _factorRH;
+            std::string _nombre;                                                // Nombre del donante.
+            std::string _apellidos;                                             // Apellidos del donante.
+            std::string _gSanguineo;                                            // Grupo sanguíneo del donante.
+            std::string _factorRH;                                              // Factor RH del donante.
         public:
+            /** @name Constructores */
+            /*
+            * @brief Constructor con valores por defecto.
+            * @param nombre Nombre del donante (string).
+            * @param apellidos Apellidos del donante (string).
+            * @param gSanguineo Grupo sanguíneo del donante (string).
+            * @param factorRH Factor RH del donante (string).
+            */
             Donante(const std::string &nombre="", const std::string &apellidos="", const std::string &gSanguineo="", const std::string &factorRH=""): _nombre(nombre), _apellidos(apellidos), _gSanguineo(gSanguineo), _factorRH(factorRH){}
-
+            /*
+            * @brief Constructor de copia.
+            * @param d Donante del que crear el nuevo donante.
+            */
             Donante(const Donante &d): _nombre(d.getNombre()), _apellidos(d.getApellidos()), _gSanguineo(d.getGrupoSanguineo()), _factorRH(d.getFactorRH()){}
-
+            /** @name Observadores. */
+            /*
+            * @brief Devuelve el nombre del donante.
+            * @return Nombre del donante.
+            */
             std::string getNombre() const{
                 return _nombre;
             }
-
+            /*
+            * @brief Devuelve los apellidos del donante.
+            * @return Apellidos del donante.
+            */
             std::string getApellidos() const{
                 return _apellidos;
             }
-
+            /*
+            * @brief Devuelve el grupo sanguíneo del donante.
+            * @return Grupo sanguíneo del donante.
+            */
             std::string getGrupoSanguineo() const{
                 return _gSanguineo;
             }
-
+            /*
+            * @brief Devuelve el factor RH del donante.
+            * @return Factor RH del donante.
+            */
             std::string getFactorRH() const{
                 return _factorRH;
             }
-
+            /** @name Modificadores. */
+            /*
+            * @brief Establece el nombre del donante.
+            * @param nombre Nombre del donante (string).
+            */
             void setNombre(const std::string &nombre){
                 _nombre = nombre;
             }
-
+            /*
+            * @brief Establece los apellidos del donante.
+            * @param apellidos Apellidos del donante (string).
+            */
             void setApellidos(const std::string &apellidos){
                 _apellidos = apellidos;
             }
-
+            /*
+            * @brief Establece el grupos sanguíneo del donante.
+            * @param gSanguineo Grupo sanguíneo del donante (string).
+            */
             void setGrupoSanguineo(const std::string &gSanguineo){
                 _gSanguineo = gSanguineo;
             }
-
+            /*
+            * @brief Establece el factor RH del donante.
+            * @param factorRH Factor RH del donante (string).
+            */
             void setFactorRH(const std::string &factorRH){
                 _factorRH = factorRH;
             }
-
+            /** @name Input y Output. */
+            /*
+            * @brief Lee por teclado los datos del donante.
+            * @note La función tiene control de errores por dentro.
+            * @sa setNombre()
+            * @sa setApellidos()
+            * @sa setGrupoSanguineo()
+            * @sa setFactorRH()
+            */
             void leerDonante(){
                 std::string nombre, apellidos, gSanguineo[] = {"0", "A", "B", "AB"}, factorRH[] = {"+", "-"};
                 unsigned int opcion1, opcion2;
@@ -92,7 +148,14 @@ namespace ed{
                 this->setGrupoSanguineo(gSanguineo[opcion1-1]);
                 this->setFactorRH(factorRH[opcion2-1]);
             }
-
+            /*
+            * @brief Escribe por pantalla el donante.
+            * @note Imprime detalladamente los datos del donante.
+            * @sa getNombre()
+            * @sa getApellidos()
+            * @sa getGrupoSanguineo()
+            * @sa getFactorRH()
+            */
             void mostrarDonante() const {
                 if(this->getNombre() == "" || this->getApellidos() == ""){
                     std::cout << "Donante vacío." << std::endl;
@@ -104,9 +167,21 @@ namespace ed{
                     std::cout << "\t\e[1;4mGrupo sanguíneo\e[0m: " << this->getGrupoSanguineo() << std::endl;
                     std::cout << "\t\e[1;4mFactor RH\e[0m: " << this->getFactorRH() << std::endl;
                 }
-                // std::cout << this->getApellidos() << ", " << this->getNombre() << " ( " << this->getGrupoSanguineo() << this->getFactorRH() << " )" << std::endl;
             }
-
+            /** @name Sobrecarga de operadores. */
+            /*
+            * @brief Sobrecarga del operador =
+            * @param d Donante.
+            * @return Donante.
+            * @sa getNombre()
+            * @sa getApellidos()
+            * @sa getGrupoSanguineo()
+            * @sa getFactorRH()
+            * @sa setNombre()
+            * @sa setApellidos()
+            * @sa setGrupoSanguineo()
+            * @sa setFactorRH()
+            */
             Donante &operator =(const Donante &d){
                 this->setNombre(d.getNombre());
                 this->setApellidos(d.getApellidos());
@@ -115,29 +190,59 @@ namespace ed{
                 assert(*this == d);
                 return *this;
             }
-
+            /**
+            * @brief Sobrecarga del operador ==
+            * @param d Donante.
+            * @return true si *this == d, false si *this != d
+            * @sa getApellidos()
+            * @sa getNombre()
+            */
             bool operator ==(const Donante &d){
                 return this->getApellidos() == d.getApellidos() && this->getNombre() == d.getNombre();
             }
-
+            /**
+            * @brief Sobrecarga del operador <
+            * @param d Donante.
+            * @return true si *this < d, false si *this > d
+            * @sa getApellidos()
+            * @sa getNombre()
+            */
             bool operator < (const Donante &d){
                 if(this->getApellidos() < d.getApellidos()){
                     return true;
                 }
-                else{
+                else if(this->getApellidos() > d.getApellidos()){
                     return false;
                 }
+                else{
+                    return this->getNombre() < d.getNombre();
+                }
             }
-
+            /**
+            * @brief Sobrecarga del operador >
+            * @param d Donante.
+            * @return true si *this > d, false si *this < d
+            * @sa getApellidos()
+            * @sa getNombre()
+            */
             bool operator > (const Donante &d){
                 if(this->getApellidos() > d.getApellidos()){
                     return true;
                 }
-                else{
+                else if(this->getApellidos() < d.getApellidos()){
                     return false;
                 }
+                else{
+                    return this->getNombre() > d.getNombre();
+                }
             }
-
+            /**
+            * @brief Sobrecarga del operador <=
+            * @param d Donante.
+            * @return true si *this <= d, false si *this > d
+            * @sa getApellidos()
+            * @sa getNombre()
+            */
             bool operator <=(const Donante &d){
                 if(this->getApellidos() < d.getApellidos())
                     return true;
@@ -146,7 +251,16 @@ namespace ed{
                 return this->getNombre() <= d.getNombre();
                 // return this->getApellidos() <= d.getApellidos() && this->getNombre() <= d.getNombre();
             }
-
+            /**
+            * @brief Sobrecarga del operador >>
+            * @param input Flujo de entrada.
+            * @param d Donante.
+            * @return Flujo de entrada con el donante ya leido.
+            * @sa setNombre()
+            * @sa setApellidos()
+            * @sa setGrupoSanguineo()
+            * @sa setFactorRH()
+            */
             friend std::istream &operator >>(std::istream &input, Donante &d){
                 std::string nombre, apellidos, gSanguineo[] = {"0", "A", "B", "AB"}, factorRH[] = {"+", "-"};
                 unsigned int opcion1, opcion2;
@@ -188,7 +302,16 @@ namespace ed{
                 d.setFactorRH(factorRH[opcion2-1]);
                 return input;
             }
-
+            /**
+            * @brief Sobrecarga del operador <<
+            * @param output Flujo de salida.
+            * @param d Donante.
+            * @return Flujo de salido con el polinomio ya impreso.
+            * @sa getNombre()
+            * @sa getApellidos()
+            * @sa getGrupoSanguineo()
+            * @sa getFactorRH()
+            */
             friend std::ostream &operator <<(std::ostream &output, const Donante &d){
                 if(d.getNombre() == "" || d.getApellidos() == ""){
                     output << "Donante vacío." << std::endl;
@@ -197,7 +320,18 @@ namespace ed{
                 output << d.getApellidos() << ", " << d.getNombre() << " ( " << d.getGrupoSanguineo() << d.getFactorRH() << " )" << std::endl;
                 return output;
             }
-
+            /**
+            * @brief Función para modificar un donante.
+            * @note La función tiene un submenú donde pregunta al usuario qué modificar.
+            * @sa getNombre()
+            * @sa getApellidos()
+            * @sa getGrupoSanguineo()
+            * @sa getFactorRH()
+            * @sa setNombre()
+            * @sa setApellidos()
+            * @sa setGrupoSanguineo()
+            * @sa setFactorRH()
+            */
             void modificarDonante(){
                 unsigned int opcion_1, opcion_2;
                 std::string nombre, apellidos, gSanguineo[] = {"0", "A", "B", "AB"}, factorRH[] = {"+", "-"};
@@ -235,10 +369,10 @@ namespace ed{
                     case 3:
                         do{
                             std::cout << "Estos son los grupos sanguíneos posibles:" << std::endl;
-                            std::cout << "\t[33;1m[1]\e[0m - 0" << std::endl;
-                            std::cout << "\t[33;1m[2]\e[0m - A" << std::endl;
-                            std::cout << "\t[33;1m[3]\e[0m - B" << std::endl;
-                            std::cout << "\t[33;1m[4]\e[0m - AB" << std::endl;
+                            std::cout << "\t\e[33;1m[1]\e[0m - 0" << std::endl;
+                            std::cout << "\t\e[33;1m[2]\e[0m - A" << std::endl;
+                            std::cout << "\t\e[33;1m[3]\e[0m - B" << std::endl;
+                            std::cout << "\t\e[33;1m[4]\e[0m - AB" << std::endl;
                             std::cout << "Introduce el número del nuevo grupo sanguíneo: ";
                             std::cin >> opcion_2;
                             if(opcion_2 < 1 || opcion_2 > 4)
@@ -249,8 +383,8 @@ namespace ed{
                     case 4:
                         do{
                             std::cout << "Estos son los factores RH posibles:" << std::endl;
-                            std::cout << "\t[33;1m[1]\e[0m - Positivo" << std::endl;
-                            std::cout << "\t[33;1m[2]\e[0m - Negativo" << std::endl;
+                            std::cout << "\t\e[33;1m[1]\e[0m - Positivo" << std::endl;
+                            std::cout << "\t\e[33;1m[2]\e[0m - Negativo" << std::endl;
                             std::cout << "Introduce el número del factor RH: ";
                             std::cin >> opcion_2;
                             if(opcion_2 < 1 || opcion_2 > 2)

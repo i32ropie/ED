@@ -5,3 +5,4 @@ Elodia,Cordero Cabrera,0,+
 José Luis,Lira Posada,A,+
 Valeriano,Medina Echevarría,0,+
 Rosalía,Murillo Árias,B,+
+Rosalía,Murillo Árias,B,+
