@@ -94,7 +94,7 @@ namespace ed{
             }
 
             void mostrarDonante() const {
-                if(this->getNombre() == ""){
+                if(this->getNombre() == "" || this->getApellidos() == ""){
                     std::cout << "Donante vacío." << std::endl;
                 }
                 else{
@@ -190,7 +190,7 @@ namespace ed{
             }
 
             friend std::ostream &operator <<(std::ostream &output, const Donante &d){
-                if(d.getNombre() == ""){
+                if(d.getNombre() == "" || d.getApellidos() == ""){
                     output << "Donante vacío." << std::endl;
                     return output;
                 }

@@ -144,7 +144,7 @@ void modificarDonante(ed::Donante &d1, ed::Donante &d2, ed::Donante &d3){
             break;
     }
     std::cout << std::endl << "Donante modificado con éxito." << std::endl;
-    volver();
+    volver(1);
 }
 
 void compararDonantes(ed::Donante &d1, ed::Donante &d2, ed::Donante &d3){
