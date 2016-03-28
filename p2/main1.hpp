@@ -27,7 +27,7 @@ void volver(const unsigned int &nChar = 2){
 void error(const std::string &er){
     std::cout << std::endl << "\e[31;1m[ERROR]\e[0m - " << er;
     fflush(stdout);
-    sleep(3);
+    sleep(2);
 }
 
 unsigned int opciones(){

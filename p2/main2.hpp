@@ -29,7 +29,7 @@ void volver(){
 void error(const std::string &er){
     std::cout << std::endl << "\e[31;1m[ERROR]\e[0m - " << er;
     fflush(stdout);
-    sleep(3);
+    sleep(2);
 }
 
 bool existe(const std::string &fichero){
