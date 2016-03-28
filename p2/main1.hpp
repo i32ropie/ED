@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <string>
 #include <cstdlib>
 #include <cstdio>
@@ -8,13 +9,13 @@
 
 void cabecera(){
     cls();
-    std::cout << "\e[1;92m###############################" << std::endl;
-    std::cout << "###############################" << std::endl;
-    std::cout << "####                       ####" << std::endl;
-    std::cout << "####    \e[96mPrograma Donante\e[92m  ####" << std::endl;
-    std::cout << "####                       ####" << std::endl;
-    std::cout << "###############################" << std::endl;
-    std::cout << "###############################\e[0m" << std::endl << std::endl;
+    std::cout << "\e[1;92m##############################" << std::endl;
+    std::cout << "##############################" << std::endl;
+    std::cout << "####                      ####" << std::endl;
+    std::cout << "####   \e[96mPrograma Donante\e[92m   ####" << std::endl;
+    std::cout << "####                      ####" << std::endl;
+    std::cout << "##############################" << std::endl;
+    std::cout << "##############################\e[0m" << std::endl << std::endl;
 }
 
 void volver(const unsigned int &nChar = 2){
@@ -146,7 +147,54 @@ void modificarDonante(ed::Donante &d1, ed::Donante &d2, ed::Donante &d3){
     volver();
 }
 
-void compararDonantes(ed::Donante &d1, ed::Donante &d2, ed::Donante &d3){}
+void compararDonantes(ed::Donante &d1, ed::Donante &d2, ed::Donante &d3){
+    unsigned int opcion_1, opcion_2;
+    std::vector<ed::Donante> v = {d1, d2, d3};
+    do{
+        cabecera();
+        std::cout << "Estos son tus donantes:" << std::endl;
+        std::cout << "\t\e[33;1m[1]\e[0m - " << d1;
+        std::cout << "\t\e[33;1m[2]\e[0m - " << d2;
+        std::cout << "\t\e[33;1m[3]\e[0m - " << d3;
+        std::cout << "Introduce el primer donante a comparar: \e[33;1m";
+        std::cin >> opcion_1;
+        std::cout << "\e[0m";
+        if(opcion_1 < 1 || opcion_1 > 3){
+            error("Opción no válida. Debe ser un número entre 1 y 3.");
+        }
+    }while(opcion_1 < 1 || opcion_1 > 3);
+    do{
+        cabecera();
+        std::cout << "Estos son tus donantes:" << std::endl;
+        std::cout << "\t\e[33;1m[1]\e[0m - " << d1;
+        std::cout << "\t\e[33;1m[2]\e[0m - " << d2;
+        std::cout << "\t\e[33;1m[3]\e[0m - " << d3;
+        std::cout << "Introduce el primer donante a comparar: \e[33;1m" << opcion_1 << "\e[0m" << std::endl;
+        std::cout << "Introduce el segundo donante a comparar: \e[33;1m";
+        std::cin >> opcion_2;
+        std::cout << "\e[0m";
+        if(opcion_2 == opcion_1){
+            error("Opción no válida. No debes elegir el mismo donante.");
+        }
+        else if(opcion_2 < 1 || opcion_2 > 3){
+            error("Opción no válida. Debe ser un número entre 1 y 3.");
+        }
+    }while(opcion_2 == opcion_1 || opcion_2 < 1 || opcion_2 > 3);
+    if(v[opcion_1-1] == v[opcion_2-1]){
+        std::cout << std::endl << "Los dos donantes son iguales." << std::endl;
+    }
+    else if(v[opcion_1-1] < v[opcion_2-1]){
+        std::cout << std::endl << "Donantes ordenados lexicográficamente:" << std::endl;
+        std::cout << "\t\e[33;1m[1]\e[0m - " << v[opcion_1-1];
+        std::cout << "\t\e[33;1m[2]\e[0m - " << v[opcion_2-1];
+    }
+    else if(v[opcion_1-1] > v[opcion_2-1]){
+        std::cout << std::endl << "Donantes ordenados lexicográficamente:" << std::endl;
+        std::cout << "\t\e[33;1m[1]\e[0m - " << v[opcion_2-1];
+        std::cout << "\t\e[33;1m[2]\e[0m - " << v[opcion_1-1];
+    }
+    volver();
+}
 
 void despedida(){
     cabecera();

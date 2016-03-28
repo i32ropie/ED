@@ -99,10 +99,10 @@ namespace ed{
                 }
                 else{
                     std::cout << "Información del donante:" << std::endl;
-                    std::cout << "\t\e[31;4mNombre\e[0m: " << this->getNombre() << std::endl;
-                    std::cout << "\t\e[31;4mApellidos\e[0m: " << this->getApellidos() << std::endl;
-                    std::cout << "\t\e[31;4mGrupo sanguíneo\e[0m: " << this->getGrupoSanguineo() << std::endl;
-                    std::cout << "\t\e[31;4mFactor RH\e[0m: " << this->getFactorRH() << std::endl;
+                    std::cout << "\t\e[1;4mNombre\e[0m: " << this->getNombre() << std::endl;
+                    std::cout << "\t\e[1;4mApellidos\e[0m: " << this->getApellidos() << std::endl;
+                    std::cout << "\t\e[1;4mGrupo sanguíneo\e[0m: " << this->getGrupoSanguineo() << std::endl;
+                    std::cout << "\t\e[1;4mFactor RH\e[0m: " << this->getFactorRH() << std::endl;
                 }
                 // std::cout << this->getApellidos() << ", " << this->getNombre() << " ( " << this->getGrupoSanguineo() << this->getFactorRH() << " )" << std::endl;
             }
@@ -118,6 +118,24 @@ namespace ed{
 
             bool operator ==(const Donante &d){
                 return this->getApellidos() == d.getApellidos() && this->getNombre() == d.getNombre();
+            }
+
+            bool operator < (const Donante &d){
+                if(this->getApellidos() < d.getApellidos()){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+
+            bool operator > (const Donante &d){
+                if(this->getApellidos() > d.getApellidos()){
+                    return true;
+                }
+                else{
+                    return false;
+                }
             }
 
             bool operator <=(const Donante &d){
