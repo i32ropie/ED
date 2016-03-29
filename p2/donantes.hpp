@@ -12,6 +12,8 @@
 #include <cassert>
 #include <cstdio>
 #include <iostream>
+#include "listasimpleenlazada.hpp"
+#include "donante.hpp"
 #include "donantesinterfaz.hpp"
 
 /**
@@ -22,30 +24,31 @@ namespace ed{
     /**
     * @brief Estructura auxiliar nodo para la lista.
     */
-    template <class T>
-    struct Nodo{
-        T dato;
-        Nodo *siguiente;
-        Nodo(const T &n): dato(n), siguiente(0){}
-    };
+    // template <class T>
+    // struct Nodo{
+    //     T dato;
+    //     Nodo *siguiente;
+    //     Nodo(const T &n): dato(n), siguiente(0){}
+    // };
 
-    template <class T>
-    class Donantes:public DonantesInterfaz<T>{
+    // template <class T>
+    class Donantes:public DonantesInterfaz{
         private:
-            Nodo<T> *_cabeza;                                                   // Puntero al primer elemento de la lista.
-            unsigned int _total;                                                // Número de donantes.
+            ListaSimpleEnlazada<Donante> _l;
         public:
             /** @name Constructores. */
             /**
             * @brief Constructor parametrizado.
             */
-            Donantes(): _cabeza(0), _total(0){}
+            Donantes(){}
             /** @name Observadores. */
             /**
             * @brief Obtiene el total de elementos de la lista.
             * @return Total de elementos de la lista.
             */
-            inline unsigned int getTotal() const {return _total;}
+            uint totalDonantes() const{
+                return _l.getTotal();
+            }
             /**
             * @brief Devuelve el donante i-ésimo.
             * @note Función muy útil para recorrer los donantes.
@@ -55,14 +58,17 @@ namespace ed{
             * @pre No puede estar vacía.
             * @sa estaVacia()
             */
-            T getDonante(const unsigned int &i) const{
-                assert(i>=1 && i<=_total);
-                assert(!this->estaVacia());
-                Nodo<T> *aux = _cabeza;
-                for( unsigned int x = 1 ; x < i ; ++x )
-                    aux = aux->siguiente;
-                return aux->dato;
+            T getDonante(const uint &indice) const{
+                return _l.getItem(indice);
             }
+            // T getDonante(const unsigned int &i) const{
+            //     assert(i>=1 && i<=_total);
+            //     assert(!this->estaVacia());
+            //     Nodo<T> *aux = _cabeza;
+            //     for( unsigned int x = 1 ; x < i ; ++x )
+            //         aux = aux->siguiente;
+            //     return aux->dato;
+            // }
             /**
             * @brief Devuelve el índice de un donante.
             * @note Función muy útil para obtener el índice a partir de un donante.
@@ -72,54 +78,60 @@ namespace ed{
             * @sa getTotal()
             * @sa getDonante()
             */
-            int getIndice(const T &d){
-                if(this->estaVacia()){
-                    return -1;
-                }
-                int indice = -1;
-                bool encontrado = false;
-                for( unsigned int x = 1 ; x <= this->getTotal() && !encontrado ; ++x ){
-                    if(this->getDonante(x) == d){
-                        indice = x;
-                    }
-                }
-                return indice;
+            int getIndice(const Donante &d) const{
+                return _l.getIndex(d);
             }
+            // int getIndice(const T &d){
+            //     if(this->estaVacia()){
+            //         return -1;
+            //     }
+            //     int indice = -1;
+            //     bool encontrado = false;
+            //     for( unsigned int x = 1 ; x <= this->getTotal() && !encontrado ; ++x ){
+            //         if(this->getDonante(x) == d){
+            //             indice = x;
+            //         }
+            //     }
+            //     return indice;
+            // }
             /**
             * @brief Inserta un donante.
             * @note Inserta un donante de manera ordenada.
             * @param d Elemento.
             * @sa estaVacia()
             */
-            void insertarDonante(const T &d){
-                Nodo<T> *nuevo = new Nodo<T>(d);                                // Creamos un nuevo nodo con el dato a insertar
-                if(this->estaVacia()){                                          // Si la lista de donantes está vacía mi cursor y
-                    _cabeza = nuevo;                                            // mi cabeza va a ser el dato a insertar.
-                }
-                else{                                                           // Si no está vacía
-                    if(_cabeza->dato <= d){                                     // Y el dato en la cabeza es menor o igual que a insertar
-                        Nodo<T> *aux = _cabeza;                                 // Tendremos que buscar la posición donde insertarlo.
-                        Nodo<T> *anterior = 0;                                  // Puede ocurrir que insertemos entre dos nodos o al final
-                        bool encontrado = false;                                // por lo que recorreremos la lista de donantes comparando
-                        while(aux && !encontrado){                              // nuestros nodos para ver en qué posición insertarmos
-                            if(aux->dato <= d){                                 // el nuevo nodo.
-                                anterior = aux;
-                                aux = aux->siguiente;
-                            }
-                            else{
-                                encontrado = true;
-                            }
-                        }
-                        anterior->siguiente = nuevo;                            // Una vez recorridos todos los nodos y hecho las comprobaciones
-                        nuevo->siguiente = aux;                                 // insertamos el nuevo nodo donde le corresponda y actualizamos
-                    }
-                    else{                                                       // Si el dato en la cabeza es mayor que el que vamos a insertar
-                        nuevo->siguiente = _cabeza;                             // actualizamos el puntero del nuevo y lo metemos en la cabeza.
-                        _cabeza = nuevo;
-                    }
-                }
-                _total++;
+            void insertarDonante(const Donante &d){
+                _l.insertItem(d);
             }
+            // void insertarDonante(const T &d){
+            //     Nodo<T> *nuevo = new Nodo<T>(d);                                // Creamos un nuevo nodo con el dato a insertar
+            //     if(this->estaVacia()){                                          // Si la lista de donantes está vacía mi cursor y
+            //         _cabeza = nuevo;                                            // mi cabeza va a ser el dato a insertar.
+            //     }
+            //     else{                                                           // Si no está vacía
+            //         if(_cabeza->dato <= d){                                     // Y el dato en la cabeza es menor o igual que a insertar
+            //             Nodo<T> *aux = _cabeza;                                 // Tendremos que buscar la posición donde insertarlo.
+            //             Nodo<T> *anterior = 0;                                  // Puede ocurrir que insertemos entre dos nodos o al final
+            //             bool encontrado = false;                                // por lo que recorreremos la lista de donantes comparando
+            //             while(aux && !encontrado){                              // nuestros nodos para ver en qué posición insertarmos
+            //                 if(aux->dato <= d){                                 // el nuevo nodo.
+            //                     anterior = aux;
+            //                     aux = aux->siguiente;
+            //                 }
+            //                 else{
+            //                     encontrado = true;
+            //                 }
+            //             }
+            //             anterior->siguiente = nuevo;                            // Una vez recorridos todos los nodos y hecho las comprobaciones
+            //             nuevo->siguiente = aux;                                 // insertamos el nuevo nodo donde le corresponda y actualizamos
+            //         }
+            //         else{                                                       // Si el dato en la cabeza es mayor que el que vamos a insertar
+            //             nuevo->siguiente = _cabeza;                             // actualizamos el puntero del nuevo y lo metemos en la cabeza.
+            //             _cabeza = nuevo;
+            //         }
+            //     }
+            //     _total++;
+            // }
             /**
             * @brief Borra un donante pasado por parámetro.
             * @param d Elemento.
@@ -128,54 +140,60 @@ namespace ed{
             * @sa getIndice()
             * @sa borrarElemento()
             */
-            bool borrarDonante(const T &d){
-                if(this->estaVacia()){                                          // Si está vacía, devolvemos false.
-                    return false;
-                }
-                int indice;
-                if((indice = this->getIndice(d)) == -1){                        // Si al comprobar el índice del donante dentro de la lista obtenemos
-                    return false;                                               // -1 quiere decir que no está en la lista, por lo que devolvemos false.
-                }
-                if(this->borrarElemento(indice)){                               // Intentamos el elemento llamando a la función borrarElemento.
-                    _total--;
-                    return true;
-                }
-                else{
-                    return false;
-                }
+            bool borrarDonante(const Donante &d){
+                return _l.deleteItem(this->getIndice(d));
             }
+            bool borrarDonante(const uint &indice){
+                return _l.deleteItem(indice);
+            }
+            // bool borrarDonante(const T &d){
+            //     if(this->estaVacia()){                                          // Si está vacía, devolvemos false.
+            //         return false;
+            //     }
+            //     int indice;
+            //     if((indice = this->getIndice(d)) == -1){                        // Si al comprobar el índice del donante dentro de la lista obtenemos
+            //         return false;                                               // -1 quiere decir que no está en la lista, por lo que devolvemos false.
+            //     }
+            //     if(this->borrarElemento(indice)){                               // Intentamos el elemento llamando a la función borrarElemento.
+            //         _total--;
+            //         return true;
+            //     }
+            //     else{
+            //         return false;
+            //     }
+            // }
             /**
             * @brief Borra un donante pasándole el índice.
             * @param indice Índice.
             * @return true si lo borra, false si no lo borra.
             * @sa getDonante()
             */
-            bool borrarElemento(const unsigned int &indice){
-                T d = this->getDonante(indice);
-                if(d == _cabeza->dato){                                         // Si queremos borrar la cabeza, la actualizamos.
-                    _cabeza = _cabeza->siguiente;
-                    return true;
-                }
-                Nodo<T> *aux = _cabeza;
-                Nodo<T> *anterior = 0;
-                bool encontrado = false;
-                while(aux && !encontrado){                                      // Si no, recorremos los donantes hasta encontrarlo
-                    if(d == aux->dato){
-                        encontrado = true;
-                    }
-                    else{
-                        anterior = aux;
-                        aux = aux->siguiente;
-                    }
-                }
-                if(encontrado){
-                    anterior->siguiente = aux->siguiente;
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            }
+            // bool borrarElemento(const unsigned int &indice){
+            //     T d = this->getDonante(indice);
+            //     if(d == _cabeza->dato){                                         // Si queremos borrar la cabeza, la actualizamos.
+            //         _cabeza = _cabeza->siguiente;
+            //         return true;
+            //     }
+            //     Nodo<T> *aux = _cabeza;
+            //     Nodo<T> *anterior = 0;
+            //     bool encontrado = false;
+            //     while(aux && !encontrado){                                      // Si no, recorremos los donantes hasta encontrarlo
+            //         if(d == aux->dato){
+            //             encontrado = true;
+            //         }
+            //         else{
+            //             anterior = aux;
+            //             aux = aux->siguiente;
+            //         }
+            //     }
+            //     if(encontrado){
+            //         anterior->siguiente = aux->siguiente;
+            //         return true;
+            //     }
+            //     else{
+            //         return false;
+            //     }
+            // }
             // bool borrarDonante(const T &d) {
             //     if(this->estaVacia()){                                          // Comprobamos si no hay donantes
             //         return false;                                               // y devolvemos false ya que no eliminamos nada.
@@ -210,15 +228,18 @@ namespace ed{
             //     return false;                                                   // Si no, devolvemos false.
             // }
             // EXTRA
-            bool buscarDonante(T &d){
-                int indice;
-                if((indice = this->getIndice(d)) == -1){
-                    return false;
-                }
-                else{
-                    return true;
-                }
+            bool existeDonante(const Donante &d) const{
+                return _l.isValid(d);
             }
+            // bool buscarDonante(T &d){
+            //     int indice;
+            //     if((indice = this->getIndice(d)) == -1){
+            //         return false;
+            //     }
+            //     else{
+            //         return true;
+            //     }
+            // }
             // bool buscarDonante(T &d) const {
             //     Nodo<T> *aux = _cabeza;
             //     while( aux ){                                                   // Recorremos nuestra lista de donantes.
@@ -234,7 +255,7 @@ namespace ed{
             //     return false;
             // }
             bool estaVacia() const {
-                return _cabeza == NULL;
+                return _l.isEmpty();
             }
             void leerDonantes(){
                 T d;
@@ -244,7 +265,7 @@ namespace ed{
                 do{
                     std::cout << "Introduce tu donante nº " << nDonante << ": " << std::endl;
                     std::cin >> d;
-                    encontrado = this->buscarDonante(d);
+                    encontrado = this->existeDonante(d);
                     if(!encontrado){
                         this->insertarDonante(d);
                         std::cout << "Donante insertado.";
@@ -271,16 +292,27 @@ namespace ed{
                     }while(respuesta < 0 || respuesta > 1);
                 }while(continuar);
             }
-            void mostrarDonantes(){
+            void mostrarDonantes() const{
                 if(this->estaVacia()){
                     std::cout << "No hay ningún donante para mostrar." << std::endl;
-                    return;
                 }
-                std::cout << "Estos son tus donantes:\n";
-                for( unsigned int i = 1 ; i <= _total ; ++i ){
-                    std::cout << "\t\e[33;1m[" << i << "]\e[0m - \e[1m"<< getDonante(i) << "\e[0m";
+                else{
+                    std::cout << "Estos son tus donantes:" << std::endl;
+                    for( uint i = 1 ; i <= this->totalDonantes() ; ++i ){
+                        std::cout << "\t\e[33;1m[" << i << "]\e[0m - \e[1m"<< this->getDonante(i) << "\e[0m";
+                    }
                 }
             }
+            // void mostrarDonantes(){
+            //     if(this->estaVacia()){
+            //         std::cout << "No hay ningún donante para mostrar." << std::endl;
+            //         return;
+            //     }
+            //     std::cout << "Estos son tus donantes:\n";
+            //     for( unsigned int i = 1 ; i <= _total ; ++i ){
+            //         std::cout << "\t\e[33;1m[" << i << "]\e[0m - \e[1m"<< getDonante(i) << "\e[0m";
+            //     }
+            // }
             void modificarDonante(const unsigned int &i){
                 assert(i>=1 && i<=_total);
                 assert(!this->estaVacia());
