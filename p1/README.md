@@ -12,7 +12,7 @@ Para compilar:
 make
 ```
 
-Para limpiar ejecutables y archivos objeto:
+Para limpiar ejecutables:
 ```bash
 make clean
 ```
