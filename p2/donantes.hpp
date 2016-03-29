@@ -20,9 +20,10 @@
 */
 
 namespace ed{
-
+    /// Clase DonantesInterfaz
     class Donantes:public DonantesInterfaz{
         private:
+            /// Lista de donantes.
             ListaSimpleEnlazada<Donante> _l;
         public:
             /** @name Constructores. */

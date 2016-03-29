@@ -19,12 +19,17 @@
 */
 
 namespace ed{
+    /// Clase Donante. Hereda de DonanteInterfaz.
     class Donante:public DonanteInterfaz{
         private:
-            std::string _nombre;                                                // Nombre del donante.
-            std::string _apellidos;                                             // Apellidos del donante.
-            std::string _gSanguineo;                                            // Grupo sanguíneo del donante.
-            std::string _factorRH;                                              // Factor RH del donante.
+            /// Nombre del donante.
+            std::string _nombre;
+            /// Apellidos del donante.
+            std::string _apellidos;
+            /// Grupo sanguíneo del donante.
+            std::string _gSanguineo;
+            /// Factor RH del donante.
+            std::string _factorRH;
         public:
             /** @name Constructores. */
             /*
@@ -168,7 +173,7 @@ namespace ed{
                 }
             }
             /** @name Sobrecarga de operadores. */
-            /*
+            /**
             * @brief Sobrecarga del operador =
             * @param d Donante.
             * @return Donante.

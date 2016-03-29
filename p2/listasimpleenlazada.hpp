@@ -22,15 +22,23 @@ namespace ed{
     */
     template <class T>
     struct Nodo{
+        /// Dato almacenado dentro del nodo.
         T data;
+        /// Puntero al nodo siguiente.
         Nodo *next;
+        /**
+        * @brief Constructor parametrizado.
+        * @param d T.
+        */
         Nodo(const T &d): data(d), next(0){}
     };
-
+    /// Clase ListaSimpleEnlazada. Hereda de ListaSimpleEnlazadaInterfaz.
     template <class T>
     class ListaSimpleEnlazada:public ListaSimpleEnlazadaInterfaz<T>{
         private:
+            /// Puntero a la cabeza de la lista.
             Nodo<T> *_head;
+            /// Total de elementos de la lista.
             uint _total;
         public:
             /**
@@ -48,7 +56,7 @@ namespace ed{
             /**
             * @brief Devuelve si la lista está vacía o no.
             * @return true si la lista está vacía, false si no lo esta.
-            * @bost Que getTotal() devuelva != 0 implica que esta función devuelva false.
+            * @post Que getTotal() devuelva != 0 implica que esta función devuelva false.
             */
             bool isEmpty() const{
                 return _head == 0;

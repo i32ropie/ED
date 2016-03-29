@@ -16,6 +16,7 @@
 */
 
 namespace ed{
+    /// Clase DonantesInterfaz.
     class DonantesInterfaz{
         public:
             /**

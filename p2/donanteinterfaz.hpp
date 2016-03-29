@@ -14,6 +14,7 @@
 */
 
 namespace ed{
+    /// Clase DonanteInterfaz.
     class DonanteInterfaz{
         public:
             /** @name Modificadores. */
