@@ -58,7 +58,7 @@ unsigned int opciones(){
     return opcion;
 }
 
-void comprobarDonantes(const ed::Donantes<ed::Donante> &lista_donantes){
+void comprobarDonantes(const ed::Donantes &lista_donantes){
     cabecera();
     if(lista_donantes.estaVacia())
         std::cout << "No hay ningún donante insertado." << std::endl;
@@ -67,7 +67,7 @@ void comprobarDonantes(const ed::Donantes<ed::Donante> &lista_donantes){
     volver();
 }
 
-void cargarDonantes(ed::Donantes<ed::Donante> &lista_donantes){
+void cargarDonantes(ed::Donantes &lista_donantes){
     cabecera();
     ed::Donante d;
     std::string nombre_fichero;
@@ -80,7 +80,7 @@ void cargarDonantes(ed::Donantes<ed::Donante> &lista_donantes){
         return;
     }
     std::ifstream fichero(nombre_fichero.c_str());
-    lista_donantes = *(new ed::Donantes<ed::Donante>());
+    lista_donantes = *(new ed::Donantes());
     while(fichero.getline(linea, 256, ',')){
         d.setNombre(linea);
         fichero.getline(linea, 256, ',');
@@ -98,7 +98,7 @@ void cargarDonantes(ed::Donantes<ed::Donante> &lista_donantes){
     volver();
 }
 
-void guardarDonantes(ed::Donantes<ed::Donante> &lista_donantes){
+void guardarDonantes(ed::Donantes &lista_donantes){
     cabecera();
     if(lista_donantes.estaVacia()){
         std::cout << "No hay ningún donante para guardar." << std::endl;
@@ -152,14 +152,14 @@ void guardarDonantes(ed::Donantes<ed::Donante> &lista_donantes){
     }
     volver();
 }
-void insertarDonante(ed::Donantes<ed::Donante> &lista_donantes){
+void insertarDonante(ed::Donantes &lista_donantes){
     bool encontrado;
     ed::Donante d;
     do{
         cabecera();
         getchar();
         std::cin >> d;
-        encontrado = lista_donantes.buscarDonante(d);
+        encontrado = lista_donantes.existeDonante(d);
         if(encontrado)
             error("Ya exisitía un donante con esos datos. Donante no insertado.");
     }while(encontrado);
@@ -167,7 +167,7 @@ void insertarDonante(ed::Donantes<ed::Donante> &lista_donantes){
     std::cout << std::endl << "Donante insertado con éxito.";
     volver();
 }
-void modificarDonante(ed::Donantes<ed::Donante> &lista_donantes){
+void modificarDonante(ed::Donantes &lista_donantes){
     unsigned int opcion;
     if(!lista_donantes.estaVacia()){
         do{
@@ -187,7 +187,7 @@ void modificarDonante(ed::Donantes<ed::Donante> &lista_donantes){
     }
     volver();
 }
-void borrarDonante(ed::Donantes<ed::Donante> &lista_donantes){
+void borrarDonante(ed::Donantes &lista_donantes){
     unsigned int opcion;
     bool borrado;
     if(!lista_donantes.estaVacia()){
@@ -211,7 +211,7 @@ void borrarDonante(ed::Donantes<ed::Donante> &lista_donantes){
     }
     volver();
 }
-void mostrarDonantes(ed::Donantes<ed::Donante> &lista_donantes){
+void mostrarDonantes(ed::Donantes &lista_donantes){
     cabecera();
     lista_donantes.mostrarDonantes();
     volver();

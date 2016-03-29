@@ -1,6 +1,8 @@
 #ifndef __LISTASIMPLEENLAZADA_HPP__
 #define __LISTASIMPLEENLAZADA_HPP__
 
+#include "listasimpleenlazadainterfaz.hpp"
+
 namespace ed{
 
     template <class T>
@@ -24,7 +26,7 @@ namespace ed{
                 return _head == 0;
             }
             void insertItem(const T &d){
-                Nodo *n = new Nodo<T>(d);
+                Nodo<T> *n = new Nodo<T>(d);
                 if(this->isEmpty()){
                     _head = n;
                 }
@@ -59,6 +61,7 @@ namespace ed{
                 T d = this->getItem(index);
                 if(d == _head->data){
                     _head = _head->next;
+                    _total--;
                     return true;
                 }
                 Nodo<T> *curr = _head;
@@ -75,11 +78,13 @@ namespace ed{
                 }
                 if(found){
                     prev->next = curr->next;
+                    _total--;
                     return true;
                 }
                 else{
                     return false;
                 }
+
             }
             T getItem(const uint &index) const{
                 assert(index>=1 && index<=_total);

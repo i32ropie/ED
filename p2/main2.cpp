@@ -7,7 +7,7 @@
 // #define cls() system("clear");
 
 int main() {
-    ed::Donantes<ed::Donante> lista_donantes;
+    ed::Donantes lista_donantes;
     unsigned int opcion_1;
     bool salir = false;
     do{

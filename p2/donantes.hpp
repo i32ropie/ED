@@ -46,7 +46,7 @@ namespace ed{
             * @brief Obtiene el total de elementos de la lista.
             * @return Total de elementos de la lista.
             */
-            uint totalDonantes() const{
+            uint getTotal() const{
                 return _l.getTotal();
             }
             /**
@@ -58,7 +58,7 @@ namespace ed{
             * @pre No puede estar vacía.
             * @sa estaVacia()
             */
-            T getDonante(const uint &indice) const{
+            Donante getDonante(const uint &indice) const{
                 return _l.getItem(indice);
             }
             // T getDonante(const unsigned int &i) const{
@@ -258,10 +258,10 @@ namespace ed{
                 return _l.isEmpty();
             }
             void leerDonantes(){
-                T d;
+                Donante d;
                 bool continuar = true, encontrado;
-                unsigned int respuesta;
-                unsigned int nDonante = 1;
+                int respuesta;
+                uint nDonante = 1;
                 do{
                     std::cout << "Introduce tu donante nº " << nDonante << ": " << std::endl;
                     std::cin >> d;
@@ -298,7 +298,7 @@ namespace ed{
                 }
                 else{
                     std::cout << "Estos son tus donantes:" << std::endl;
-                    for( uint i = 1 ; i <= this->totalDonantes() ; ++i ){
+                    for( uint i = 1 ; i <= this->getTotal() ; ++i ){
                         std::cout << "\t\e[33;1m[" << i << "]\e[0m - \e[1m"<< this->getDonante(i) << "\e[0m";
                     }
                 }
@@ -313,11 +313,10 @@ namespace ed{
             //         std::cout << "\t\e[33;1m[" << i << "]\e[0m - \e[1m"<< getDonante(i) << "\e[0m";
             //     }
             // }
-            void modificarDonante(const unsigned int &i){
-                assert(i>=1 && i<=_total);
+            void modificarDonante(const uint &i){
+                assert(i>=1 && i<=this->getTotal());
                 assert(!this->estaVacia());
-                T aux;
-                aux = this->getDonante(i);
+                Donante aux = this->getDonante(i);
                 this->borrarDonante(aux);
                 aux.modificarDonante();
                 this->insertarDonante(aux);

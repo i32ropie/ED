@@ -9,27 +9,28 @@
 #define __DONANTESINTERFAZ_HPP__
 
 #include <string>
+#include "donante.hpp"
 
 /**
 * @brief Espacio de nombres para la asignatura Estructuras de Datos.
 */
 
 namespace ed{
-    template <class T>
+    // template <class T>
     class DonantesInterfaz{
         public:
             /**
             * @brief Inserta un donante en la lista.
             */
-            virtual void insertarDonante(const T &d) = 0;
+            virtual void insertarDonante(const Donante &d) = 0;
             /**
             * @brief Borra un donante de la lista.
             */
-            virtual bool borrarDonante(const T &d) = 0;
+            virtual bool borrarDonante(const Donante &d) = 0;
             /**
             * @brief Comprueba si existe un donante.
             */
-            virtual bool buscarDonante(T &d) = 0;
+            virtual bool existeDonante(const Donante &d) const = 0;
             /**
             * @brief Comprueba si la lista está vacía.
             */
