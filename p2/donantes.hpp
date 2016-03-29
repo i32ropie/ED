@@ -67,35 +67,6 @@ namespace ed{
                 _l.insertItem(d);
                 assert(!this->estaVacia());
             }
-            // void insertarDonante(const T &d){
-            //     Nodo<T> *nuevo = new Nodo<T>(d);                                // Creamos un nuevo nodo con el dato a insertar
-            //     if(this->estaVacia()){                                          // Si la lista de donantes está vacía mi cursor y
-            //         _cabeza = nuevo;                                            // mi cabeza va a ser el dato a insertar.
-            //     }
-            //     else{                                                           // Si no está vacía
-            //         if(_cabeza->dato <= d){                                     // Y el dato en la cabeza es menor o igual que a insertar
-            //             Nodo<T> *aux = _cabeza;                                 // Tendremos que buscar la posición donde insertarlo.
-            //             Nodo<T> *anterior = 0;                                  // Puede ocurrir que insertemos entre dos nodos o al final
-            //             bool encontrado = false;                                // por lo que recorreremos la lista de donantes comparando
-            //             while(aux && !encontrado){                              // nuestros nodos para ver en qué posición insertarmos
-            //                 if(aux->dato <= d){                                 // el nuevo nodo.
-            //                     anterior = aux;
-            //                     aux = aux->siguiente;
-            //                 }
-            //                 else{
-            //                     encontrado = true;
-            //                 }
-            //             }
-            //             anterior->siguiente = nuevo;                            // Una vez recorridos todos los nodos y hecho las comprobaciones
-            //             nuevo->siguiente = aux;                                 // insertamos el nuevo nodo donde le corresponda y actualizamos
-            //         }
-            //         else{                                                       // Si el dato en la cabeza es mayor que el que vamos a insertar
-            //             nuevo->siguiente = _cabeza;                             // actualizamos el puntero del nuevo y lo metemos en la cabeza.
-            //             _cabeza = nuevo;
-            //         }
-            //     }
-            //     _total++;
-            // }
             /**
             * @brief Borra un donante pasado como parámetro.
             * @note Si no existe el donante, no borrará nada y devolverá false.

@@ -1,6 +1,6 @@
 /**
 * @file main1.hpp
-* @brief <Práctica 2> Segunda parte: main1.
+* @brief <Práctica 2> Segunda parte: Funciones para el main.
 * @author Eduardo Roldán Pijuán
 * @date Marzo de 2016
 */
@@ -14,6 +14,9 @@
 #include "donante.hpp"
 #define cls() system("clear");
 
+/**
+* @brief Cabecera que se mostrará durante la ejecución del programa.
+*/
 void cabecera(){
     cls();
     std::cout << "\e[1;92m##############################" << std::endl;
@@ -24,21 +27,33 @@ void cabecera(){
     std::cout << "##############################" << std::endl;
     std::cout << "##############################\e[0m" << std::endl << std::endl;
 }
-
-void volver(const unsigned int &nChar = 2){
+/**
+* @brief Mensaje que se muestra al final de cada opción del menú.
+* @note Algunas veces con 1 solo getchar() es suficiente, por eso puede variar.
+* @param nChar Número de veces que se ejecuta getchar()
+*/
+void volver(const uint &nChar = 2){
     std::cout << std::endl << "Presiona ENTER para volver al menú.";
-    for( unsigned int i = 0 ; i < nChar ; ++i )
+    for( uint i = 0 ; i < nChar ; ++i )
         getchar();
 }
-
+/**
+* @brief Muestra un error personalizado por pantalla.
+* @note Con 2 segundos de sleep da tiempo a leer los errores.
+* @param er Error a mostrar.
+*/
 void error(const std::string &er){
     std::cout << std::endl << "\e[31;1m[ERROR]\e[0m - " << er;
     fflush(stdout);
     sleep(2);
 }
-
-unsigned int opciones(){
-    unsigned int opcion;
+/**
+* @brief Muestra las opciones del menú e interactua con el usuario.
+* @return Opción del menú a ejecutar.
+* @sa error()
+*/
+uint opciones(){
+    uint opcion;
     do{
         cabecera();
         std::cout << "Estas son las opciones disponibles:" << std::endl;
@@ -56,10 +71,18 @@ unsigned int opciones(){
     }while(opcion<1 || opcion>5);
     return opcion;
 }
-
-
+/**
+* @brief Función para leer un donante por teclado.
+* @note Se muestran los donantes y se pregunta cuál se quiere escribir.
+* @param d1 Donante 1.
+* @param d2 Donante 2.
+* @param d3 Donante 3.
+* @sa cabecera()
+* @sa error()
+* @sa volver()
+*/
 void leerDonante(ed::Donante &d1, ed::Donante &d2, ed::Donante &d3){
-    unsigned int opcion;
+    uint opcion;
     do{
         cabecera();
         std::cout << "Estos son tus donantes:" << std::endl;
@@ -89,9 +112,18 @@ void leerDonante(ed::Donante &d1, ed::Donante &d2, ed::Donante &d3){
     std::cout << std::endl << "Donante guardado con éxito." << std::endl;
     volver();
 }
-
+/**
+* @brief Función para escribir un donante por pantalla.
+* @note Se muestran los donantes y se pregunta cuál se quiere mostrar más detalladamente.
+* @param d1 Donante 1.
+* @param d2 Donante 2.
+* @param d3 Donante 3.
+* @sa cabecera()
+* @sa error()
+* @sa volver()
+*/
 void escribirDonante(const ed::Donante &d1, const ed::Donante &d2, const ed::Donante &d3){
-    unsigned int opcion;
+    uint opcion;
     do{
         cabecera();
         std::cout << "Estos son tus donantes:" << std::endl;
@@ -118,12 +150,20 @@ void escribirDonante(const ed::Donante &d1, const ed::Donante &d2, const ed::Don
             d3.mostrarDonante();
             break;
     }
-    // std::cout << std::endl << "Donante guardado con éxito." << std::endl;
     volver(1);
 }
-
+/**
+* @brief Función para modificar un donante.
+* @note Se muestran los donantes y se pregunta cuál se quiere modificar.
+* @param d1 Donante 1.
+* @param d2 Donante 2.
+* @param d3 Donante 3.
+* @sa cabecera()
+* @sa error()
+* @sa volver()
+*/
 void modificarDonante(ed::Donante &d1, ed::Donante &d2, ed::Donante &d3){
-    unsigned int opcion;
+    uint opcion;
     do{
         cabecera();
         std::cout << "Estos son tus donantes:" << std::endl;
@@ -153,9 +193,18 @@ void modificarDonante(ed::Donante &d1, ed::Donante &d2, ed::Donante &d3){
     std::cout << std::endl << "Donante modificado con éxito." << std::endl;
     volver(1);
 }
-
+/**
+* @brief Función para comparar lexicográficamente dos donantes.
+* @note Se muestran los donantes y se pregunta cuáles se quieren comparar.
+* @param d1 Donante 1.
+* @param d2 Donante 2.
+* @param d3 Donante 3.
+* @sa cabecera()
+* @sa error()
+* @sa volver()
+*/
 void compararDonantes(ed::Donante &d1, ed::Donante &d2, ed::Donante &d3){
-    unsigned int opcion_1, opcion_2;
+    uint opcion_1, opcion_2;
     std::vector<ed::Donante> v = {d1, d2, d3};
     do{
         cabecera();
@@ -202,7 +251,11 @@ void compararDonantes(ed::Donante &d1, ed::Donante &d2, ed::Donante &d3){
     }
     volver();
 }
-
+/**
+* @brief Función para despedirse.
+* @note Con el Adiós en grande mejoramos la experiencia del usuario.
+* @sa cabecera()
+*/
 void despedida(){
     cabecera();
     std::cout << "Gracias por usar el programa, ¡hasta la próxima!\e[1m" << std::endl;

@@ -11,16 +11,18 @@
 #include "donante.hpp"
 #include "main2.hpp"
 #include "donantes.hpp"
-// #define cls() system("clear");
+
+/** @name Main
+* Programa principal.
+*/
 
 int main() {
-    ed::Donantes lista_donantes;
-    unsigned int opcion_1;
-    bool salir = false;
-    do{
-        // cabecera();
-        opcion_1 = opciones();
-        switch (opcion_1) {
+    ed::Donantes lista_donantes;                                                // Declaramos la lista de donantes.
+    uint opcion;                                                                // Declaramos variable para movernos por el menú.
+    bool salir = false;                                                         // Declaramos variable que indica cuando salir.
+    do{                                                                         // Ejecutamos el menú hasta que se seleccione la opción de salir.
+        opcion = opciones();                                                    // Aquí mostramos las opciones y preguntamos qué hacer.
+        switch (opcion) {                                                       // Dependiendo de la opción hacemos una cosa u otra.
             case 1:
                 comprobarDonantes(lista_donantes);
                 break;

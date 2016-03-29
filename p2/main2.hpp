@@ -15,6 +15,9 @@
 #include "donantes.hpp"
 #define cls() system("clear");
 
+/**
+* @brief Cabecera que se mostrará durante la ejecución del programa.
+*/
 void cabecera(){
     cls();
     std::cout << "\e[1;92m###############################" << std::endl;
@@ -25,25 +28,39 @@ void cabecera(){
     std::cout << "###############################" << std::endl;
     std::cout << "###############################\e[0m" << std::endl << std::endl;
 }
-
+/**
+* @brief Mensaje que se muestra al final de cada opción del menú.
+*/
 void volver(){
     std::cout << std::endl << "Presiona ENTER para volver al menú.";
     getchar();
     getchar();
 }
-
+/**
+* @brief Muestra un error personalizado por pantalla.
+* @note Con 2 segundos de sleep da tiempo a leer los errores.
+* @param er Error a mostrar.
+*/
 void error(const std::string &er){
     std::cout << std::endl << "\e[31;1m[ERROR]\e[0m - " << er;
     fflush(stdout);
     sleep(2);
 }
-
+/**
+* @brief Comprueba si existe un fichero.
+* @param fichero Nombre del fichero a comprobar si existe.
+* @return true si el fichero existe, false si no.
+*/
 bool existe(const std::string &fichero){
     return (access( fichero.c_str(), F_OK) != -1);
 }
-
-unsigned int opciones(){
-    unsigned int opcion;
+/**
+* @brief Muestra las opciones del menú e interactua con el usuario.
+* @return Opción del menú a ejecutar.
+* @sa error()
+*/
+uint opciones(){
+    uint opcion;
     do{
         cabecera();
         std::cout << "Estas son las opciones disponibles:" << std::endl;
@@ -64,7 +81,13 @@ unsigned int opciones(){
     }while(opcion<1 || opcion>8);
     return opcion;
 }
-
+/**
+* @brief Función para comprobar si hay donantes insertados.
+* @note En el caso de que haya, mostrará cuantos hay.
+* @param lista_donantes Donantes.
+* @sa cabecera()
+* @sa volver()
+*/
 void comprobarDonantes(const ed::Donantes &lista_donantes){
     cabecera();
     if(lista_donantes.estaVacia())
@@ -73,7 +96,13 @@ void comprobarDonantes(const ed::Donantes &lista_donantes){
         std::cout << "Hay " << lista_donantes.getTotal() << " donantes insertados." << std::endl;
     volver();
 }
-
+/**
+* @brief Función para cargar los donantes desde un fichero.
+* @param lista_donantes Donantes.
+* @sa cabecera()
+* @sa error()
+* @sa volver()
+*/
 void cargarDonantes(ed::Donantes &lista_donantes){
     cabecera();
     ed::Donante d;
@@ -104,7 +133,13 @@ void cargarDonantes(ed::Donantes &lista_donantes){
     std::cout << std::endl << "Donantes actualizados con éxito." << std::endl;
     volver();
 }
-
+/**
+* @brief Función para guardar los donantes en un fichero.
+* @param lista_donantes Donantes.
+* @sa cabecera()
+* @sa error()
+* @sa volver()
+*/
 void guardarDonantes(ed::Donantes &lista_donantes){
     cabecera();
     if(lista_donantes.estaVacia()){
@@ -113,7 +148,7 @@ void guardarDonantes(ed::Donantes &lista_donantes){
         return;
     }
     bool escribir = true;
-    unsigned int opcion;
+    uint opcion;
     ed::Donante d;
     std::string nombre_fichero;
     std::cout << "Introduce el nombre del fichero: \e[1;4m";
@@ -143,7 +178,7 @@ void guardarDonantes(ed::Donantes &lista_donantes){
     }
     if(escribir){
         std::ofstream fichero(nombre_fichero.c_str());
-        for( unsigned int i = 1 ; i <= lista_donantes.getTotal() ; ++i ){
+        for( uint i = 1 ; i <= lista_donantes.getTotal() ; ++i ){
             d = lista_donantes.getDonante(i);
             fichero << d.getNombre();
             fichero << ',';
@@ -159,6 +194,13 @@ void guardarDonantes(ed::Donantes &lista_donantes){
     }
     volver();
 }
+/**
+* @brief Función para insertar un donante.
+* @param lista_donantes Donantes.
+* @sa cabecera()
+* @sa error()
+* @sa volver()
+*/
 void insertarDonante(ed::Donantes &lista_donantes){
     bool encontrado;
     ed::Donante d;
@@ -174,8 +216,14 @@ void insertarDonante(ed::Donantes &lista_donantes){
     std::cout << std::endl << "Donante insertado con éxito.";
     volver();
 }
+/**
+* @brief Función para modificar un donante.
+* @param lista_donantes Donantes.
+* @sa cabecera()
+* @sa volver()
+*/
 void modificarDonante(ed::Donantes &lista_donantes){
-    unsigned int opcion;
+    uint opcion;
     if(!lista_donantes.estaVacia()){
         do{
             cabecera();
@@ -194,8 +242,15 @@ void modificarDonante(ed::Donantes &lista_donantes){
     }
     volver();
 }
+/**
+* @brief Función para borrar un donante.
+* @param lista_donantes Donantes.
+* @sa cabecera()
+* @sa error()
+* @sa volver()
+*/
 void borrarDonante(ed::Donantes &lista_donantes){
-    unsigned int opcion;
+    uint opcion;
     bool borrado;
     if(!lista_donantes.estaVacia()){
         do{
@@ -218,11 +273,22 @@ void borrarDonante(ed::Donantes &lista_donantes){
     }
     volver();
 }
+/**
+* @brief Función para mostrar los donantes.
+* @param lista_donantes Donantes.
+* @sa cabecera()
+* @sa volver()
+*/
 void mostrarDonantes(ed::Donantes &lista_donantes){
     cabecera();
     lista_donantes.mostrarDonantes();
     volver();
 }
+/**
+* @brief Función para despedirse.
+* @note Con el Adiós en grande mejoramos la experiencia del usuario.
+* @sa cabecera()
+*/
 void despedida(){
     cabecera();
     std::cout << "Gracias por usar el programa, ¡hasta la próxima!\e[1m" << std::endl;

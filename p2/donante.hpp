@@ -109,7 +109,7 @@ namespace ed{
             */
             void leerDonante(){
                 std::string nombre, apellidos, gSanguineo[] = {"0", "A", "B", "AB"}, factorRH[] = {"+", "-"};
-                unsigned int opcion1, opcion2;
+                uint opcion1, opcion2;
                 do{
                     std::cout << "Introduce el nombre: ";
                     std::getline(std::cin, nombre);
@@ -262,7 +262,7 @@ namespace ed{
             */
             friend std::istream &operator >>(std::istream &input, Donante &d){
                 std::string nombre, apellidos, gSanguineo[] = {"0", "A", "B", "AB"}, factorRH[] = {"+", "-"};
-                unsigned int opcion1, opcion2;
+                uint opcion1, opcion2;
                 do{
                     std::cout << "Introduce el nombre: ";
                     std::getline(std::cin, nombre);
@@ -332,7 +332,7 @@ namespace ed{
             * @sa setFactorRH()
             */
             void modificarDonante(){
-                unsigned int opcion_1, opcion_2;
+                uint opcion_1, opcion_2;
                 std::string nombre, apellidos, gSanguineo[] = {"0", "A", "B", "AB"}, factorRH[] = {"+", "-"};
                 std::cout << std::endl << "Estos son los atributos del donante:";
                 std::cout << std::endl << "\t\e[33;1m[1]\e[0m - Nombre: " << this->getNombre();

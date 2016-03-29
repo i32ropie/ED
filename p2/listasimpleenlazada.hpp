@@ -101,7 +101,7 @@ namespace ed{
             * @sa getItem()
             */
             bool deleteItem(const int &index){
-                if(this->isEmpty() || index < 1 || index > this->getTotal()){
+                if(this->isEmpty() || index < 1 || index > (int)this->getTotal()){
                     return false;
                 }
                 T d = this->getItem(index);
