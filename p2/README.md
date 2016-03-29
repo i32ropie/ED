@@ -26,5 +26,4 @@ doxygen Doxyfile
 
 ###Nota
 
-Esta práctica la continuaré en la rama lista, donde haré una clase lista 
-con las cosas de lista.
+Esta práctica la continuaré en esta rama, donde crearé una clase lista.
