@@ -1,5 +1,5 @@
 /**
-* @file donanteinterfaz.hpp
+* @file donantesinterfaz.hpp
 * @brief <Práctica 2> Tercera parte: Representación del TAD donantes interfaz.
 * @author Eduardo Roldán Pijuán
 * @date Marzo de 2016
@@ -16,7 +16,6 @@
 */
 
 namespace ed{
-    // template <class T>
     class DonantesInterfaz{
         public:
             /**

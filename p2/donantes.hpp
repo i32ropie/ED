@@ -1,9 +1,8 @@
 /**
-* @file donante.hpp
+* @file donantes.hpp
 * @brief <Práctica 2> Tercera parte: Representación del TAD donantes.
 * @author Eduardo Roldán Pijuán
 * @date Marzo de 2016
-* Pese a que el nombre de la clase es Donantes y hace referencias a Donante en el nombre de las funciones, la clase funciona como una lista para cualquier tipo de dato, ya que usa una plantilla con tipo genérico T.
 */
 
 #ifndef __DONANTES_HPP__
@@ -21,24 +20,14 @@
 */
 
 namespace ed{
-    /**
-    * @brief Estructura auxiliar nodo para la lista.
-    */
-    // template <class T>
-    // struct Nodo{
-    //     T dato;
-    //     Nodo *siguiente;
-    //     Nodo(const T &n): dato(n), siguiente(0){}
-    // };
 
-    // template <class T>
     class Donantes:public DonantesInterfaz{
         private:
             ListaSimpleEnlazada<Donante> _l;
         public:
             /** @name Constructores. */
             /**
-            * @brief Constructor parametrizado.
+            * @brief Constructor.
             */
             Donantes(){}
             /** @name Observadores. */
@@ -51,57 +40,32 @@ namespace ed{
             }
             /**
             * @brief Devuelve el donante i-ésimo.
-            * @note Función muy útil para recorrer los donantes.
-            * @param i Índice del donante.
+            * @param indice Índice del donante.
             * @return Donante i-ésimo.
             * @pre i >= 1 && i <= _total
             * @pre No puede estar vacía.
-            * @sa estaVacia()
             */
             Donante getDonante(const uint &indice) const{
                 return _l.getItem(indice);
             }
-            // T getDonante(const unsigned int &i) const{
-            //     assert(i>=1 && i<=_total);
-            //     assert(!this->estaVacia());
-            //     Nodo<T> *aux = _cabeza;
-            //     for( unsigned int x = 1 ; x < i ; ++x )
-            //         aux = aux->siguiente;
-            //     return aux->dato;
-            // }
             /**
             * @brief Devuelve el índice de un donante.
-            * @note Función muy útil para obtener el índice a partir de un donante.
-            * @param d Elemento.
-            * @return Índice de un dato T o -1 en caso de que no esté o no haya elementos.
-            * @sa estaVacia()
-            * @sa getTotal()
-            * @sa getDonante()
+            * @param d Donante.
+            * @return Índice del donante o -1 en caso de que no exista el donante o no haya ninguno insertado.
             */
             int getIndice(const Donante &d) const{
                 return _l.getIndex(d);
             }
-            // int getIndice(const T &d){
-            //     if(this->estaVacia()){
-            //         return -1;
-            //     }
-            //     int indice = -1;
-            //     bool encontrado = false;
-            //     for( unsigned int x = 1 ; x <= this->getTotal() && !encontrado ; ++x ){
-            //         if(this->getDonante(x) == d){
-            //             indice = x;
-            //         }
-            //     }
-            //     return indice;
-            // }
             /**
             * @brief Inserta un donante.
             * @note Inserta un donante de manera ordenada.
-            * @param d Elemento.
+            * @param d Donante.
+            * @post Tras insertar un donante, la lista no puede estar vacía.
             * @sa estaVacia()
             */
             void insertarDonante(const Donante &d){
                 _l.insertItem(d);
+                assert(!this->estaVacia());
             }
             // void insertarDonante(const T &d){
             //     Nodo<T> *nuevo = new Nodo<T>(d);                                // Creamos un nuevo nodo con el dato a insertar
@@ -133,130 +97,44 @@ namespace ed{
             //     _total++;
             // }
             /**
-            * @brief Borra un donante pasado por parámetro.
-            * @param d Elemento.
+            * @brief Borra un donante pasado como parámetro.
+            * @note Si no existe el donante, no borrará nada y devolverá false.
+            * @param d Donante.
             * @return true si lo borra, false si no lo borra.
-            * @sa estaVacia()
             * @sa getIndice()
-            * @sa borrarElemento()
+            * @post Si se elimina con éxito, el total de elementos debe ser 1 menos que antes de llamar a la función.
             */
             bool borrarDonante(const Donante &d){
                 return _l.deleteItem(this->getIndice(d));
             }
+            /**
+            * @brief Borra un donante pasado su índice como parámetro.
+            * @note Si no existe el donante, no borrará nada y devolverá false.
+            * @param indice Índice del donante a borrar.
+            * @return true si lo borra, false si no lo borra.
+            * @post Si se elimina con éxito, el total de elementos debe ser 1 menos que antes de llamar a la función.
+            */
             bool borrarDonante(const uint &indice){
                 return _l.deleteItem(indice);
             }
-            // bool borrarDonante(const T &d){
-            //     if(this->estaVacia()){                                          // Si está vacía, devolvemos false.
-            //         return false;
-            //     }
-            //     int indice;
-            //     if((indice = this->getIndice(d)) == -1){                        // Si al comprobar el índice del donante dentro de la lista obtenemos
-            //         return false;                                               // -1 quiere decir que no está en la lista, por lo que devolvemos false.
-            //     }
-            //     if(this->borrarElemento(indice)){                               // Intentamos el elemento llamando a la función borrarElemento.
-            //         _total--;
-            //         return true;
-            //     }
-            //     else{
-            //         return false;
-            //     }
-            // }
             /**
-            * @brief Borra un donante pasándole el índice.
-            * @param indice Índice.
-            * @return true si lo borra, false si no lo borra.
-            * @sa getDonante()
+            * @brief Comprueba si un donante existe en nuestra lista de donantes.
+            * @param d Donante.
+            * @return true si existe el donante, false si no existe.
             */
-            // bool borrarElemento(const unsigned int &indice){
-            //     T d = this->getDonante(indice);
-            //     if(d == _cabeza->dato){                                         // Si queremos borrar la cabeza, la actualizamos.
-            //         _cabeza = _cabeza->siguiente;
-            //         return true;
-            //     }
-            //     Nodo<T> *aux = _cabeza;
-            //     Nodo<T> *anterior = 0;
-            //     bool encontrado = false;
-            //     while(aux && !encontrado){                                      // Si no, recorremos los donantes hasta encontrarlo
-            //         if(d == aux->dato){
-            //             encontrado = true;
-            //         }
-            //         else{
-            //             anterior = aux;
-            //             aux = aux->siguiente;
-            //         }
-            //     }
-            //     if(encontrado){
-            //         anterior->siguiente = aux->siguiente;
-            //         return true;
-            //     }
-            //     else{
-            //         return false;
-            //     }
-            // }
-            // bool borrarDonante(const T &d) {
-            //     if(this->estaVacia()){                                          // Comprobamos si no hay donantes
-            //         return false;                                               // y devolvemos false ya que no eliminamos nada.
-            //     }
-            //     if(_cabeza->dato == d){                                         // Si el dato a borrar está en la cabeza
-            //         if(_cabeza->siguiente){                                     // comprobamos si hay sólo 1 donante o más.
-            //             _cabeza = _cabeza->siguiente;                           // En el caso de que haya más, actualizamos la cabeza al siguiente.
-            //         }
-            //         else{                                                       // En el caso de que solo haya un donante y sea ese mismo el que
-            //             _cabeza = 0;                                            // borramos, hacemos que _cabeza apunte a 0.
-            //         }                                                           // En ambos casos, hemos eliminado el donante, por lo que
-            //         _total--;
-            //         return true;                                                // devolvemos true.
-            //     }
-            //     Nodo<T> *aux = _cabeza;                                         // En caso de que no sea la cabeza, necesitaremos recorrer los
-            //     Nodo<T> *anterior = 0;                                          // donantes para buscarlo.
-            //     bool encontrado = false;
-            //     while( aux && !encontrado){
-            //         if(aux->dato == d){
-            //             encontrado = true;
-            //         }
-            //         else{
-            //             anterior = aux;
-            //             aux = aux->siguiente;
-            //         }
-            //     }
-            //     if(encontrado){
-            //         anterior->siguiente = aux->siguiente;                       // Si lo hemos encontrado lo borramos eliminando la unión.
-            //         _total--;
-            //         return true;                                                // y devolvemos true.
-            //     }
-            //     return false;                                                   // Si no, devolvemos false.
-            // }
-            // EXTRA
             bool existeDonante(const Donante &d) const{
                 return _l.isValid(d);
             }
-            // bool buscarDonante(T &d){
-            //     int indice;
-            //     if((indice = this->getIndice(d)) == -1){
-            //         return false;
-            //     }
-            //     else{
-            //         return true;
-            //     }
-            // }
-            // bool buscarDonante(T &d) const {
-            //     Nodo<T> *aux = _cabeza;
-            //     while( aux ){                                                   // Recorremos nuestra lista de donantes.
-            //         if(aux->dato == d){                                         // Si lo encontramos
-            //             d = aux->dato;                                          // actualizamos el parámetro pasado por referencia
-            //             return true;                                            // y devolvemos true.
-            //         }
-            //         else if(aux->dato <= d){                                    // Si no lo encontramos, miramos si nos hemos pasado
-            //             return false;                                           // y devolvemos false. (Esto es para que sea más eficiente)
-            //         }
-            //         aux = aux->siguiente;
-            //     }
-            //     return false;
-            // }
+            /**
+            * @brief Comprueba si la lista está vacía.
+            * @return true si la lista está vacía, false si no lo está.
+            */
             bool estaVacia() const {
                 return _l.isEmpty();
             }
+            /**
+            * @brief Función para leer múltiples donantes.
+            */
             void leerDonantes(){
                 Donante d;
                 bool continuar = true, encontrado;
@@ -292,6 +170,9 @@ namespace ed{
                     }while(respuesta < 0 || respuesta > 1);
                 }while(continuar);
             }
+            /**
+            * @brief Función para mostrar los donantes en caso de que haya alguno.
+            */
             void mostrarDonantes() const{
                 if(this->estaVacia()){
                     std::cout << "No hay ningún donante para mostrar." << std::endl;
@@ -303,20 +184,16 @@ namespace ed{
                     }
                 }
             }
-            // void mostrarDonantes(){
-            //     if(this->estaVacia()){
-            //         std::cout << "No hay ningún donante para mostrar." << std::endl;
-            //         return;
-            //     }
-            //     std::cout << "Estos son tus donantes:\n";
-            //     for( unsigned int i = 1 ; i <= _total ; ++i ){
-            //         std::cout << "\t\e[33;1m[" << i << "]\e[0m - \e[1m"<< getDonante(i) << "\e[0m";
-            //     }
-            // }
-            void modificarDonante(const uint &i){
-                assert(i>=1 && i<=this->getTotal());
+            /**
+            * @brief Función para modificar el donante iésimo.
+            * @param indice Número entero positivo con el índice del donante a modificar.
+            * @pre El valor de indice debe estar entre 1 y el total de donantes.
+            * @pre Debe haber algún donante insertado.
+            */
+            void modificarDonante(const uint &indice){
+                assert(indice>=1 && indice<=this->getTotal());
                 assert(!this->estaVacia());
-                Donante aux = this->getDonante(i);
+                Donante aux = this->getDonante(indice);
                 this->borrarDonante(aux);
                 aux.modificarDonante();
                 this->insertarDonante(aux);

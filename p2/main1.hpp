@@ -1,3 +1,10 @@
+/**
+* @file main1.hpp
+* @brief <Práctica 2> Segunda parte: main1.
+* @author Eduardo Roldán Pijuán
+* @date Marzo de 2016
+*/
+
 #include <iostream>
 #include <vector>
 #include <string>

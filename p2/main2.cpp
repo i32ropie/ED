@@ -1,3 +1,10 @@
+/**
+* @file main2.cpp
+* @brief <Práctica 2> Cuarta parte: main2.
+* @author Eduardo Roldán Pijuán
+* @date Marzo de 2016
+*/
+
 #include <iostream>
 #include <cstdio>
 #include <string>
