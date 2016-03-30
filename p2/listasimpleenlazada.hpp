@@ -112,32 +112,23 @@ namespace ed{
                 if(this->isEmpty() || index < 1 || index > (int)this->getTotal()){
                     return false;
                 }
-                T d = this->getItem(index);
-                if(d == _head->data){
+                if(index == 1){
+                    Nodo<T> *aux = _head;
                     _head = _head->next;
-                    _total--;
-                    return true;
+                    delete aux;
                 }
-                Nodo<T> *curr = _head;
-                Nodo<T> *prev = 0;
-                bool found = false;
-                while(curr && !found){
-                    if(d == curr->data){
-                        found = true;
-                    }
-                    else{
+                else{
+                    Nodo<T> *curr = _head;
+                    Nodo<T> *prev = _head;
+                    for( int i = 1 ; i < index ; ++i){
                         prev = curr;
                         curr = curr->next;
                     }
-                }
-                if(found){
                     prev->next = curr->next;
-                    _total--;
-                    return true;
+                    delete curr;
                 }
-                else{
-                    return false;
-                }
+                _total--;
+                return true;
             }
             /**
             * @brief Devuelve el elemento i-ésimo.

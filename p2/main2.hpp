@@ -125,7 +125,7 @@ void cargarDonantes(ed::Donantes &lista_donantes){
         d.setGrupoSanguineo(linea);
         fichero.getline(linea, 256);
         d.setFactorRH(linea);
-        if(lista_donantes.getIndice(d) == -1){                                  // Evitar donantes repetidos.
+        if(lista_donantes.getIndice(d) == -1){
             lista_donantes.insertarDonante(d);
         }
     }
