@@ -13,7 +13,6 @@
 #include <string>
 #include "donante.hpp"
 #include "main1.hpp"
-#define cls() system("clear");
 
 /** @name Main
 * Programa principal.
