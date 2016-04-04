@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Práctica2: Fichero Fuente listasimpleenlazadainterfaz.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Práctica2
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Clases</span></a></li>
+      <li class="current"><a href="files.html"><span>Archivos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="globals.html"><span>Miembros&#160;de&#160;los&#160;ficheros</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">listasimpleenlazadainterfaz.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="listasimpleenlazadainterfaz_8hpp.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef __LISTASIMPLEENLAZADAINTERFAZ_HPP__</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define __LISTASIMPLEENLAZADAINTERFAZ_HPP__</span></div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceed.html">ed</a>{</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div><div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classed_1_1ListaSimpleEnlazadaInterfaz.html">   19</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classed_1_1ListaSimpleEnlazadaInterfaz.html">ListaSimpleEnlazadaInterfaz</a>{</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keyword">public</span>:</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classed_1_1ListaSimpleEnlazadaInterfaz.html#a1acb55e5f765b065865b0cfac084c740">isEmpty</a>() <span class="keyword">const</span> = 0;</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="keyword">virtual</span> T <a class="code" href="classed_1_1ListaSimpleEnlazadaInterfaz.html#a91b3293eff8de13b18ba31a4991f0f53">getItem</a>(<span class="keyword">const</span> uint &amp;index) <span class="keyword">const</span> = 0;</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classed_1_1ListaSimpleEnlazadaInterfaz.html#a4ef756377aecd172373157fd515107f2">getIndex</a>(<span class="keyword">const</span> T &amp;d) <span class="keyword">const</span> = 0;</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classed_1_1ListaSimpleEnlazadaInterfaz.html#ae9fa5f4939a7986a6e8bc11a6ec4a1df">insertItem</a>(<span class="keyword">const</span> T &amp;d) = 0;</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classed_1_1ListaSimpleEnlazadaInterfaz.html#afc965ccae8c8259308afb136fb0a21a5">deleteItem</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> &amp;index) = 0;</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classed_1_1ListaSimpleEnlazadaInterfaz.html#ad6c8c8c3cf3557a0bd0a72e59c37ba46">isValid</a>(<span class="keyword">const</span> T &amp;d) <span class="keyword">const</span> = 0;</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="keyword">virtual</span> uint <a class="code" href="classed_1_1ListaSimpleEnlazadaInterfaz.html#a3c876aa363ae8b6c3129d5abd7903b54">getTotal</a>() <span class="keyword">const</span> = 0;</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    };</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif</span></div><div class="ttc" id="classed_1_1ListaSimpleEnlazadaInterfaz_html_a1acb55e5f765b065865b0cfac084c740"><div class="ttname"><a href="classed_1_1ListaSimpleEnlazadaInterfaz.html#a1acb55e5f765b065865b0cfac084c740">ed::ListaSimpleEnlazadaInterfaz::isEmpty</a></div><div class="ttdeci">virtual bool isEmpty() const =0</div><div class="ttdoc">Comprueba si la lista está vacía. </div></div>
+<div class="ttc" id="classed_1_1ListaSimpleEnlazadaInterfaz_html_a4ef756377aecd172373157fd515107f2"><div class="ttname"><a href="classed_1_1ListaSimpleEnlazadaInterfaz.html#a4ef756377aecd172373157fd515107f2">ed::ListaSimpleEnlazadaInterfaz::getIndex</a></div><div class="ttdeci">virtual int getIndex(const T &amp;d) const =0</div><div class="ttdoc">Devuelve el índice de un elemento. </div></div>
+<div class="ttc" id="classed_1_1ListaSimpleEnlazadaInterfaz_html_a3c876aa363ae8b6c3129d5abd7903b54"><div class="ttname"><a href="classed_1_1ListaSimpleEnlazadaInterfaz.html#a3c876aa363ae8b6c3129d5abd7903b54">ed::ListaSimpleEnlazadaInterfaz::getTotal</a></div><div class="ttdeci">virtual uint getTotal() const =0</div><div class="ttdoc">Devuelve el total de elementos de la lista. </div></div>
+<div class="ttc" id="classed_1_1ListaSimpleEnlazadaInterfaz_html_ad6c8c8c3cf3557a0bd0a72e59c37ba46"><div class="ttname"><a href="classed_1_1ListaSimpleEnlazadaInterfaz.html#ad6c8c8c3cf3557a0bd0a72e59c37ba46">ed::ListaSimpleEnlazadaInterfaz::isValid</a></div><div class="ttdeci">virtual bool isValid(const T &amp;d) const =0</div><div class="ttdoc">Comprueba si un elemento es miembro de la lista. </div></div>
+<div class="ttc" id="classed_1_1ListaSimpleEnlazadaInterfaz_html_a91b3293eff8de13b18ba31a4991f0f53"><div class="ttname"><a href="classed_1_1ListaSimpleEnlazadaInterfaz.html#a91b3293eff8de13b18ba31a4991f0f53">ed::ListaSimpleEnlazadaInterfaz::getItem</a></div><div class="ttdeci">virtual T getItem(const uint &amp;index) const =0</div><div class="ttdoc">Devuelve el elemento i-ésimo. </div></div>
+<div class="ttc" id="namespaceed_html"><div class="ttname"><a href="namespaceed.html">ed</a></div><div class="ttdoc">Espacio de nombres para la asignatura Estructuras de Datos. </div><div class="ttdef"><b>Definition:</b> <a href="donante_8hpp_source.html#l00021">donante.hpp:21</a></div></div>
+<div class="ttc" id="classed_1_1ListaSimpleEnlazadaInterfaz_html"><div class="ttname"><a href="classed_1_1ListaSimpleEnlazadaInterfaz.html">ed::ListaSimpleEnlazadaInterfaz</a></div><div class="ttdoc">Clase ListaSimpleEnlazadaInterfaz. </div><div class="ttdef"><b>Definition:</b> <a href="listasimpleenlazadainterfaz_8hpp_source.html#l00019">listasimpleenlazadainterfaz.hpp:19</a></div></div>
+<div class="ttc" id="classed_1_1ListaSimpleEnlazadaInterfaz_html_afc965ccae8c8259308afb136fb0a21a5"><div class="ttname"><a href="classed_1_1ListaSimpleEnlazadaInterfaz.html#afc965ccae8c8259308afb136fb0a21a5">ed::ListaSimpleEnlazadaInterfaz::deleteItem</a></div><div class="ttdeci">virtual bool deleteItem(const int &amp;index)=0</div><div class="ttdoc">Borra el elemento i-ésimo en el caso de que pueda. </div></div>
+<div class="ttc" id="classed_1_1ListaSimpleEnlazadaInterfaz_html_ae9fa5f4939a7986a6e8bc11a6ec4a1df"><div class="ttname"><a href="classed_1_1ListaSimpleEnlazadaInterfaz.html#ae9fa5f4939a7986a6e8bc11a6ec4a1df">ed::ListaSimpleEnlazadaInterfaz::insertItem</a></div><div class="ttdeci">virtual void insertItem(const T &amp;d)=0</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>

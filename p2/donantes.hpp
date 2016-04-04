@@ -170,6 +170,21 @@ namespace ed{
                 aux.modificarDonante();
                 this->insertarDonante(aux);
             }
+            /**
+            * @brief Función para modificar un donante pasado como parámetro.
+            * @param d Donante.
+            */
+            void modificarDonante(const Donante &d){
+                if(this->existeDonante(d)){
+                    Donante aux = d;
+                    this->borrarDonante(aux);
+                    aux.modificarDonante();
+                    this->insertarDonante(aux);
+                }
+                else{
+                    std::cout << std::endl << "\e[31;1m[ERROR]\e[0m - Donante no encontrado en la base de datos." << std::endl;
+                }
+            }
     };
 
 }
