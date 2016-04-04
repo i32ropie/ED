@@ -12,3 +12,6 @@ SOURCE_BROWSER         = YES
 
 # No se genera la documentación en latex
 GENERATE_LATEX         = NO
+
+# Excluir el readme
+EXCLUDE                = README.md
