@@ -51,8 +51,43 @@ void error(const std::string &er){
 * @param fichero Nombre del fichero a comprobar si existe.
 * @return true si el fichero existe, false si no.
 */
-bool existe(const std::string &fichero){
-    return (access( fichero.c_str(), F_OK) != -1);
+bool existe(const char *fichero){
+    return (access( fichero, F_OK) != -1);
+}
+/**
+* @brief Carga los donantes pasándole lista de donantes y nombre del fichero.
+* @note La finalidad de esta función es poder pasarle como argumento al programa un archivo con los donantes.
+* @param lista_donantes Donantes.
+* @param file_name Nombre del fichero.
+* @param precarga Si es precarga de donantes o solo carga.
+*/
+void precargarDonantes(ed::Donantes &lista_donantes, const char *file_name, const bool &precarga = true){
+    if(existe(file_name)){
+        if(precarga)
+            cabecera();
+        char linea[256];
+        ed::Donante d;
+        std::ifstream fichero(file_name);
+        lista_donantes = *(new ed::Donantes());
+        while(fichero.getline(linea, 256, ',')){
+            d.setNombre(linea);
+            fichero.getline(linea, 256, ',');
+            d.setApellidos(linea);
+            fichero.getline(linea, 256, ',');
+            d.setGrupoSanguineo(linea);
+            fichero.getline(linea, 256);
+            d.setFactorRH(linea);
+            if(lista_donantes.getIndice(d) == -1){
+                lista_donantes.insertarDonante(d);
+            }
+        }
+        fichero.close();
+        if(precarga){
+            std::cout << std::endl << "\e[1mDonantes precargados de \e[4mdonantes.txt\e[0m";
+            fflush(stdout);
+            sleep(3);
+        }
+    }
 }
 /**
 * @brief Muestra las opciones del menú e interactua con el usuario.
@@ -107,29 +142,15 @@ void cargarDonantes(ed::Donantes &lista_donantes){
     cabecera();
     ed::Donante d;
     std::string nombre_fichero;
-    char linea[256];
+    // char linea[256];
     std::cout << "Introduce el nombre del fichero: \e[1;4m";
     std::cin >> nombre_fichero;
     std::cout << "\e[0m";
-    if(!existe(nombre_fichero)){
+    if(!existe(nombre_fichero.c_str())){
         error("El fichero " + nombre_fichero + " no existe");
         return;
     }
-    std::ifstream fichero(nombre_fichero.c_str());
-    lista_donantes = *(new ed::Donantes());
-    while(fichero.getline(linea, 256, ',')){
-        d.setNombre(linea);
-        fichero.getline(linea, 256, ',');
-        d.setApellidos(linea);
-        fichero.getline(linea, 256, ',');
-        d.setGrupoSanguineo(linea);
-        fichero.getline(linea, 256);
-        d.setFactorRH(linea);
-        if(lista_donantes.getIndice(d) == -1){
-            lista_donantes.insertarDonante(d);
-        }
-    }
-    fichero.close();
+    precargarDonantes(lista_donantes, nombre_fichero.c_str(), false);
     std::cout << std::endl << "Donantes actualizados con éxito." << std::endl;
     volver();
 }
@@ -154,7 +175,7 @@ void guardarDonantes(ed::Donantes &lista_donantes){
     std::cout << "Introduce el nombre del fichero: \e[1;4m";
     std::cin >> nombre_fichero;
     std::cout << "\e[0m";
-    if(existe(nombre_fichero)){
+    if(existe(nombre_fichero.c_str())){
         do{
             cabecera();
             std::cout << "Ya existe un fichero con ese nombre." << std::endl;

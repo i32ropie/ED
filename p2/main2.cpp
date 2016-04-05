@@ -16,10 +16,12 @@
 * Programa principal.
 */
 
-int main() {
+int main(int argc, char const *argv[]) {
     ed::Donantes lista_donantes;                                                // Declaramos la lista de donantes.
     uint opcion;                                                                // Declaramos variable para movernos por el menú.
     bool salir = false;                                                         // Declaramos variable que indica cuando salir.
+    if(argc == 2)
+        precargarDonantes(lista_donantes, argv[1]);                             // Precargamos los donantes.
     do{                                                                         // Ejecutamos el menú hasta que se seleccione la opción de salir.
         opcion = opciones();                                                    // Aquí mostramos las opciones y preguntamos qué hacer.
         switch (opcion) {                                                       // Dependiendo de la opción hacemos una cosa u otra.
