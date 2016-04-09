@@ -29,13 +29,13 @@ void cabecera(){
 }
 /**
 * @brief Mensaje que se muestra al final de cada opción del menú.
-* @note Algunas veces con 1 solo getchar() es suficiente, por eso puede variar.
-* @param nChar Número de veces que se ejecuta getchar()
+* @note Algunas veces con 1 solo std::cin.ignore() es suficiente, por eso puede variar.
+* @param nChar Número de veces que se ejecuta std::cin.ignore()
 */
 void volver(const uint &nChar = 2){
     std::cout << std::endl << "Presiona ENTER para volver al menú.";
     for( uint i = 0 ; i < nChar ; ++i )
-        getchar();
+        std::cin.ignore();
 }
 /**
 * @brief Muestra un error personalizado por pantalla.
@@ -97,7 +97,7 @@ void leerDonante(ed::Donante &d1, ed::Donante &d2, ed::Donante &d3){
         }
     }while(opcion < 1 || opcion > 3);
     std::cout << std::endl;
-    getchar();
+    std::cin.ignore();
     switch (opcion) {
         case 1:
             std::cin >> d1;
@@ -138,7 +138,7 @@ void escribirDonante(const ed::Donante &d1, const ed::Donante &d2, const ed::Don
         }
     }while(opcion < 1 || opcion > 3);
     std::cout << std::endl;
-    getchar();
+    std::cin.ignore();
     switch (opcion) {
         case 1:
             d1.mostrarDonante();
@@ -178,7 +178,7 @@ void modificarDonante(ed::Donante &d1, ed::Donante &d2, ed::Donante &d3){
         }
     }while(opcion < 1 || opcion > 3);
     std::cout << std::endl;
-    getchar();
+    std::cin.ignore();
     switch (opcion) {
         case 1:
             d1.modificarDonante();

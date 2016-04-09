@@ -50,6 +50,12 @@ int main(int argc, char const *argv[]) {
                 despedida();
                 salir = true;
                 break;
+            case 9:
+                borrarLista(lista_donantes);
+                break;
+            case 10:
+                insertarMultiplesDonantes(lista_donantes);
+                break;
         }
     }while(!salir);
     return 0;

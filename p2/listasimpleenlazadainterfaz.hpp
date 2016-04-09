@@ -46,6 +46,10 @@ namespace ed{
             * @brief Devuelve el total de elementos de la lista.
             */
             virtual uint getTotal() const = 0;
+            /**
+            * @brief Limpia la lista.
+            */
+            virtual void clear() = 0;
     };
 }
 

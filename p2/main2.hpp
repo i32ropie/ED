@@ -33,8 +33,8 @@ void cabecera(){
 */
 void volver(){
     std::cout << std::endl << "Presiona ENTER para volver al menú.";
-    getchar();
-    getchar();
+    std::cin.ignore();
+    std::cin.ignore();
 }
 /**
 * @brief Muestra un error personalizado por pantalla.
@@ -107,13 +107,16 @@ uint opciones(){
         std::cout << "\t\e[33;1m[6]\e[0m - Borrar un donante de la lista." << std::endl;
         std::cout << "\t\e[33;1m[7]\e[0m - Mostrar por pantalla los donantes de sangre." << std::endl;
         std::cout << "\t\e[33;1m[8]\e[0m - Fin del programa." << std::endl;
+        std::cout << "\e[1m<Opciones extra>\e[0m" << std::endl,
+        std::cout << "\t\e[33;1m[9]\e[0m - Borrar todos los donantes." << std::endl;
+        std::cout << "\t\e[33;1m[10]\e[0m - Leer múltiples donantes." << std::endl;
         std::cout << "Introduce tu opción: \e[33;1m";
         std::cin >> opcion;
         std::cout << "\e[0m";
-        if(opcion<1 || opcion>8){
+        if(opcion<1 || opcion>10){
             error("Opción no válida. Volviendo al menú principal...");
         }
-    }while(opcion<1 || opcion>8);
+    }while(opcion<1 || opcion>10);
     return opcion;
 }
 /**
@@ -227,7 +230,7 @@ void insertarDonante(ed::Donantes &lista_donantes){
     ed::Donante d;
     do{
         cabecera();
-        getchar();
+        std::cin.ignore();
         std::cin >> d;
         encontrado = lista_donantes.existeDonante(d);
         if(encontrado)
@@ -303,6 +306,23 @@ void borrarDonante(ed::Donantes &lista_donantes){
 void mostrarDonantes(ed::Donantes &lista_donantes){
     cabecera();
     lista_donantes.mostrarDonantes();
+    volver();
+}
+void borrarLista(ed::Donantes &lista_donantes){
+    cabecera();
+    if(lista_donantes.estaVacia()){
+        std::cout << "No hay ningún donante para borrar." << std::endl;
+    }
+    else{
+        lista_donantes.limpiarLista();
+        std::cout << "Lista de donantes borrada con éxito." << std::endl;
+    }
+    volver();
+}
+void insertarMultiplesDonantes(ed::Donantes &lista_donantes){
+    cabecera();
+    std::cin.ignore();
+    lista_donantes.leerDonantes();
     volver();
 }
 /**

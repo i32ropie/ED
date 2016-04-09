@@ -166,10 +166,10 @@ namespace ed{
                 }
                 else{
                     std::cout << "Información del donante:" << std::endl;
-                    std::cout << "\t\e[1;4mNombre\e[0m: " << this->getNombre() << std::endl;
-                    std::cout << "\t\e[1;4mApellidos\e[0m: " << this->getApellidos() << std::endl;
-                    std::cout << "\t\e[1;4mGrupo sanguíneo\e[0m: " << this->getGrupoSanguineo() << std::endl;
-                    std::cout << "\t\e[1;4mFactor RH\e[0m: " << this->getFactorRH() << std::endl;
+                    std::cout << "\t\e[1;4mNombre\e[0m          : " << this->getNombre() << std::endl;
+                    std::cout << "\t\e[1;4mApellidos\e[0m       : " << this->getApellidos() << std::endl;
+                    std::cout << "\t\e[1;4mGrupo sanguíneo\e[0m : " << this->getGrupoSanguineo() << std::endl;
+                    std::cout << "\t\e[1;4mFactor RH\e[0m       : " << this->getFactorRH() << std::endl;
                 }
             }
             /** @name Sobrecarga de operadores. */
@@ -340,17 +340,17 @@ namespace ed{
                 uint opcion_1, opcion_2;
                 std::string nombre, apellidos, gSanguineo[] = {"0", "A", "B", "AB"}, factorRH[] = {"+", "-"};
                 std::cout << std::endl << "Estos son los atributos del donante:";
-                std::cout << std::endl << "\t\e[33;1m[1]\e[0m - Nombre: " << this->getNombre();
-                std::cout << std::endl << "\t\e[33;1m[2]\e[0m - Apellidos: " << this->getApellidos();
-                std::cout << std::endl << "\t\e[33;1m[3]\e[0m - Grupo sanguíneo: " << this->getGrupoSanguineo();
-                std::cout << std::endl << "\t\e[33;1m[4]\e[0m - Factor RH: " << this->getFactorRH();
+                std::cout << std::endl << "\t\e[33;1m[1]\e[0m - Nombre          : " << this->getNombre();
+                std::cout << std::endl << "\t\e[33;1m[2]\e[0m - Apellidos       : " << this->getApellidos();
+                std::cout << std::endl << "\t\e[33;1m[3]\e[0m - Grupo sanguíneo : " << this->getGrupoSanguineo();
+                std::cout << std::endl << "\t\e[33;1m[4]\e[0m - Factor RH       : " << this->getFactorRH();
                 do{
                     std::cout << std::endl << "Introduce qué atributo quieres modificar: ";
                     std::cin >> opcion_1;
                     if(opcion_1 < 1 || opcion_1 > 4)
                         std::cout << std::endl << "Error. Debes introducir un número entre 1 y 4." << std::endl;
                 }while(opcion_1 < 1 || opcion_1 > 4);
-                getchar();
+                std::cin.ignore();
                 switch (opcion_1) {
                     case 1:
                         do{
@@ -368,7 +368,7 @@ namespace ed{
                             if(apellidos.empty())
                                 std::cout << "Error. Debes introducir unos apellidos." << std::endl;
                         }while(apellidos.empty());
-                        this->setNombre(apellidos);
+                        this->setApellidos(apellidos);
                         break;
                     case 3:
                         do{

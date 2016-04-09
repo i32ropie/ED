@@ -185,6 +185,14 @@ namespace ed{
                     return true;
                 }
             }
+            /**
+            * @brief Limpia la lista.
+            */
+            void clear(){
+                while(this->getTotal() != 0){
+                    this->deleteItem(1);
+                }
+            }
     };
 }
 

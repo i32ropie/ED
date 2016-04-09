@@ -113,24 +113,25 @@ namespace ed{
                 int respuesta;
                 uint nDonante = 1;
                 do{
-                    std::cout << "Introduce tu donante nº " << nDonante << ": " << std::endl;
+                    std::cout << std::endl << "Introduce tu donante nº \e[1;4m" << nDonante << "\e[0m: " << std::endl << std::endl;
                     std::cin >> d;
                     encontrado = this->existeDonante(d);
                     if(!encontrado){
                         this->insertarDonante(d);
-                        std::cout << "Donante insertado.";
+                        std::cout << std::endl << "Donante insertado." << std::endl;
+                        nDonante++;
                     }
                     else{
-                        std::cout << "Error, ya existía ese donante. Donante no insertado" << std::endl;
+                        std::cout << "\e[31;1m[ERROR]\e[0m - Ya existía ese donante. Donante no insertado" << std::endl;
                     }
-                    getchar();
+                    std::cin.ignore();
                     do{
-                        std::cout << "¿Deseas introducir más donantes? (1 = continuar; 0 = parar): ";
+                        std::cout << std::endl << "¿Deseas introducir más donantes? (1 = \e[4mcontinuar\e[0m; 0 = \e[4mparar\e[0m): ";
                         std::cin >> respuesta;
                         switch (respuesta) {
                             case 1:
                                 continuar = true;
-                                getchar();
+                                std::cin.ignore();
                                 break;
                             case 0:
                                 continuar = false;
@@ -184,6 +185,12 @@ namespace ed{
                 else{
                     std::cout << std::endl << "\e[31;1m[ERROR]\e[0m - Donante no encontrado en la base de datos." << std::endl;
                 }
+            }
+            /**
+            * @brief Limpia la lista de donantes en el caso de que haya alguno.
+            */
+            void limpiarLista(){
+                _l.clear();
             }
     };
 
