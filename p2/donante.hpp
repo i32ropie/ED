@@ -12,6 +12,7 @@
 #include <string>
 #include <cassert>
 #include <cstdlib>
+#include "extra.hpp"
 #include "donanteinterfaz.hpp"
 
 /**
@@ -202,7 +203,7 @@ namespace ed{
             * @sa getNombre()
             */
             bool operator ==(const Donante &d){
-                return this->getApellidos() == d.getApellidos() && this->getNombre() == d.getNombre();
+                return toUpper(this->getApellidos()) == toUpper(d.getApellidos()) && toUpper(this->getNombre()) == toUpper(d.getNombre());
             }
             /**
             * @brief Sobrecarga del operador <
@@ -212,14 +213,14 @@ namespace ed{
             * @sa getNombre()
             */
             bool operator < (const Donante &d){
-                if(this->getApellidos() < d.getApellidos()){
+                if(toUpper(this->getApellidos()) < toUpper(d.getApellidos())){
                     return true;
                 }
-                else if(this->getApellidos() > d.getApellidos()){
+                else if(toUpper(this->getApellidos()) > toUpper(d.getApellidos())){
                     return false;
                 }
                 else{
-                    return this->getNombre() < d.getNombre();
+                    return toUpper(this->getNombre()) < toUpper(d.getNombre());
                 }
             }
             /**
@@ -230,14 +231,14 @@ namespace ed{
             * @sa getNombre()
             */
             bool operator > (const Donante &d){
-                if(this->getApellidos() > d.getApellidos()){
+                if(toUpper(this->getApellidos()) > toUpper(d.getApellidos())){
                     return true;
                 }
-                else if(this->getApellidos() < d.getApellidos()){
+                else if(toUpper(this->getApellidos()) < toUpper(d.getApellidos())){
                     return false;
                 }
                 else{
-                    return this->getNombre() > d.getNombre();
+                    return toUpper(this->getNombre()) > toUpper(d.getNombre());
                 }
             }
             /**
@@ -248,11 +249,11 @@ namespace ed{
             * @sa getNombre()
             */
             bool operator <=(const Donante &d){
-                if(this->getApellidos() < d.getApellidos())
+                if(toUpper(this->getApellidos()) < toUpper(d.getApellidos()))
                     return true;
-                if(this->getApellidos() > d.getApellidos())
+                if(toUpper(this->getApellidos()) > toUpper(d.getApellidos()))
                     return false;
-                return this->getNombre() <= d.getNombre();
+                return toUpper(this->getNombre()) <= toUpper(d.getNombre());
                 // return this->getApellidos() <= d.getApellidos() && this->getNombre() <= d.getNombre();
             }
             /**
