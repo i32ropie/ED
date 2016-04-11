@@ -168,7 +168,7 @@ namespace ed{
                 assert(!this->estaVacia());
                 Donante aux = this->getDonante(indice);
                 this->borrarDonante(aux);
-                aux.modificarDonante();
+                std::cin >> aux;
                 this->insertarDonante(aux);
             }
             /**

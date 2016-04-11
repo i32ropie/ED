@@ -258,6 +258,7 @@ void modificarDonante(ed::Donantes &lista_donantes){
             error("Debes introducir un número entre 1 y " + std::to_string(lista_donantes.getTotal()));
         }while(opcion < 1 || opcion > lista_donantes.getTotal());
         cabecera();
+        std::cin.ignore();
         lista_donantes.modificarDonante(opcion);
     }
     else{
