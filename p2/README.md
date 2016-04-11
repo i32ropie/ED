@@ -23,7 +23,3 @@ Para generar la documentación:
 ```bash
 doxygen Doxyfile
 ```
-
-###Nota
-
-Esta práctica la continuaré en esta rama, donde crearé una clase lista.
