@@ -12,7 +12,7 @@
 #include <string>
 #include <cassert>
 #include <cstdlib>
-// #include "extra.hpp"
+#include "extra.hpp"
 #include "donanteinterfaz.hpp"
 
 /**
@@ -346,7 +346,7 @@ namespace ed{
                 std::cout << std::endl << "\t\e[33;1m[2]\e[0m - Apellidos       : " << this->getApellidos();
                 std::cout << std::endl << "\t\e[33;1m[3]\e[0m - Grupo sanguíneo : " << this->getGrupoSanguineo();
                 std::cout << std::endl << "\t\e[33;1m[4]\e[0m - Factor RH       : " << this->getFactorRH();
-                std::cout << std::endl << "\t\e[33;1m[4]\e[0m - Donaciones      : " << this->getDonaciones();
+                std::cout << std::endl << "\t\e[33;1m[5]\e[0m - Donaciones      : " << this->getDonaciones();
                 do{
                     std::cout << std::endl << "Introduce qué atributo quieres modificar: ";
                     std::cin >> opcion_1;

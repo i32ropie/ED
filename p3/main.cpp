@@ -2,7 +2,7 @@
 #include "donante.hpp"
 #include "boundedminheap.hpp"
 
-int main(void){
+int main(int argc, const char *argv[]){
     ed::BoundedMinHeap<ed::Donante> monticulo_donantes;
     uint opcion;
     bool salir = false;
@@ -19,7 +19,7 @@ int main(void){
                 comprobarDonantes(monticulo_donantes);
                 break;
             case 2:
-                cardarDonantes(monticulo_donantes);
+                cargarDonantes(monticulo_donantes);
                 break;
             case 3:
                 guardarDonantes(monticulo_donantes);

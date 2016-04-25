@@ -1,0 +1,6 @@
+Sansón,Baeza Rodríguez,A,+,1
+Aída,Cabán Muñoz,0,+,3
+Claudia,Castellanos Gil,0,+,7
+Elodia,Cordero Cabrera,0,+,6
+José Luis,Lira Posada,A,+,2
+Eduardo,Roldán Pijuán,0,+,4

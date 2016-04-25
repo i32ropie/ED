@@ -45,7 +45,7 @@ namespace ed{
                     this->shiftDown(n);
                 }
             }
-            bool has(const T &d) const{
+            bool has(const T &d){
                 for( int i = 0 ; i < this->lastItem() ; ++i ){
                     if(_data[i] == d)
                         return true;
@@ -64,7 +64,7 @@ namespace ed{
                 return _data[0];
             }
             void insert(const T &d){
-                if(!this->has(T)){
+                if(!this->has(d)){
                     _data.push_back(d);
                     this->shiftUp(this->lastItem()-1);
                 }
