@@ -1,3 +1,10 @@
+/**
+* @file main.hpp
+* @brief <Práctica 3> Tercera parte: main.
+* @author Eduardo Roldán Pijuán
+* @date Abril de 2016
+*/
+
 #include <iostream>
 #include <unistd.h>
 #include <cstdio>
@@ -48,9 +55,9 @@ bool existe(const char *fichero){
     return (access( fichero, F_OK) != -1);
 }
 /**
-* @brief Carga los donantes pasándole lista de donantes y nombre del fichero.
+* @brief Carga los donantes pasándole un montículo de donantes y el nombre del fichero.
 * @note La finalidad de esta función es poder pasarle como argumento al programa un archivo con los donantes.
-* @param lista_donantes Donantes.
+* @param monticulo_donantes BoundedMinHeap.
 * @param file_name Nombre del fichero.
 * @param precarga Si es precarga de donantes o solo carga.
 */
@@ -88,7 +95,7 @@ void precargarDonantes(ed::BoundedMinHeap<ed::Donante> &monticulo_donantes, cons
 * @sa error()
 */
 uint opciones(){
-    uint opcion;
+    int opcion;
     do{
         cabecera();
         std::cout << "Estas son las opciones disponibles:" << std::endl;
@@ -97,7 +104,7 @@ uint opciones(){
         std::cout << "\t\e[33;1m[3]\e[0m - Grabar un montículo de donantes de sangre en un fichero." << std::endl;
         std::cout << "\t\e[33;1m[4]\e[0m - Mostrar el donante que se encuentra en la cima del montículo." << std::endl;
         std::cout << "\t\e[33;1m[5]\e[0m - Simular la realización de uno o más donaciones." << std::endl << std::endl;
-        std::cout << "\t\e[33;1m[0]\e[0m - Borrar un donante de la lista." << std::endl;
+        std::cout << "\t\e[33;1m[0]\e[0m - Salir del programa." << std::endl;
         std::cout << "Introduce tu opción: \e[33;1m";
         std::cin >> opcion;
         std::cout << "\e[0m";
@@ -109,7 +116,7 @@ uint opciones(){
 }
 /**
 * @brief Función para comprobar si hay donantes insertados en el montículo.
-* @param lista_donantes BoundedMinHeap.
+* @param monticulo_donantes BoundedMinHeap.
 * @sa cabecera()
 * @sa volver()
 */
@@ -123,7 +130,7 @@ void comprobarDonantes(const ed::BoundedMinHeap<ed::Donante> &monticulo_donantes
 }
 /**
 * @brief Función para cargar los donantes desde un fichero.
-* @param lista_donantes BoundedMinHeap.
+* @param monticulo_donantes BoundedMinHeap.
 * @sa cabecera()
 * @sa error()
 * @sa volver()
@@ -145,7 +152,7 @@ void cargarDonantes(ed::BoundedMinHeap<ed::Donante> &monticulo_donantes){
 }
 /**
 * @brief Función para guardar los donantes en un fichero.
-* @param lista_donantes BoundedMinHeap.
+* @param monticulo_donantes BoundedMinHeap.
 * @sa cabecera()
 * @sa error()
 * @sa volver()
@@ -209,7 +216,10 @@ void guardarDonantes(const ed::BoundedMinHeap<ed::Donante> &monticulo_donantes){
     volver();
 }
 /**
-*
+* @brief Muestra información del donante que se encuentra en la cima del montículo.
+* @param monticulo_donantes BoundedMinHeap.
+* @sa cabecera()
+* @sa volver()
 */
 void mostrarDonanteTop(const ed::BoundedMinHeap<ed::Donante> &monticulo_donantes){
     cabecera();
@@ -218,13 +228,14 @@ void mostrarDonanteTop(const ed::BoundedMinHeap<ed::Donante> &monticulo_donantes
         volver();
         return;
     }
-    // ed::Donante d = monticulo_donantes.top();
-    // d.monstrarDonante();
     monticulo_donantes.top().mostrarDonante();
     volver();
 }
 /**
-*
+* @brief Simula donaciones.
+* @note Dentro de la función, se preguntará cuantas donaciones se quieren simular.
+* @sa cabecera()
+* @sa volver()
 */
 void simularDonaciones(ed::BoundedMinHeap<ed::Donante> &monticulo_donantes){
     cabecera();
@@ -238,6 +249,7 @@ void simularDonaciones(ed::BoundedMinHeap<ed::Donante> &monticulo_donantes){
         monticulo_donantes.remove();
         monticulo_donantes.insert(d);
     }
+    std::cout << std::endl << "Donaciones simuladas correctamente." << std::endl;
     volver();
 }
 /**

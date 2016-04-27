@@ -1,6 +1,18 @@
+/**
+* @file main.cpp
+* @brief <Práctica 3> Tercera parte: main.
+* @author Eduardo Roldán Pijuán
+* @date Abril de 2016
+*/
+
 #include "main.hpp"
 #include "donante.hpp"
 #include "boundedminheap.hpp"
+
+/**
+* @name Main
+* Programa principal.
+*/
 
 int main(int argc, const char *argv[]){
     ed::BoundedMinHeap<ed::Donante> monticulo_donantes;

@@ -1,6 +1,6 @@
 /**
 * @file donante.hpp
-* @brief <Práctica 2> Primera parte: Representación del TAD donante.
+* @brief <Práctica 3> Primera parte: Representación del TAD donante.
 * @author Eduardo Roldán Pijuán
 * @date Marzo de 2016
 */

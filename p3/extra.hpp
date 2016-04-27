@@ -24,7 +24,13 @@ std::string toUpper(std::string strToConvert)
     return strToConvert;
 }
 
-// AÑADIR COMENTARIO DE XQ ESTO MOLA MAS Q LA DE ALGORITHM
+/**
+* @brief Función que intercambia dos elementos de un vector dados el vector y dos índices.
+* @param v Vector.
+* @param x Índice del primer elemento.
+* @param y Índice del segundo elemento.
+* @pre (x >= 0 && x<v.size()) && (y >= 0 && y<v.size())
+*/
 template <class T> void swap(std::vector<T> &v, const int &x, const int &y){
     T aux = v[x];
     v[x] = v[y];
