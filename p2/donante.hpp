@@ -311,7 +311,7 @@ namespace ed{
             * @brief Sobrecarga del operador <<
             * @param output Flujo de salida.
             * @param d Donante.
-            * @return Flujo de salido con el polinomio ya impreso.
+            * @return Flujo de salido con el donante ya impreso.
             * @sa getNombre()
             * @sa getApellidos()
             * @sa getGrupoSanguineo()

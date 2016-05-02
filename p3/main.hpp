@@ -83,7 +83,7 @@ void precargarDonantes(ed::BoundedMinHeap<ed::Donante> &monticulo_donantes, cons
         }
         fichero.close();
         if(precarga){
-            std::cout << std::endl << "\e[1mDonantes precargados de \e[4mdonantes.txt\e[0m";
+            std::cout << std::endl << "\e[1mDonantes precargados de \e[4m" << file_name << "\e[0m";
             fflush(stdout);
             sleep(3);
         }
