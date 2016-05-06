@@ -1,8 +1,8 @@
 /**
 * @file extra.hpp
-* @brief <Práctica 2> Primera parte: Función extra para pasar un string a mayúsculas.
+* @brief <Práctica 3> Primera parte: Funciones extra.
 * @author Eduardo Roldán Pijuán
-* @date Marzo de 2016
+* @date Abril de 2016
 */
 
 #ifndef __EXTRA_HPP__
