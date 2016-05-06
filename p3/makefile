@@ -1,4 +1,4 @@
-CPPFLAGS = -g -Wall -Wextra -std=c++11 -c #-DNDEBUG
+CPPFLAGS = -g -Wall -Wextra -std=c++11 -c -DNDEBUG
 OBJECT = main.o
 BIN = main
 
