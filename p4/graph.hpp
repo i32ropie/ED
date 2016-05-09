@@ -14,7 +14,7 @@ namespace ed {
             // Todas las ciudades con sus respectivas labels
             std::vector<Vertex<std::string> > _vector;
             // Matriz de adyacencias v1.
-            std::vector<std::vector<double> > _adyacencias;
+            std::vector<std::vector<double> > _matrix;
             // Matriz de adyacencias v2.
             // double **_matrix;
             // ¿Grafo dirigido?
@@ -46,7 +46,7 @@ primero puntero a grafo (se crea dinamicamente a partir de un fichero)
 FUNCION ADYACENT DEVUELVE EL PESO DEL LADO
                 */
                 // RELLENAR LA MATRIZ DE LA OTRA FORMA
-                _adyacencias = std::vector< std::vector< float > >(capacity, std::vector< float >(capacity));
+                _matrix = std::vector< std::vector< double > >(capacity, std::vector< double >(capacity));
                 // _matrix = new double *[this->getCapacity()];
                 // for( int i = 0 ; i < this->getCapacity() ; ++i )
                 //     _matrix[i] = new double [this->getCapacity()];
@@ -57,7 +57,7 @@ FUNCION ADYACENT DEVUELVE EL PESO DEL LADO
                 // }
             }
             inline std::vector<Vertex<std::string> > getVector() const { return _vector; }
-            inline double ** getMatrix() const { return _matrix; }
+            inline std::vector<std::vector<double> > getMatrix() const { return _matrix; }
             inline bool getDirected() const { return _directed; }
             inline int getCursorV() const { return _cursorV; }
             inline int getCursorM() const { return _cursorM; }
@@ -65,7 +65,7 @@ FUNCION ADYACENT DEVUELVE EL PESO DEL LADO
             inline int getEdges() const { return _nEdges; }
             inline int getCapacity() const { return _capacity; }
             inline void setVector(const std::vector<Vertex<std::string> > &vector) { _vector = vector; }
-            inline void setMatrix(double **matrix) { _matrix = matrix; }
+            inline void setMatrix(const std::vector<std::vector<double> > &matrix) { _matrix = matrix; }
             inline void setDirected(const bool &directed) { _directed = directed; }
             inline void setCursorV(const int &cursorV) { _cursorV = cursorV; }
             inline void setCursorM(const int &cursorM) { _cursorM = cursorM; }
@@ -83,11 +83,11 @@ FUNCION ADYACENT DEVUELVE EL PESO DEL LADO
                 assert(this->hasCurV());
                 return _vector[_cursorV];
             }
-            Edge<double> curEdge() const{ // MIRAR PARA MOVER CURSORES Y TAL (USANDO GOTO)
+            Edge<double> curEdge() { // MIRAR PARA MOVER CURSORES Y TAL (USANDO GOTO)
                 assert(this->hasCurM());
                 Edge<double> e;
                 //
-                uint oldCur = _this->getCursorV();
+                int oldCur = this->getCursorV();
                 Vertex<std::string> first, last;
                 first = this->curVertex();
                 this->goTo(this->getCursorM()); // CAMBIAR A _cursorM
@@ -110,7 +110,7 @@ FUNCION ADYACENT DEVUELVE EL PESO DEL LADO
                 v.setData(data);
                 v.setLabel(this->getVertexes());
                 this->setVertexes(this->getVertexes()+1);
-                this->setEdges(this->getEdges()+1)
+                this->setEdges(this->getEdges()+1);
                 _vector.push_back(v);
             }
             // Añadir un lado (Edge)
@@ -167,7 +167,7 @@ do{
             void beginEdge(const Vertex<std::string> &v) {
                 this->setCursorV(v.getLabel());
                 this->setCursorM(0);
-                while(_matrix[this->getCursorV()][this->getCursorM()] == INFINITE && !this->afterEndEdge()){
+                while((_matrix[this->getCursorV()][this->getCursorM()] == INFINITE) && !(this->afterEndEdge())){
                     this->setCursorM(this->getCursorM()+1);
                 }
             }
