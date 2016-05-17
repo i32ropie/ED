@@ -4,4 +4,5 @@
 #include <limits>
 #define INFINITE std::numeric_limits<double>::infinity()
 
+
 #endif

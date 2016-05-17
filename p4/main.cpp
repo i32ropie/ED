@@ -9,24 +9,24 @@ int main() {
     ed::Graph *g;
     unsigned int opcion;
     bool salir;
-    cargarGrafo2(&g);
+    // cargarGrafo2(&g);
     // mostrarGrafo(g);
-    floyd(g);
+    // floyd(g);
     // FORZAR QUE META PRIMERO EL NOMBRE | AÑADIR PRECARGAR????
-    // do{
-    //     opcion = opciones();
-    //     switch (opcion) {
-    //         case 0:
-    //             despedida();
-    //             salir = true;
-    //             break;
-    //         case 1:
-    //             cargarGrafo2(&g);
-    //             break;
-    //         case 2:
-    //             mostrarGrafo(g);
-    //             break;
-    //         case 3:
+    do{
+        opcion = opciones();
+        switch (opcion) {
+            case 0:
+                despedida();
+                salir = true;
+                break;
+            case 1:
+                cargarGrafo2(&g);
+                break;
+            case 2:
+                mostrarGrafo(g);
+                break;
+            case 3:
                     // INICIALIZAR VECTOR DE DOUBLES 'dist_sum'
                     // sumDist(g,dist_sum)
                     // mostrarMinimo(dist_sum)
@@ -37,10 +37,10 @@ int main() {
                     // u = g->curVertex();
                     // std::cout << u.getData() << " : " << dist_sum[u.getLabel()] << std::endl;
 
-    //             aplicarFloyd(g);
-    //             break;
-    //     }
-    // }while(!salir);
+                aplicarFloyd(g);
+                break;
+        }
+    }while(!salir);
     return 0;
 }
 /*

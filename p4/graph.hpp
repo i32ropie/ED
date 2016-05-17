@@ -17,7 +17,6 @@ namespace ed {
             // Matriz de adyacencias v1.
             std::vector<std::vector<double> > _matrix;
             // Matriz de adyacencias v2.
-            // double **_matrix;
             // ¿Grafo dirigido?
             bool _directed;
             // Cursor _vector (Vértices) o primera posición _matrix.
@@ -39,6 +38,7 @@ namespace ed {
                 this->setEdges(0);
                 this->setCursorV(0);
                 this->setCursorM(0);
+                // ESTO VALE COMO 'makeDirected'
                 this->setDirected(directed);
                 /*
 primero puntero a grafo (se crea dinamicamente a partir de un fichero)
@@ -132,13 +132,14 @@ FUNCION ADYACENT DEVUELVE EL PESO DEL LADO
                     // this->setEdges(this->getEdges()+1);
             }
             // Mueve el cursorV recibiendo una ciudad
-            void searchVertex(const std::string &data) {
+            bool searchVertex(const std::string &data) {
                 for( int i = 0 ; i < this->getVertexes() ; ++i ){
                     if(_vector[i].getData() == data){
                         this->setCursorV(i);
-                        return;
+                        return true;
                     }
                 }
+                return false;
             }
             // Mueve el cursorV recibiendo un vértice
             void goTo(const Vertex<std::string> &v) {
@@ -188,14 +189,6 @@ do{
             }
             bool afterEndEdge() const {
                 return this->getCursorM() == this->getEdges();
-             }
-             void printMatrix() const {
-                 for( int i = 0 ; i < this->getCapacity() ; ++i ){
-                     for( int j = 0 ; j < this->getCapacity() ; ++j ){
-                         std::cout << _matrix[i][j] << " ";
-                     }
-                     std::cout << std::endl;
-                 }
              }
     };
 }
