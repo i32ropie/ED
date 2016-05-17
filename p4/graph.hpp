@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <cassert>
+#include <iostream>
 #include <string>
 #include "vertex.hpp"
 #include "edge.hpp"
@@ -36,6 +37,8 @@ namespace ed {
                 this->setCapacity(capacity);
                 this->setVertexes(0);
                 this->setEdges(0);
+                this->setCursorV(0);
+                this->setCursorM(0);
                 this->setDirected(directed);
                 /*
 primero puntero a grafo (se crea dinamicamente a partir de un fichero)
@@ -47,6 +50,11 @@ FUNCION ADYACENT DEVUELVE EL PESO DEL LADO
                 */
                 // RELLENAR LA MATRIZ DE LA OTRA FORMA
                 _matrix = std::vector< std::vector< double > >(capacity, std::vector< double >(capacity));
+                for( int i = 0 ; i < capacity ; ++i){
+                    for( int j = 0 ; j < capacity ; ++j){
+                        _matrix[i][j] = INFINITE;
+                    }
+                }
                 // _matrix = new double *[this->getCapacity()];
                 // for( int i = 0 ; i < this->getCapacity() ; ++i )
                 //     _matrix[i] = new double [this->getCapacity()];
@@ -74,31 +82,31 @@ FUNCION ADYACENT DEVUELVE EL PESO DEL LADO
             inline void setCapacity(const int &capacity) { _capacity = capacity; }
 
             inline bool isEmpty() const { return this->getVertexes() == 0 && this->getEdges() == 0; }
-            inline bool adyacent(const Vertex<std::string> &v1, const Vertex<std::string> &v2) const { return _matrix[v1.getLabel()][v2.getLabel()]; } // USAR CURSORES (CREO QUE NO HACE FALTA :DDDDDD)
+            inline double adyacent(const Vertex<std::string> &v1, const Vertex<std::string> &v2) const { return _matrix[v1.getLabel()][v2.getLabel()]; } // USAR CURSORES (CREO QUE NO HACE FALTA :DDDDDD)
             // Comprueba si el cursor de los vertices esta en una posicion valida
             inline bool hasCurV() const { return _cursorV < _nVertexes; }
             inline bool hasCurM() const { return _cursorM < _nEdges; }
             // Devuelve el vértice referenciado por el cursor
             Vertex<std::string> curVertex() const {
-                assert(this->hasCurV());
+                // assert(this->hasCurV());
                 return _vector[_cursorV];
             }
             Edge<double> curEdge() { // MIRAR PARA MOVER CURSORES Y TAL (USANDO GOTO)
-                assert(this->hasCurM());
+                // assert(this->hasCurM());
                 Edge<double> e;
-                //
-                int oldCur = this->getCursorV();
-                Vertex<std::string> first, last;
-                first = this->curVertex();
-                this->goTo(this->getCursorM()); // CAMBIAR A _cursorM
-                last = this->curVertex();
-                //
+                // //
+                // int oldCur = this->getCursorV();
+                // Vertex<std::string> first, last;
+                // first = this->curVertex();
+                // this->goTo(this->getCursorM()); // CAMBIAR A _cursorM
+                // last = this->curVertex();
+                // //
                 e.setData(_matrix[this->getCursorV()][this->getCursorM()]);
                 e.setFirst(_vector[this->getCursorV()]);
                 e.setSecond(_vector[this->getCursorM()]);
-                //
-                this->setCursorV(oldCur);
-                //
+                // //
+                // this->setCursorV(oldCur);
+                // //
                 return e;
             }
             inline void makeDirected() { _directed = true; }
@@ -143,6 +151,7 @@ FUNCION ADYACENT DEVUELVE EL PESO DEL LADO
                 // }
             }
             void goTo(const int &i){
+                // assert posicion valida
                 this->setCursorV(i);
             }
             // Mueve el cursorE
@@ -158,7 +167,7 @@ do{
     v = g->curVertex();
     // Lo que sea
     g->nextVertex();
-}while(g->afterEndVertex());
+}while(!g->afterEndVertex());
             */
             inline void beginVertex() { this->goTo(0); } // No hace falta, llamar a goto(0) a pelo
             inline void nextVertex() { this->setCursorV(this->getCursorV()+1); }
@@ -172,11 +181,22 @@ do{
                 }
             }
             void nextEdge() {
-                while(_matrix[this->getCursorV()][this->getCursorM()] == INFINITE && !this->afterEndEdge()){
+                this->setCursorM(this->getCursorM()+1);
+                while((_matrix[this->getCursorV()][this->getCursorM()] == INFINITE) && !(this->afterEndEdge())){
                     this->setCursorM(this->getCursorM()+1);
                 }
             }
-            inline bool afterEndEdge() const { return this->getCursorM() == this->getEdges(); }
+            bool afterEndEdge() const {
+                return this->getCursorM() == this->getEdges();
+             }
+             void printMatrix() const {
+                 for( int i = 0 ; i < this->getCapacity() ; ++i ){
+                     for( int j = 0 ; j < this->getCapacity() ; ++j ){
+                         std::cout << _matrix[i][j] << " ";
+                     }
+                     std::cout << std::endl;
+                 }
+             }
     };
 }
 
@@ -188,7 +208,7 @@ do{
 
 -USAR EN MAIN PUNTERO A GRAFO, YA SE RESERVA MEMORIA DESPUES EN FUNCIONES DE ENTRADA_SALIDA
 -METEMOS LOS VERTICES
-while(f >> dataEdgeFirst << dataEdegeSecond << weight){
+while(f >> dataEdgeFirst >> dataEdegeSecond >> weight){
     g->searchVertex(dataEdgeFirst);
     first.setLabel(g->curVertex().getLabel());
     first.setData(dataEdgeFirst);
