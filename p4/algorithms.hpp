@@ -8,6 +8,7 @@
 #include "vertex.hpp"
 
 void Path(ed::Graph * g, ed::Vertex<std::string> &origen, ed::Vertex<std::string> &destiny, std::vector<std::vector<int> > &mids){
+    // std::cout << "- ";
     if(mids[origen.getLabel()][destiny.getLabel()] != -1){
         g->goTo(mids[origen.getLabel()][destiny.getLabel()]);
         ed::Vertex<std::string> mid = g->curVertex();
@@ -18,7 +19,7 @@ void Path(ed::Graph * g, ed::Vertex<std::string> &origen, ed::Vertex<std::string
 }
 
 // Inicializar fuera 'distances' y 'mids'
-void Floyd(ed::Graph * g, std::vector<std::vector<double> > &distances, std::vector<std::vector<int> > &mids, const std::string &origen, const std::string &destiny){
+void Floyd(ed::Graph * g, std::vector<std::vector<double> > &distances, std::vector<std::vector<int> > &mids/*, const std::string &origen, const std::string &destiny*/){
     int vertexes = g->getVertexes();
     ed::Vertex<std::string> u, v;
     for( int i = 0 ; i < vertexes ; ++i ){
@@ -46,17 +47,17 @@ void Floyd(ed::Graph * g, std::vector<std::vector<double> > &distances, std::vec
             }
         }
     }
-    g->searchVertex(origen);
-    u = g->curVertex();
-    g->searchVertex(destiny);
-    v = g->curVertex();
-    if( distances[u.getLabel()][v.getLabel()] == INFINITE ){
-        std::cout << "No existe la distancia mínima" << std::endl;
-        return;
-    }
-    std::cout << "La distancia mínima entre <" << u.getData() << "> y <" << v.getData() << "> es: \e[1m" << distances[u.getLabel()][v.getLabel()] << "\e[m" << std::endl;
-    std::cout << "El camino mínimo es: " << origen << " ";
-    Path(g,u,v,mids);
-    std::cout << destiny << std::endl;
+    // g->searchVertex(origen);
+    // u = g->curVertex();
+    // g->searchVertex(destiny);
+    // v = g->curVertex();
+    // if( distances[u.getLabel()][v.getLabel()] == INFINITE ){
+    //     std::cout << "No existe la distancia mínima" << std::endl;
+    //     return;
+    // }
+    // std::cout << "La distancia mínima entre <" << u.getData() << "> y <" << v.getData() << "> es: \e[1m" << distances[u.getLabel()][v.getLabel()] << "\e[m" << std::endl;
+    // std::cout << "El camino mínimo es: " << origen << " ";
+    // Path(g,u,v,mids);
+    // std::cout << destiny << std::endl;
 }
 #endif
