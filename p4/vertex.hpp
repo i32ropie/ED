@@ -22,6 +22,7 @@ namespace ed {
             /// Dato del vértice.
             T _data;
         public:
+            /** @name Observadores. */
             /**
             * @brief Devuelve la etiqueta del vértice.
             * @return Etiqueta del vértice.
@@ -32,6 +33,7 @@ namespace ed {
             * @return Dato del vértice.
             */
             inline const T & getData() const { return _data; }
+            /** @name Modificadores. */
             /**
             * @brief Establece la etiqueta del vértice.
             * @param label Etiqueta del vértice.
@@ -42,6 +44,7 @@ namespace ed {
             * @param data Dato del vértice
             */
             inline void setData(const T &data) { _data = data; }
+            /** @name Sobrecarga de operadores. */
             /**
             * @brief Sobrecarga del operador ==
             * @param v Vértice.

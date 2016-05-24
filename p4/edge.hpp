@@ -27,6 +27,7 @@ namespace ed {
             /// Segundo vértice.
             Vertex<std::string> _second;
         public:
+            /** @name Observadores. */
             /**
             * @brief Devuelve el dato del lado.
             * @return Dato del lado.
@@ -42,10 +43,30 @@ namespace ed {
             * @return Segundo vértice del lado.
             */
             inline Vertex<std::string> getSecond() const { return _second; }
+            /** @name Modificadores. */
+            /**
+            * @brief Establece el dato del lado.
+            * @param data Dato del lado.
+            */
             inline void setData(const T &data) { _data = data; }
+            /**
+            * @brief Establece el primer vértice del lado.
+            * @param first Vértice.
+            */
             inline void setFirst(const Vertex<std::string> &first) { _first = first; }
+            /**
+            * @brief Establece el segundo vértice del lado.
+            * @param second Vértice.
+            */
             inline void setSecond(const Vertex<std::string> &second) { _second = second; }
-            inline bool has(const Vertex<std::string> &v) const { return v == this->getFirst() || v == this->getSecond(); }
+            /** @name Sobrecarga de operadores. */
+            /**
+            * @brief Sobrecarga del operador ==
+            * @param e Lado.
+            * @return true si this->getFirst() == e.getFirst() && this->getSecond() == e.getSecond(), false si no.
+            * @sa getFirst()
+            * @sa getSecond()
+            */
             inline bool operator == (const Edge<T> &e) const { return this->getFirst() == e.getFirst() && this->getSecond() == e.getSecond(); }
     };
 }
