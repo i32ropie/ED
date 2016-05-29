@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['opciones',['opciones',['../main_8hpp.html#a0e2ff059a449f05014cbafa2ce6a8f31',1,'main.hpp']]],
-  ['opciones2',['opciones2',['../main_8hpp.html#a888ade2d5376e999af565e6c934412a8',1,'main.hpp']]],
-  ['operator_21_3d',['operator!=',['../classed_1_1Vertex.html#a545a0cdbc5239ac1ff7d10200787c8db',1,'ed::Vertex']]],
-  ['operator_3d_3d',['operator==',['../classed_1_1Edge.html#a4c0be7ab3f8fd48b691e346ed6c71956',1,'ed::Edge::operator==()'],['../classed_1_1Vertex.html#a3702339b08118185f78e3e55569e58a8',1,'ed::Vertex::operator==()']]]
+  ['nextedge',['nextEdge',['../classed_1_1Graph.html#a22b6bcff929e2a2c5b7786a1151acf5a',1,'ed::Graph']]],
+  ['nextvertex',['nextVertex',['../classed_1_1Graph.html#aeecbbca40ae6a6ddb1a5b20317c180c7',1,'ed::Graph']]]
 ];

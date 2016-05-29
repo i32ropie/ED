@@ -1,5 +1,5 @@
 /**
-* @file graph.hpp
+* @file functions.hpp
 * @brief <Práctica 4> Segunda parte: Algoritmo de Floyd y camino mínimo.
 * @author Eduardo Roldán Pijuán
 * @date Mayo de 2016

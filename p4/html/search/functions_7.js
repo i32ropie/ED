@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['isempty',['isEmpty',['../classed_1_1Graph.html#a6c1ee6de426faec41fc3ad8c08b94322',1,'ed::Graph']]]
+  ['hascure',['hasCurE',['../classed_1_1Graph.html#a849d692a9561cd3f1d46a77fb04813ac',1,'ed::Graph']]],
+  ['hascurv',['hasCurV',['../classed_1_1Graph.html#aba975572f8b5994dda86fd061133141c',1,'ed::Graph']]]
 ];

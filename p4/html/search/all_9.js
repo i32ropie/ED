@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['main_2ecpp',['main.cpp',['../main_8cpp.html',1,'']]],
-  ['main_2ehpp',['main.hpp',['../main_8hpp.html',1,'']]],
-  ['menordist',['menorDist',['../main_8hpp.html#a1ce0e7d5a5a6ad7167212a948f4224b9',1,'main.hpp']]],
-  ['mostrargrafo',['mostrarGrafo',['../main_8hpp.html#a3699cb6a4cc1d179241259e0c5d9a264',1,'main.hpp']]],
-  ['mostrarminimo',['mostrarMinimo',['../main_8hpp.html#a155861babb8f655266803b84f8aecd9f',1,'main.hpp']]]
+  ['infinite',['INFINITE',['../extra_8hpp.html#aa84a29002ab81c719c0d07bb446296e0',1,'extra.hpp']]],
+  ['isempty',['isEmpty',['../classed_1_1Graph.html#a6c1ee6de426faec41fc3ad8c08b94322',1,'ed::Graph']]]
 ];
