@@ -21,6 +21,16 @@
 #define cls() system("clear");
 
 /**
+* @brief Función que imprime una cadena poco a poco.
+*/
+void pprint(const std::string &cad, const uint &speed = 1000){
+    for(auto i = cad.begin() ; i != cad.end() ; ++i){
+        std::cout << *i;
+        usleep(speed);
+        fflush(stdout);
+    }
+}
+/**
 * @brief Cabecera que se mostrará durante la ejecución del programa.
 */
 void cabecera(){
@@ -173,9 +183,16 @@ bool cargarGrafo2(ed::Graph **g){
         return false;
     }
     *g=cargarGrafo1(nombre_fichero);
-    std::cout << std::endl << "Grafo actualizado con éxito." << std::endl;
-    volver();
-    return true;
+    if(!(*g)->isEmpty()){
+        std::cout << std::endl << "Grafo actualizado con éxito." << std::endl;
+        volver();
+        return true;
+    }
+    else{
+        error("El fichero " + nombre_fichero + " no tiene una sintaxis adecuada.");
+        volver();
+        return false;
+    }
 }
 /**
 * @brief Función que muestra por pantalla un grafo.
@@ -193,26 +210,30 @@ void mostrarGrafo(ed::Graph *g, const bool &cargado){
     }
     ed::Vertex<std::string> v, u;
     ed::Edge<double> e;
-    std::cout << "Mostrando vector de vértices:" << std::endl;
+    std::cout << "Mostrando vector de \e[1mvértices\e[m:" << std::endl << std::endl;
     g->beginVertex();
     do{
         v = g->curVertex();
-        std::cout << v.getData() << " : " << v.getLabel() << std::endl;
+        pprint("\e[1;4;92m" + v.getData() + "\e[m : \e[1;4;33m" + std::to_string(v.getLabel()) + "\e[m\n");
+        // std::cout << "\e[1;4;92m" << v.getData() << "\e[m : \e[1;4;33m" << v.getLabel() << "\e[m" << std::endl;
         g->nextVertex();
     }while(!g->afterEndVertex());
-    std::cout << "Mostrando matriz de adyacencias:" << std::endl;
+    volver(2,"Pulsa ENTER para mostrar la matriz de adyacencias.");
+    cabecera();
+    std::cout << "Mostrando matriz de \e[1madyacencias\e[m:" << std::endl << std::endl;
     g->beginVertex();
     do{
         v = g->curVertex();
         g->beginEdge(v);
         while(!g->afterEndEdge()){
             e = g->curEdge();
-            std::cout << e.getFirst().getData() << " -> " << e.getSecond().getData() << " : " << e.getData() << std::endl;
+            pprint("\e[1;4;92m" + e.getFirst().getData() + "\e[m \e[1m->\e[m \e[1;4;92m" + e.getSecond().getData() + "\e[m : \e[1;4;33m" + std::to_string((int)e.getData()) + "\e[m\n");
+            // std::cout << "\e[1;4;92m" << e.getFirst().getData() << "\e[m \e[1m->\e[m \e[1;4;92m" << e.getSecond().getData() << "\e[m : \e[1;4;33m" << e.getData() << "\e[m" << std::endl;
             g->nextEdge();
         }
         g->nextVertex();
     }while(!g->afterEndVertex());
-    volver();
+    volver(1);
 }
 /**
 * @brief Función que suma las filas de una matriz y las alamacena en un vector.
@@ -246,17 +267,6 @@ int menorDist(std::vector<int> &sum){
     return min_pos;
 }
 /**
-* @brief Función que imprime una cadena poco a poco.
-* @note Su uso principal es que al mostrar la suma de distancias cuando cada vértice es usado como origen sea un poco más legible.
-*/
-void pprint(const std::string &cad, const uint &speed = 5000){
-    for(auto i = cad.begin() ; i != cad.end() ; ++i){
-        std::cout << *i;
-        usleep(speed);
-        fflush(stdout);
-    }
-}
-/**
 * @brief Función que muestra el vértice que tiene la menor suma de distancias a los demás vértices y la suma de distancias cuando cada vértice es usado como origen.
 * @param g Puntero a grafo.
 * @param distances Matriz de distancias.
@@ -273,10 +283,10 @@ void sumaDist_menorDist(ed::Graph *g, std::vector<std::vector<double> > &distanc
     sumaDist(g->getVertexes(), distances, sum);
     g->goTo(menorDist(sum));
     v = g->curVertex();
-    std::cout << std::endl << "El \e[1mvértice\e[m que tiene la menor suma de distancias a los demás vértices es \e[1;4;92m" << v.getData() << "\e[m" << std::endl;
+    std::cout << "El \e[1mvértice\e[m que tiene la menor suma de distancias a los demás vértices es \e[1;4;92m" << v.getData() << "\e[m" << std::endl;
     volver(2,"Presiona ENTER para continuar.");
     cabecera();
-    std::cout << std::endl << "Suma de distancias cuando cada \e[1mvértice\e[m es usado como origen:" << std::endl << std::endl;
+    std::cout << "Suma de distancias cuando cada \e[1mvértice\e[m es usado como origen:" << std::endl << std::endl;
     for( uint i = 0 ; i < sum.size() ; ++i ){
         g->goTo(i);
         v = g->curVertex();
