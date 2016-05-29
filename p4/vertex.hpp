@@ -36,12 +36,12 @@ namespace ed {
             /** @name Modificadores. */
             /**
             * @brief Establece la etiqueta del vértice.
-            * @param label Etiqueta del vértice.
+            * @param label Etiqueta del vértice (int).
             */
             inline void setLabel(const int &label) { _label = label; }
             /**
             * @brief Establece el dato del vértice
-            * @param data Dato del vértice
+            * @param data Dato del vértice (T).
             */
             inline void setData(const T &data) { _data = data; }
             /** @name Sobrecarga de operadores. */
