@@ -20,7 +20,6 @@
 * @param origen Vértice de origen (Vertex<string>).
 * @param destiny Vértide de destino (Vertex<string>).
 * @param mids Matriz de intermedios (vetor<vector<int>>).
-* @sa pprint()
 * @sa Path()
 */
 void Path(ed::Graph * g, ed::Vertex<std::string> &origen, ed::Vertex<std::string> &destiny, std::vector<std::vector<int> > &mids){
