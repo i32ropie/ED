@@ -9,6 +9,7 @@
 #define __EXTRA_HPP__
 
 #include <limits>
+/// Variable infinito a usar en el uso del programa.
 #define INFINITE std::numeric_limits<double>::infinity()
 
 
